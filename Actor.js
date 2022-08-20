@@ -21,14 +21,6 @@ class Actor extends Sprite {
 
     // An HTML template is used for the structure of the actor.
     this.appendChild(document.importNode(document.getElementById('person').content, true));
-
-    // TODO: Experimental.
-
-    //let face = Util.renderEmoji('🤨', 42, 42)[0];
-    let face = Util.renderEmoji('☺', 40, 40)[0];
-    //🙂🤨😊☺
-    let head = this.querySelector('.head');
-    head.appendChild(face);
   }
 
   /**

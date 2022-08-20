@@ -255,7 +255,7 @@ class Sprite extends HTMLElement {
                     // This edge number is simply to stop ego. He won't leave the room. Only the pedestrian
                     // crossings can be used to cross the street, so any other movement beyond the foot path
                     // is blocked.
-                    if ((z < 710) || (z > 850)) edge = 10;
+                    if ((z < 710) || (z > 950)) edge = 10;
 
                 } else {
                     // Walking out left side with under program control.

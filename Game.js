@@ -24,7 +24,7 @@ class Game {
         // Negative value for room applies to left/right path only. Negative means down, Position means up.
 
         // Main street north.
-        [7, 4800,  1, 0, 0, 0, 1],
+        [7, 960,  1, 0, 0, 0, 1],
     ];
 
     props = [
@@ -42,8 +42,11 @@ class Game {
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.
 
         // Room 0 - All rooms
-        [ 0,  14, 'sea',                null, 6720,  50,  0,    985, , 100 ],
-        [ 0,  14, 'sand',               null, 6720,  95, 0,     890, , 99 ],
+        [ 0,  14, 'left_wall',            null, 260,   360, null, null, , 501 ],
+        [ 0,  14, 'right_wall',           null, 260,   360, null, null, , 501 ],
+        [ 0,  14, 'left_window',          null, 121,   231, null, null, , 501 ],
+        [ 0,  14, 'right_window',         null, 121,   231, null, null, , 501 ],
+
     ];
 
     // 1 = 
@@ -155,7 +158,6 @@ class Game {
         //                             this.ego.say("Please help me to find him.", 200, () => {
         //                                 this.ego.say("Use the Walk, Look, Pick up, and Talk icons below.", 300, () => {
                                             this.inputEnabled = true;
-                                            this.fadeOut(this.status);
         //                                 });
         //                             });
         //                         });
@@ -347,25 +349,6 @@ class Game {
             if ((prop[0] == this.room) || (prop[0] == 0)) this.addPropToRoom(prop);
         });
 
-        // Add tree row, if required.
-        if (this.roomData[0] & 2) {
-            let treeSize = this.roomData[0] & 4? 100 : 200;
-            for (let x=0; x < this.roomData[1]; x += treeSize) {
-                this.addPropToRoom([ 0, 0x4A, 'trees', '🌲', treeSize, treeSize, x, 400 ]);
-            }
-            for (let x=-treeSize/2; x < this.roomData[1]; x += treeSize) {
-                this.addPropToRoom([ 0, 10, 'trees', '🌲', treeSize, treeSize, x, 450 ]);
-            }
-        }
-        if (this.roomData[0] & 8) {
-            for (let x=0; x < this.roomData[1]; x += 300) {
-                this.addPropToRoom([ 0, 0x42, 'trees', '🌲', 300, 300, x, 1100, , 990 ]);
-            }
-            for (let x=-150; x < this.roomData[1]; x += 300) {
-                this.addPropToRoom([ 0, 2, 'trees', '🌲', 300, 300, x, 1150, , 991 ]);
-            }
-        }
-
         this.ego.show();
 
         if (this.edge == 3) {
@@ -414,16 +397,6 @@ class Game {
 
             if (prop[6] !== null) {
                 obj.setPosition(prop[6], prop[7]);
-            }
-
-            if (prop[1] & 16) {
-                obj.classList.add('bldg');
-            }
-            if (prop[1] & 32) {
-                obj.classList.add('light');
-            }
-            if (prop[1] & 64) {
-                obj.classList.add('dark');
             }
             if (prop[1] & 8) {
                 // Ignore objs

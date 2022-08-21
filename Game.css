@@ -33,6 +33,7 @@ span {
 #status {
 	background-color: #000;
   height: 27px;
+  color: white;
 }
 #sentence {
   text-align: center;
@@ -345,13 +346,14 @@ x-sprite canvas {
   height: 200px;
   cursor: var(--c, var(--🡲, var(--➡️)));
 }
-.left_wall, .right_wall {
+.left_wall, .right_wall, .middle_wall {
   top: 0px;
   background: linear-gradient(
     0deg,
     #F0E0BF 0% 24%,
     #EEE3DF 24% 100%
   );
+  filter: brightness(0.95)
   /*
   background: linear-gradient( 
       0deg, 
@@ -365,13 +367,13 @@ x-sprite canvas {
 .left_wall {
   left: -30px;
   transform: rotateY(100deg);
-  cursor: var(--c, var(--🡵, var(--↗️)));
+  /*cursor: var(--c, var(--🡵, var(--↗️)));*/
   box-shadow: 10px -20px 300px grey
 }
 .right_wall {
   right: -30px;
   transform: rotateY(-100deg);
-  cursor: var(--c, var(--🡴, var(--↖️)));
+  /*cursor: var(--c, var(--🡴, var(--↖️)));*/
   box-shadow: -10px -20px 300px grey
 }
 .left_window, .right_window {
@@ -389,4 +391,17 @@ x-sprite canvas {
 .right_window {
   right: 35px;
   transform: rotateY(-100deg);
+}
+.middle_wall {
+  left: 270px;
+  transform: rotateY(90deg);
+  box-shadow: -60px 0px black;
+  clip-path: polygon(
+    -60px 0, 
+    -60px 359px, 
+    160px 359px, 
+    160px 100px, 
+    259px 100px, 
+    259px 0, 
+    -60px 0); 
 }

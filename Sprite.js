@@ -255,7 +255,7 @@ class Sprite extends HTMLElement {
                     // This edge number is simply to stop ego. He won't leave the room. Only the pedestrian
                     // crossings can be used to cross the street, so any other movement beyond the foot path
                     // is blocked.
-                    if ((z < 710) || (z > 950)) edge = 10;
+                    if ((z < 585) || (z > 950)) edge = 10;
 
                 } else {
                     // Walking out left side with under program control.
@@ -285,8 +285,11 @@ class Sprite extends HTMLElement {
             }
 
             if (edge) {
+                window.game.status.innerHTML = `${this.x.toFixed(1)}, ${this.z.toFixed(1)}  [${x.toFixed(1)}, ${z.toFixed(1)}]   HIT EDGE`;
                 this.hitEdge(edge);
             } else {
+                window.game.status.innerHTML = `${this.x.toFixed(1)}, ${this.z.toFixed(1)}  [${x.toFixed(1)}, ${z.toFixed(1)}]`;
+
                 // If x or z has changed, update the position.
                 if ((x != this.x) || (z != this.z)) {
                     this.setPosition(x, z);

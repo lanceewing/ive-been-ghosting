@@ -47,6 +47,8 @@ class Game {
         [ 0,  14, 'left_window',          null, 121,   231, null, null, , 501 ],
         [ 0,  14, 'right_window',         null, 121,   231, null, null, , 501 ],
 
+        [ 0,  14, 'middle_wall',          null, 260,   360, null, null, , 1000 ],
+
     ];
 
     // 1 = 
@@ -117,9 +119,6 @@ class Game {
                 }, 200);
             }
         //}
-
-        this.generateMaze(0, 0);
-        this.displayMaze();
 
         // TODO: Following is for debug only
         window.game = this;

@@ -105,7 +105,7 @@ class Logic {
                   ego.stop(true);
                   let destX = game.screenLeft + (e.pageX / game.scaleX);
                   destX = (destX > game.roomData[1] - 50? game.roomData[1] + 10 : destX < 50? -10 : destX);
-                  ego.moveTo(destX, z > 710? z : 740);
+                  ego.moveTo(destX, z > 555? z : 585);
                 }
               } else {
                 // Must be an item. Change command to Use

@@ -46,9 +46,9 @@ class Game {
         [ 0,  14, 'right_wall',           null, 260,   360, null, null, , 501 ],
         [ 0,  14, 'left_window',          null, 121,   231, null, null, , 501 ],
         [ 0,  14, 'right_window',         null, 121,   231, null, null, , 501 ],
-
         [ 0,  14, 'middle_wall',          null, 260,   360, null, null, , 1000 ],
 
+        [ 0,  14, 'stairs',               null, 260,   75, null, null, , 501 ],
     ];
 
     // 1 = 

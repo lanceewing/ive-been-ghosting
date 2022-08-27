@@ -441,3 +441,21 @@ x-sprite canvas {
   box-shadow: #321e1f 32px 18px 16px 9px inset;
   transform: scaleY(1.2);
 }
+.room2 .left_window, .room2 .right_window {
+  height: 323px !important;
+}
+.fireplace {
+  background: #a4a4a4;
+}
+.fireplace:after {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 90px;
+  left: 30px;
+  bottom: 0px;
+  background: #484848;
+  border: 12px grey solid;
+  border-bottom: 0px;
+  box-shadow: #2e2e2e 0px 5px 8px 10px inset;
+}

@@ -17,14 +17,16 @@ class Game {
         // Room type, room width, left crossing, left path, centre crossing, right path, right crossing
         // room 50  = special room for country side, but used in multiple places.
         // Room types:
-        //  bit 0: 1 = has wall, 0 = no wall
-        //  bit 1: 1 = tree row, 0 = no tree row
-        //  bit 2: 1 = smaller trees, 0 = normal trees (if bit 1 is set)
-        //  bit 3: 1 = big trees at bottom of screen, 0 = no big trees
-        // Negative value for room applies to left/right path only. Negative means down, Position means up.
+        //  bit 0: 
+        //  bit 1: 
+        //  bit 2: 
+        //  bit 3: 
 
-        // Main street north.
-        [7, 960,  1, 0, 0, 0, 1],
+        // Entry Hall
+        [0, 960,  0, 0, 0, 0, 0],
+
+        // Parlor
+        [0, 960,  0, 0, 0, 0, 0],
     ];
 
     props = [
@@ -42,7 +44,10 @@ class Game {
         [ 1,  14, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
         [ 1,  14, 'door',                 null, 80,    207, 180,  574,  , 501  ],
         [ 1,  14, 'down_stairs',          null, 180,   70,  null, null, , 501  ],
-        [ 1,  14, 'picture',              '🖼', 100,   100,  380, 300, , 501  ],
+        [ 1,  14, 'picture',              '🖼', 100,   100,  380, 300,  , 501  ],
+
+        // Room 2 - Parlor
+        [ 2,  14, 'fireplace',            null, 200,   130,  380, 600,  , 501  ],
 
         // Room 50 - Return into current room.
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.
@@ -136,7 +141,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 1;
+        this.room = 2;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
@@ -345,6 +350,9 @@ class Game {
         // Adjust the screen width for the new room.
         this.screen.style.setProperty('--screen-width', `${this.roomData[1]}px`);
 
+        // Add room classes.
+        this.screen.className = 'room' + this.room;
+
         // Add props
         this.props.forEach(prop => {
             // If prop is in the current room, or in room 0 (i.e. all rooms)...
@@ -352,18 +360,6 @@ class Game {
         });
 
         this.ego.show();
-
-        if (this.edge == 3) {
-            let e = this.ego;
-            let bo = this.objs.find(o => e.touching(o));
-            if (bo) {
-                // Ego is touching a car...
-                // Move Ego to either the left or right, depending on which is closer.
-                e.setPosition(e.cx < bo.cx? bo.x - e.width - 20 : bo.x + bo.width + 20, e.z);
-                // Adjust the destination to match the new X position.
-                e.dests[0].x = e.x;
-            }
-        }
 
         this.fadeIn(this.wrap);
         this.fadeIn(this.ego);

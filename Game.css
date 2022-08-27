@@ -127,7 +127,7 @@ span {
 #screen * {
   position: absolute;
 }
-#screen > x-sprite {
+#screen.r0 > x-sprite:not(.p4) {
   -webkit-box-reflect: below 0px -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, transparent 45%, transparent 100%);
 }
 x-ego {
@@ -480,11 +480,5 @@ x-sprite canvas {
     linear-gradient(60deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)),
     linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
   background-size: 70px 120px;
-  /*
-  width: 630px;
-  height: 120px;
-  top: 335px;
-  left: 166px;
-  */
   transform: rotateX(77deg);
 }

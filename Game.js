@@ -17,15 +17,21 @@ class Game {
         // Room type, room width, left crossing, left path, centre crossing, right path, right crossing
         // room 50  = special room for country side, but used in multiple places.
         // Room types:
-        //  bit 0: 
+        //  bit 0: Reflective floor
         //  bit 1: 
         //  bit 2: 
         //  bit 3: 
 
-        // Entry Hall
+        // 1. Entry Hall
         [0, 960,  0, 0, 0, 0, 0],
 
-        // Parlor
+        // 2. Parlor
+        [1, 960,  0, 0, 0, 0, 0],
+
+        // 3. Small Landing and Bedroom
+        [0, 960,  0, 0, 0, 0, 0],
+
+        // 4. Library and Bedroom
         [0, 960,  0, 0, 0, 0, 0],
     ];
 
@@ -34,8 +40,9 @@ class Game {
         // bit 0-1:  00 = actor, 01 = item, 10 = prop, 11 = not used.
         // bit 2:    0  = shadow, 1 = no shadow
         // bit 3:    0  = observe objs, 1 = ignore objs
-        // bit 4:    0  = not building, 1 = building
-        // bit 5-6:  00 = normal, 01 = light, 10 = dark
+        // bit 4:    0  = observe reflection, 1 = ignore reflection
+        // bit 5:
+        // bit 6:  
         // bit 7:    0 = normal, 1 = horizontal flip
 
         // Room 1 - Entry Hall
@@ -47,9 +54,18 @@ class Game {
         [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  , 501  ],
 
         // Room 2 - Parlor
-        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  , 501  ],
-        [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  , 501  ],
-        [ 2,  4,  'rug',                  null, 630,   120,  166, 900,  , 501  ],
+        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  , 501 ],
+        [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  , 501 ],
+        [ 2, 12,  'rug',                  null, 630,   120,  166, 900,  , 501 ],
+        [ 2,  4,  'door',                 null, 80,    207,  700, 574,  , 501 ],
+        [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340,  , 501 ],
+        [ 2, 20,  'radio',                '📻', 40,    40,  520, 340,  , 501 ],
+
+        // Room 3 - Small landing and Bedroom
+
+
+        // Room 4 - Library and Bedroom
+
 
         // Room 50 - Return into current room.
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.
@@ -354,6 +370,9 @@ class Game {
 
         // Add room classes.
         this.screen.className = 'room' + this.room;
+        for (let i=0; i<8; i++) {
+            if (this.roomData[0] & (1 << i)) this.screen.classList.add('r' + i);
+        }
 
         // Add props
         this.props.forEach(prop => {
@@ -382,9 +401,10 @@ class Game {
         // bit 0-1:  00 = actor, 01 = item, 10 = prop, 11 = not used.
         // bit 2:    0  = shadow, 1 = no shadow
         // bit 3:    0  = observe objs, 1 = ignore objs
-        // bit 4:    0  = not building, 1 = building
-        // bit 5-6:  00 = normal, 01 = light, 10 = dark
-        // bit 7:    0 = normal, 1 = horizontal flip
+        // bit 4:    0  = not reflected, 1 = reflected
+        // bit 5:
+        // bit 6:  
+        // bit 7:    0  = normal, 1 = horizontal flip
 
         if (!obj) {
             obj = new Sprite();
@@ -398,6 +418,12 @@ class Game {
             if (prop[6] !== null) {
                 obj.setPosition(prop[6], prop[7]);
             }
+
+            // Add all prop type flags as classes.
+            for (let i=0; i<8; i++) {
+                if (prop[1] & (1 << i)) obj.classList.add('p' + i);
+            }
+
             if (prop[1] & 8) {
                 // Ignore objs
                 obj.ignore = true;

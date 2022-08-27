@@ -39,24 +39,26 @@ class Game {
         // bit 7:    0 = normal, 1 = horizontal flip
 
         // Room 1 - Entry Hall
-        [ 1,  14, 'middle_wall',          null, 260,   360, 165,  720,  , 1000 ],
-        [ 1,  14, 'stairs',               null, 360,   75,  null, null, , 501  ],
-        [ 1,  14, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
-        [ 1,  14, 'door',                 null, 80,    207, 180,  574,  , 501  ],
-        [ 1,  14, 'down_stairs',          null, 180,   70,  null, null, , 501  ],
-        [ 1,  14, 'picture',              '🖼', 100,   100,  380, 300,  , 501  ],
+        [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  , 1000 ],
+        [ 1,  4, 'stairs',               null, 360,   75,  null, null, , 501  ],
+        [ 1,  4, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
+        [ 1,  4, 'door',                 null, 80,    207, 180,  574,  , 501  ],
+        [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, , 501  ],
+        [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  , 501  ],
 
         // Room 2 - Parlor
-        [ 2,  14, 'fireplace',            null, 200,   130,  380, 600,  , 501  ],
+        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  , 501  ],
+        [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  , 501  ],
+        [ 2,  4,  'rug',                  null, 630,   120,  166, 900,  , 501  ],
 
         // Room 50 - Return into current room.
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.
 
         // Room 0 - All rooms
-        [ 0,  14, 'left_wall',            null, 260,   360, null, null, , 501 ],
-        [ 0,  14, 'right_wall',           null, 260,   360, null, null, , 501 ],
-        [ 0,  14, 'left_window',          null, 121,   231, null, null, , 501 ],
-        [ 0,  14, 'right_window',         null, 121,   231, null, null, , 501 ],
+        [ 0,  4, 'left_wall',            null, 260,   360, null, null, , 501 ],
+        [ 0,  4, 'right_wall',           null, 260,   360, null, null, , 501 ],
+        [ 0,  4, 'left_window',          null, 121,   231, null, null, , 501 ],
+        [ 0,  4, 'right_window',         null, 121,   231, null, null, , 501 ],
     ];
 
     // 1 = 

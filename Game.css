@@ -103,11 +103,6 @@ span {
   font-size: 40px;
 }
 #wrap {
-  background: linear-gradient( 
-    #EEE3DF 0% 39%,
-    #F0E0BF 39% 50%,
-    #7B4C3A 50% 100%
-    );
   top: 50vh;
   left: 50vw;
   width: 960px;
@@ -127,9 +122,13 @@ span {
   transform: translateX(var(--screen-left));
   perspective: 500px;
   perspective-origin: top;
+  background: linear-gradient( #EEE3DF 0% 45%, #F0E0BF 45% 59%, #7B4C3A 59% 100% );
 }
 #screen * {
   position: absolute;
+}
+#screen > x-sprite {
+  -webkit-box-reflect: below 0px -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0.3) 0%, transparent 45%, transparent 100%);
 }
 x-ego {
   transform: rotateY(0deg) translate(var(--sprite-left), var(--sprite-top)) translateZ(0);
@@ -144,7 +143,7 @@ x-shadow {
   width: var(--shadow-width);
   height: var(--shadow-height);
   background: #000;
-  border-radius: 50%;
+  border-radius: 40%;
   opacity: 0.5;
   filter: blur(1.2px);
   z-index: 0;
@@ -444,8 +443,18 @@ x-sprite canvas {
 .room2 .left_window, .room2 .right_window {
   height: 323px !important;
 }
-.fireplace {
-  background: #a4a4a4;
+.fireplace:before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  border-top: 6px solid #af4d4d;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  height: 130px;
+  left: -10px;
+  box-shadow: #a4a4a4 0px 124px 0px 0px inset;
+  filter: drop-shadow(-1px -1px 3px black);
+  z-index: 1;
 }
 .fireplace:after {
   content: "";
@@ -458,4 +467,24 @@ x-sprite canvas {
   border: 12px grey solid;
   border-bottom: 0px;
   box-shadow: #2e2e2e 0px 5px 8px 10px inset;
+  z-index: 2;
+}
+.couch {
+  filter: sepia(0.5) drop-shadow(-1px 1px 6px black);
+}
+.rug {
+  background-color: #6d695c;
+  background-image:
+    repeating-linear-gradient(120deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(60deg, rgba(255,255,255,.1), rgba(255,255,255,.1) 1px, transparent 1px, transparent 60px),
+    linear-gradient(60deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1)),
+    linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
+  background-size: 70px 120px;
+  /*
+  width: 630px;
+  height: 120px;
+  top: 335px;
+  left: 166px;
+  */
+  transform: rotateX(77deg);
 }

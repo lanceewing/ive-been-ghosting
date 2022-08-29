@@ -67,51 +67,19 @@ class Logic {
             break;
 
           default:
-            // Walking into a building.
-            if (obj && obj.propData && obj.propData[1] & 16) { 
-              if ((thing == 'circus') && !game.hasItem('ticket')) {
-                ego.say("I need a ticket.");
-              }
-              else if ((thing == 'coffin') && !game.hasItem('magic ring')) {
-                ego.say("Magic is stopping me opening the coffin.");
-              } 
-              else {
-                let props = game.props.filter(prop => prop[0] == obj.propData[10]);
-                if (props.length) {
-                  ego.stop(true);
-                  ego.moveTo(ego.cx, 740, () => {
-                    ego.moveTo(obj.cx, 740, () => {
-                      let outsideX = Math.min(Math.max(obj.cx-200, 280), game.roomData[1] - 680);
-                      // Add "outside" background
-                      game.addPropToRoom([0, 14, 'outside', null, 6720, 485, 0, 970, , 1000]);
-                      // Add "inside" background.
-                      game.addPropToRoom([0, 14, 'inside', null, 400, 300, outsideX, 700, , 1001]);
-                      // Add the items inside the building.
-                      props.forEach(prop => game.addPropToRoom(prop));
-                      ego.hide();
-                      game.inside = 1;
-                      ego.setPosition(ego.x, ego.z+544);
-                    });
-                  });
-                } else {
-                  ego.say("This building is locked.");
-                }
+            // Walk to screen object or screen click position.
+            let z = ((e.pageY / game.scaleY) - 27) * 2;
+            if (z <= 970) {
+              if (!game.inside) {
+                ego.stop(true);
+                let destX = game.screenLeft + (e.pageX / game.scaleX);
+                destX = (destX > game.roomData[1] - 50? game.roomData[1] + 10 : destX < 50? -10 : destX);
+                ego.moveTo(destX, z > 555? z : 585);
               }
             } else {
-              // Walk to screen object or screen click position.
-              let z = ((e.pageY / game.scaleY) - 27) * 2;
-              if (z <= 970) {
-                if (!game.inside) {
-                  ego.stop(true);
-                  let destX = game.screenLeft + (e.pageX / game.scaleX);
-                  destX = (destX > game.roomData[1] - 50? game.roomData[1] + 10 : destX < 50? -10 : destX);
-                  ego.moveTo(destX, z > 555? z : 585);
-                }
-              } else {
-                // Must be an item. Change command to Use
-                game.verb = 'Use';
-                newCommand = 'Use ' + thing + ' with ';
-              }
+              // Must be an item. Change command to Use
+              game.verb = 'Use';
+              newCommand = 'Use ' + thing + ' with ';
             }
             break;
         }

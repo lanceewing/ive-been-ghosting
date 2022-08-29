@@ -345,7 +345,7 @@ x-sprite canvas {
   height: 200px;
   cursor: var(--c, var(--🡲, var(--➡️)));
 }
-.left_wall, .right_wall, .middle_wall {
+.left_wall, .right_wall, .middle_wall, .alcove_wall {
   top: 0px;
   background: linear-gradient(
     0deg,
@@ -391,6 +391,22 @@ x-sprite canvas {
     259px 100px, 
     259px 0, 
     -30px 0); 
+}
+.alcove_wall {
+  transform: rotateY(90deg);
+  box-shadow: -105px 0px black;
+  clip-path: polygon(
+    -104px 0, 
+    -104px 359px, 
+    12px 359px,
+    12px 100px,
+    100px 100px,
+    100px 359px,
+    160px 359px, 
+    160px 100px, 
+    259px 100px, 
+    259px 0, 
+    -104px 0); 
 }
 .stairs {
   right: 150px;
@@ -440,6 +456,9 @@ x-sprite canvas {
   box-shadow: #321e1f 32px 18px 16px 9px inset;
   transform: scaleY(1.2);
 }
+.down_stairs.p7 {
+  transform: scaleY(1.2) scaleX(-1);
+}
 .room2 .left_window, .room2 .right_window {
   height: 323px !important;
 }
@@ -481,4 +500,19 @@ x-sprite canvas {
     linear-gradient(120deg, rgba(0,0,0,.1) 25%, transparent 25%, transparent 75%, rgba(0,0,0,.1) 75%, rgba(0,0,0,.1));
   background-size: 70px 120px;
   transform: rotateX(77deg);
+}
+.bed {
+  transform: rotateY(-86deg);
+  filter: grayscale(1) sepia(1) drop-shadow(-5px 4px 1px black);
+}
+.alcove {
+  background: linear-gradient(
+    0deg,
+    #333 0% 9%,
+    #444 10% 10%,
+    #333 11% 22%,
+    #222 23% 31%,
+    black 32% 100%
+  );
+  filter: sepia(1);
 }

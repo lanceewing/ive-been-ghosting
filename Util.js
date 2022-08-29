@@ -33,8 +33,8 @@ class Util {
         emojiCanvas.height = height;
         let emojiCtx = emojiCanvas.getContext('2d');
         if (newWidth > 0 && newHeight > 0) {
-            emojiCtx.shadowColor = "black";
-            emojiCtx.shadowBlur = 3;
+            //emojiCtx.shadowColor = "black";
+            //emojiCtx.shadowBlur = 3;
             if (flip) {
                 emojiCtx.translate(width, 0);
                 emojiCtx.scale(-1, 1);

@@ -47,7 +47,7 @@ class Game {
 
         // Room 1 - Entry Hall
         [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  , 1000 ],
-        [ 1,  4, 'stairs',               null, 360,   75,  null, null, , 501  ],
+        [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  , 501  ],
         [ 1,  4, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
         [ 1,  4, 'door',                 null, 80,    207, 180,  574,  , 501  ],
         [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, , 501  ],
@@ -71,6 +71,10 @@ class Game {
         [ 3,  4,  'door',                 null, 80,    207, 180,  574,  , 501  ],
 
         // Room 4 - Library and Bedroom
+        [ 4,  12, 'middle_wall',          null, 260,   360, 250,  720,  , 1000 ],
+        [ 4,  12, 'window',               null, 121,   231, 540,  478,  , 501  ],
+        [ 4,  4,  'stairs',               null, 360,   75,    0,  414, , 501  ],
+        [ 4,  4,  'back_wall',            null, 254,   310,  140, 620,  , 502 ],
 
 
         // Room 50 - Return into current room.
@@ -165,7 +169,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 3;
+        this.room = 4;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');

@@ -396,16 +396,14 @@ x-sprite canvas {
   transform: rotateY(90deg);
   box-shadow: -105px 0px black;
   clip-path: polygon(
-    -104px 0, 
-    -104px 359px, 
+    -105px 0, 
+    -105px 359px, 
     12px 359px,
     12px 100px,
     100px 100px,
     100px 359px,
     160px 359px, 
-    160px 100px, 
-    259px 100px, 
-    259px 0, 
+    160px 0, 
     -104px 0); 
 }
 .stairs {

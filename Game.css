@@ -345,7 +345,7 @@ x-sprite canvas {
   height: 200px;
   cursor: var(--c, var(--🡲, var(--➡️)));
 }
-.left_wall, .right_wall, .middle_wall, .alcove_wall, .back_wall {
+.left_wall, .right_wall, .middle_wall, .alcove_wall, .back_wall, .side_wall {
   top: 0px;
   background: linear-gradient(
     0deg,
@@ -366,8 +366,6 @@ x-sprite canvas {
 }
 .back_wall {
   filter: brightness(0.9);
-}
-.back_wall, .room4 .middle_wall {
   clip-path: polygon(
     -30px 0, 
     -30px 359px, 
@@ -378,6 +376,31 @@ x-sprite canvas {
     259px 359px,
     259px 0, 
     -30px 0); 
+}
+.middle_wall {
+  transform: rotateY(90deg);
+  box-shadow: -30px 0px black;
+  clip-path: polygon(
+    -30px 0, 
+    -30px 359px, 
+    160px 359px, 
+    160px 100px, 
+    259px 100px, 
+    259px 0, 
+    -30px 0); 
+}
+.room4 .middle_wall {
+  clip-path: polygon(
+    -30px 0, 
+    -30px 359px, 
+    100px 359px, 
+    100px 100px, 
+    259px 100px, 
+    259px 0, 
+    -30px 0); 
+}
+.side_wall {
+  transform: rotateY(90deg);
 }
 .left_window, .right_window, .window {
   top: 43px;
@@ -397,18 +420,6 @@ x-sprite canvas {
 }
 .window {
   transform: scaleY(0.8);
-}
-.middle_wall {
-  transform: rotateY(90deg);
-  box-shadow: -30px 0px black;
-  clip-path: polygon(
-    -30px 0, 
-    -30px 359px, 
-    160px 359px, 
-    160px 100px, 
-    259px 100px, 
-    259px 0, 
-    -30px 0); 
 }
 .alcove_wall {
   transform: rotateY(90deg);
@@ -532,4 +543,10 @@ x-sprite canvas {
     black 32% 100%
   );
   filter: sepia(1);
+}
+.book_case {
+  background: linear-gradient( 0deg, #3c200b 0% 12%, #281507 20% 100% );
+  background-size: 121px 32px;
+  border: 6px solid #3c200b;
+  filter: drop-shadow(3px -4px 1px black);
 }

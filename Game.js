@@ -33,6 +33,12 @@ class Game {
 
         // 4. Library and Bedroom
         [0, 960,  0, 0, 0, 0, 0],
+
+        // 5. Attic
+        [0, 960,  0, 0, 0, 0, 0],
+
+        // 6. Cellar
+        [0, 960,  0, 0, 0, 0, 0],
     ];
 
     props = [
@@ -72,9 +78,17 @@ class Game {
 
         // Room 4 - Library and Bedroom
         [ 4,  12, 'middle_wall',          null, 260,   360, 250,  720,  , 1000 ],
+        [ 4,  12, 'side_wall',            null,  53,   300, 372,  596,  , 501 ],
         [ 4,  12, 'window',               null, 121,   231, 540,  478,  , 501  ],
         [ 4,  4,  'stairs',               null, 360,   75,    0,  414, , 501  ],
-        [ 4,  4,  'back_wall',            null, 254,   310,  140, 620,  , 502 ],
+        [ 4,  4,  'back_wall',            null, 260,   315,  136, 630,  , 502 ],
+        [ 4,  12, 'book_case',            null, 121,   265, 412,  600,  , 501  ],
+        [ 4,  12, 'book_case',            null, 121,   265, 665,  600,  , 501  ],
+
+        // Room 5 - Attic
+
+
+        // Room 6 - Cellar
 
 
         // Room 50 - Return into current room.

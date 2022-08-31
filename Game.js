@@ -79,14 +79,21 @@ class Game {
         // Room 4 - Library and Bedroom
         [ 4,  12, 'middle_wall',          null, 260,   360, 250,  720,  , 1000 ],
         [ 4,  12, 'side_wall',            null,  53,   300, 372,  596,  , 501 ],
-        [ 4,  12, 'window',               null, 121,   231, 540,  478,  , 501  ],
+        [ 4,  12, 'window',               null, 121,   231, 542,  478,  , 501  ],
         [ 4,  4,  'stairs',               null, 360,   75,    0,  414, , 501  ],
         [ 4,  4,  'back_wall',            null, 260,   315,  136, 630,  , 502 ],
-        [ 4,  12, 'book_case',            null, 121,   265, 412,  600,  , 501  ],
-        [ 4,  12, 'book_case',            null, 121,   265, 665,  600,  , 501  ],
+        [ 4,  12, 'book_case',            null, 136,   265, 401,  600,  , 502  ],
+        [ 4,  12, 'book_case',            null, 136,   265, 667,  600,  , 502  ],
+        [ 4,  12, 'rug',                  null, 350,   120, 450,  884,  , 501 ],
+        [ 4,   0, 'chair',               '🪑',  50,   120, 720,  700,  ,   ],
+        [ 4,   0, 'desk',                 null, 222,   60, 668,  800,   ,  ],
 
         // Room 5 - Attic
-
+        [ 5,  12, 'wall1',                null, 190,   341, 115,  683,  ,   ],
+        [ 5,  12, 'wall2',                null, 190,   341, 655,  683,  ,   ],
+        [ 5,  12, 'wall3',                null, 100,   311, 295,  623,  ,   ],
+        [ 5,  12, 'wall4',                null, 100,   311, 565,  623,  ,   ],
+        [ 5,  4,  'roof',                 null, 961,   30,   -1,   30,  , 1000 ],
 
         // Room 6 - Cellar
 
@@ -183,7 +190,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 4;
+        this.room = 5;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
@@ -434,7 +441,7 @@ class Game {
             obj = new Sprite();
             obj.init(this, prop[4], prop[5], prop[3], !(prop[1] & 4), (prop[1] & 128));
 
-            obj.dataset.name = prop[2].replace('_',' ');
+            obj.dataset.name = prop[2].replace(/[0-9]/, '').replace('_',' ');
             obj.classList.add(prop[2]);
 
             obj.propData = prop;

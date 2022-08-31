@@ -345,7 +345,7 @@ x-sprite canvas {
   height: 200px;
   cursor: var(--c, var(--🡲, var(--➡️)));
 }
-.left_wall, .right_wall, .middle_wall, .alcove_wall, .back_wall, .side_wall {
+.left_wall, .right_wall, .middle_wall, .alcove_wall, .back_wall, .side_wall, .wall1, .wall2, .wall3, .wall4 {
   top: 0px;
   background: linear-gradient(
     0deg,
@@ -363,6 +363,9 @@ x-sprite canvas {
   right: -30px;
   transform: rotateY(-100deg);
   box-shadow: -10px -20px 300px grey
+}
+.wall1, .wall2 {
+  filter: brightness(0.9);
 }
 .back_wall {
   filter: brightness(0.9);
@@ -401,6 +404,12 @@ x-sprite canvas {
 }
 .side_wall {
   transform: rotateY(90deg);
+}
+.wall3 {
+  transform: rotateY(60deg);
+}
+.wall4 {
+  transform: rotateY(-60deg);
 }
 .left_window, .right_window, .window {
   top: 43px;
@@ -529,6 +538,9 @@ x-sprite canvas {
   background-size: 70px 120px;
   transform: rotateX(77deg);
 }
+.room4 .rug {
+  border-radius: 50%;
+}
 .bed {
   transform: rotateY(-86deg);
   filter: grayscale(1) sepia(1) drop-shadow(-5px 4px 1px black);
@@ -546,7 +558,65 @@ x-sprite canvas {
 }
 .book_case {
   background: linear-gradient( 0deg, #3c200b 0% 12%, #281507 20% 100% );
-  background-size: 121px 32px;
+  background-size: 121px 43px;
   border: 6px solid #3c200b;
   filter: drop-shadow(3px -4px 1px black);
+}
+.book_case ~ .book_case {
+  filter: drop-shadow(-3px -4px 1px black);
+}
+.desk {
+  background: #281507;
+  transform: rotateX(77deg);
+}
+.desk:before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 45px;
+  bottom: -44px;
+  background: #281507;
+  right: 20px;
+  transform: skewX(-41deg);
+}
+.desk:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 45px;
+  bottom: -44px;
+  background: #281507;
+  left: 0px;
+  left: -9px;
+  transform: skewX(-22deg);
+  filter: drop-shadow(-23px -55px 0px #281507);
+}
+.room5 .left_window {
+  left: 0px;
+}
+.room5 .right_window {
+  right: 0px;
+}
+.roof {
+  background: black;
+}
+.roof:before {
+  content: "";
+  position: absolute;
+  background: black;
+  width: 260px;
+  height: 145px;
+  top: -40px;
+  left: -55px;
+  transform: rotate(-30deg);
+}
+.roof:after {
+  content: "";
+  position: absolute;
+  background: black;
+  width: 260px;
+  height: 145px;
+  top: -40px;
+  right: -55px;
+  transform: rotate(30deg);
 }

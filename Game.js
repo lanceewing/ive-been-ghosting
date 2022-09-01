@@ -178,7 +178,7 @@ class Game {
                 this.fadeOut(this.msg);
                 setTimeout(() => {
                     this.msg.style.display = 'none'
-                    this.sound.playSong();
+                    //this.sound.playSong();
                     this.init();
                     this.loop();
                 }, 200);

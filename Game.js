@@ -269,10 +269,8 @@ class Game {
      * @param {UIEvent} e The resize event.
      */
     resizeScreen(e) {
-        this.scaleX = innerWidth / this.wrap.offsetWidth;
-        this.scaleY = innerHeight / this.wrap.offsetHeight;
-        this.wrap.style.setProperty('--scale-x', this.scaleX);
-        this.wrap.style.setProperty('--scale-y', this.scaleY);
+        this.wrap.style.setProperty('--scale-x', this.scaleX = innerWidth / this.wrap.offsetWidth);
+        this.wrap.style.setProperty('--scale-y', this.scaleY = innerHeight / this.wrap.offsetHeight);
     }
 
     /**

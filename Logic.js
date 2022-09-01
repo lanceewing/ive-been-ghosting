@@ -34,13 +34,6 @@ class Logic {
     switch (verb) {
       case 'Talk to':
         switch (thing) {
-          case 'office worker':
-            if (game.hasItem('ticket')) {
-              game.actor.say("Hello!");
-            } else {
-              game.actor.say("I've lost my briefcase!");
-            }
-            break;
           default:
             if (obj && obj == game.actor) {
               game.actor.say("Hello!");
@@ -53,29 +46,14 @@ class Logic {
 
       case 'Walk to':
         switch (thing) {
-          case 'outside':
-            while (obj && obj.nextElementSibling) {
-              obj = obj.nextElementSibling;
-              game.remove(obj.previousElementSibling);
-            }
-            game.remove(obj);
-            game.actor = null;
-            ego.setPosition(ego.x, ego.z-544);
-            ego.show();
-            game.inside = 0;
-            game.thing = '';
-            break;
-
           default:
             // Walk to screen object or screen click position.
             let z = ((e.pageY / game.scaleY) - 27) * 2;
             if (z <= 970) {
-              if (!game.inside) {
-                ego.stop(true);
-                let destX = game.screenLeft + (e.pageX / game.scaleX);
-                destX = (destX > game.roomData[1] - 50? game.roomData[1] + 10 : destX < 50? -10 : destX);
-                ego.moveTo(destX, z > 555? z : 585);
-              }
+              ego.stop(true);
+              let destX = game.screenLeft + (e.pageX / game.scaleX);
+              destX = (destX > game.roomData[1] - 50? game.roomData[1] + 10 : destX < 50? -10 : destX);
+              ego.moveTo(destX, z > 555? z : 585);
             } else {
               // Must be an item. Change command to Use
               game.verb = 'Use';
@@ -90,33 +68,11 @@ class Logic {
           ego.say("I already have that.");
         } else {
           switch (thing) {
-            case 'jack-o-lantern':
-              ego.say("No, I shouldn't.");
-              break;
             default:
               // Is item in the current room?
               if (obj && obj.propData[1] & 1) {
-
-                if (obj.propData[0] < 11) {
-                  // Normal room, so walk to item and pick it up.
-                  ego.moveTo(ego.cx, 740, () => ego.moveTo(obj.x, 740, pickup));
-                } else {
-                  // Inside room.
-                  if (obj.propData[0] == 31 || obj.propData[0] == 28)  {
-                    // In my house, castle and the hospital ego can pick the items without constraint.
-                    pickup();
-                  }
-                  else if (thing == 'bellhop') {
-                    if (game.actor) {
-                      game.actor.say("Please leave that there.");
-                    } else {
-                      pickup();
-                    }
-                  }
-                  else {
-                    game.actor.say(`Hey! That's my ${thing}.`);
-                  }
-                }
+                // Normal room, so walk to item and pick it up.
+                ego.moveTo(ego.cx, 740, () => ego.moveTo(obj.x, 740, pickup));
               }
               else {
                 ego.say("I can't get that.");
@@ -128,10 +84,6 @@ class Logic {
 
       case 'Look at':
         switch (thing) {
-          case 'tree':
-          case 'trees':
-            ego.say("The trees make this island look very pretty.");
-            break;
           default:
             if (thing != "") {
               ego.say("It's just a " + thing + ".");
@@ -145,45 +97,17 @@ class Logic {
           let thing1 = cmd.substring(4, cmd.indexOf(' with '));
           let things = [thing, thing1].sort().join();
           switch (things) {
-            case 'boy,pill':
-              // End game sequence.
-              game.inputEnabled = false;
-              game.actor.say("An antidote? Really? Thank you so much!", 450, () => {
-                game.actor.say("It tastes... strange...", 350, () => {
-                  game.actor.say("I feel... something...", 350, () => {
-                    game.actor.render('👦');
-                    game.actor.say("I'm normal again!!", 300, () => {
-                      game.room = 7;
-                      ego.edge
-                      game.fadeOut(game.wrap);
-                      setTimeout(() => {
-                        ego.setPosition(ego.x, ego.z-544);
-                        game.inside = 0;
-                        game.newRoom();
-                        ego.say("I have returned the page boy to the castle.", 200, () => {
-                          ego.say("Thank you for helping me to solve the case.", 200, () => {
-                            ego.say("Well done!!!", 200, () => {
-                              setTimeout(() => location.reload(), 3000);
-                            });
-                          });
-                        });
-                      }, 200);
-                    });
-                  });
-                });
-              });
-              break;
             default:
               ego.say("Hmmm, that didn't work.");
               break;
           }
         }
 
-        // Execute Use command for two objects, with movement when outside.
-        if (game.inside || !obj) {
-          useFn();
-        } else {
+        // Execute Use command for two objects, with movement if obj set.
+        if (obj) {
           ego.moveTo(ego.cx, 740, () => ego.moveTo(obj.cx, 740, useFn));
+        } else {
+          useFn();
         }
 
         newCommand = verb;

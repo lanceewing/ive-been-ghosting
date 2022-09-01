@@ -104,6 +104,7 @@ class Game {
         [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574,  , 501 ],
         [ 6,   4, 'stairs',               null, 360,   75,  500,  414,  , 502  ],
         [ 6,   4, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
+        [ 6,  12, 'book_case',            null, 136,   400,  31,  845,  , 502  ],
 
         // Room 50 - Return into current room.
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.

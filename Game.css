@@ -592,6 +592,11 @@ x-sprite canvas {
 .book_case ~ .book_case {
   filter: drop-shadow(-3px -4px 1px black);
 }
+.room6 .book_case {
+  transform: rotateY(100deg);
+  filter: drop-shadow(-62px 0px 0px black);
+  background-size: 121px 56px;
+}
 .desk {
   background: #281507;
   transform: rotateX(77deg);

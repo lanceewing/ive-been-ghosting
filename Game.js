@@ -285,7 +285,10 @@ class Game {
         requestAnimationFrame(now => this.loop(now));
 
         // Calculates the time since the last invocation of the game loop.
-        this.updateDelta(now);
+        if (now) {
+            this.stepFactor = (now - (this.lastTime || (now - 16))) * 0.06;
+            this.lastTime = now;
+        }
 
         // Update all objects on the screen.
         this.updateObjects();
@@ -320,22 +323,6 @@ class Game {
             }
         }
         this.currCursor = newCursor;
-    }
-
-    /**
-     * Updates the delta, which is the difference between the last time and now. Both values
-     * are provided by the requestAnimationFrame call to the game loop. The last time is the
-     * value from the previous frame, and now is the value for the current frame. The difference
-     * between them is the delta, which is the time between the two frames.
-     * 
-     * @param {number} now The current time provided in the invocation of the game loop.
-     */
-    updateDelta(now) {
-        if (now) {
-            this.delta = now - (this.lastTime ? this.lastTime : (now - 16));
-            this.stepFactor = this.delta * 0.06;
-            this.lastTime = now;
-        }
     }
 
     /**

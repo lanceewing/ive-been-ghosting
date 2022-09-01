@@ -99,7 +99,11 @@ class Game {
         [ 5,   4, 'stairs2',              null,  35,   207, 326,  590,  , 501  ],
 
         // Room 6 - Cellar
-
+        [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720,  , 1000 ],
+        [ 6,  12, 'side_wall',            null,  53,   300, 305,  600,  , 501 ],
+        [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574,  , 501 ],
+        [ 6,   4, 'stairs',               null, 360,   75,  500,  414,  , 502  ],
+        [ 6,   4, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
 
         // Room 50 - Return into current room.
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.
@@ -193,7 +197,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 5;
+        this.room = 6;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');

@@ -19,8 +19,8 @@
 
       <div id="controls">
 	      <div id="commands">
-          <span data-name="Walk to">👻</span>
-          <span data-name="Look at">🔍</span>
+          <span data-name="Walk to">🚶</span>
+          <span data-name="Look at">👁️</span>
           <span data-name="Pick up">🤚🏼</span>
           <span data-name="Talk to">💬</span>
         </div>
@@ -32,26 +32,6 @@
       </div>
 
     </div>
-
-    <svg>
-      <filter id='noiseFilter'>
-        <feTurbulence 
-          type='fractalNoise' 
-          baseFrequency='0.95' 
-          numOctaves='2' 
-          stitchTiles='stitch'/>
-      </filter>
-    </svg>
-
-    <svg>
-      <filter id="wood">
-          <feTurbulence type="fractalNoise" baseFrequency=".1 .01"/>
-          <feColorMatrix values="0 0 0 .11 .69
-                                 0 0 0 .09 .38
-                                 0 0 0 .08 .14
-                                 0 0 0 0 1"/>
-      </filter>
-    </svg>
 
     <template id="person">
       <div class="actor">

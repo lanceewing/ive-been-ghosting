@@ -20,5 +20,9 @@
   "homepage": "https://github.com/lanceewing/ive-been-ghosting#readme",
   "devDependencies": {
     "clean-css": "^5.3.1"
+  },
+  "dependencies": {
+    "ect-bin": "^1.4.1",
+    "roadroller": "^2.1.0"
   }
 }

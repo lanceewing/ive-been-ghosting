@@ -51,7 +51,7 @@ class Logic {
             let z = ((e.pageY / game.scaleY) - 27) * 2;
             if (z <= 970) {
               ego.stop(true);
-              let destX = game.screenLeft + (e.pageX / game.scaleX);
+              let destX = e.pageX / game.scaleX;
               destX = (destX > game.roomData[1] - 50? game.roomData[1] + 10 : destX < 50? -10 : destX);
               ego.moveTo(destX, z > 555? z : 585);
             } else {

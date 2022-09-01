@@ -117,9 +117,7 @@ span {
   position: relative;
   height: 485px;
   z-index: -2;
-  width: var(--screen-width);
-  will-change: transform;
-  transform: translateX(var(--screen-left));
+  width: 960px;
   perspective: 500px;
   perspective-origin: top;
   background: linear-gradient( #EEE3DF 0% 45%, #F0E0BF 45% 59%, #7B4C3A 59% 100% );

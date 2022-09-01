@@ -296,18 +296,6 @@ class Game {
             this.sentence.innerHTML = this.lastSentence = newSentence;
         }
 
-        // Adjust screen left to account for scrolling.
-        if (this.ego.visible) {
-            let newScreenLeft = this.ego.cx - (960 / 2);
-            if (newScreenLeft < 0) newScreenLeft = 0;
-            if (newScreenLeft > (this.roomData[1] - 960)) newScreenLeft = (this.roomData[1] - 960);
-
-            if (newScreenLeft != this.screenLeft) {
-                this.screenLeft = newScreenLeft;
-                this.screen.style.setProperty('--screen-left', `-${this.screenLeft}px`);
-            }
-        }
-
         // If after updating all objects, the room that Ego says it is in is different
         // than what it was previously in, then we trigger entry in to the new room.
         if (this.ego.edge) {
@@ -390,9 +378,6 @@ class Game {
      * Invoked when Ego is entering a room.  
      */
     newRoom() {
-        // All main rooms are outside,
-        this.inside = 0;
-
         // Reset command for new room.
         this.thing = '';
         this.command = this.verb = 'Walk to';
@@ -403,9 +388,6 @@ class Game {
         this.objs = [];
 
         this.roomData = this.rooms[this.room - 1];
-
-        // Adjust the screen width for the new room.
-        this.screen.style.setProperty('--screen-width', `${this.roomData[1]}px`);
 
         // Add room classes.
         this.screen.className = 'room' + this.room;

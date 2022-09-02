@@ -2,9 +2,9 @@ class Game {
 
     inventory = {};
     
-    verb = 'Walk to';
+    verb = 'Float to';
     
-    command = 'Walk to';   // Current constructed command, either full or partial
+    command = 'Float to';   // Current constructed command, either full or partial
     
     thing = '';
 
@@ -63,7 +63,7 @@ class Game {
         [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ,  ],
         [ 2, 20,  'fire',                 '🔥', 40,     50,  460, 590,  , 601 ],
         [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ,  ],
-        [ 2, 12,  'rug',                  null, 630,   120,  166, 900,  , 501 ],
+        [ 2, 12,  'rug',                  null, 630,   120,  166, 900,  , 611 ],
         [ 2,  4,  'door',                 null, 80,    207,  700, 574,  , 501 ],
         [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340,  , 501 ],
         [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340,  , 501 ],
@@ -161,13 +161,13 @@ class Game {
         // Note: Firefox ignores custom cursors bigger than 32x32 when near the Window edge.
         let cursorSize = navigator.userAgent.match(/Firefox/)? 32 : 50;
         this.cursors = {};
-        (Util.MAC? ['🚶','🤚🏼','⬆️','💬','⬇️','⏳','↖️','👁️','⬅️','➕','↗️','🤏🏼','➡️','❔','↙️','🔍','↘️'] :
-        ['🚶','🤚🏼','\u{1F871}','💬','\u{1F873}','⏳','\u{1F874}','👁️','\u{1F870}','➕','\u{1F875}','🤏🏼','\u{1F872}','❔','\u{1F877}','🔍','\u{1F876}']).forEach((c,i) => {
+        (Util.MAC? ['👻','🤚🏼','⬆️','💭','⬇️','⏳','↖️','👁️','⬅️','➕','↗️','🤏🏼','➡️','❔','↙️','🔍','↘️'] :
+        ['👻','🤚🏼','\u{1F871}','💭','\u{1F873}','⏳','\u{1F874}','👁️','\u{1F870}','➕','\u{1F875}','🤏🏼','\u{1F872}','❔','\u{1F877}','🔍','\u{1F876}']).forEach((c,i) => {
             let hsy = [cursorSize-1, cursorSize/2][i%2];
             this.cursors[c] = `url(${Util.renderEmoji(c, cursorSize, cursorSize)[0].toDataURL()}) ${cursorSize/2} ${hsy}, auto`;
             document.body.style.setProperty(`--${c}`, this.cursors[c]);
         });
-        this.verbIcon = '🚶';
+        this.verbIcon = '👻';
 
         this.started = false;
         this.fadeOut(this.wrap);
@@ -204,12 +204,16 @@ class Game {
         this.ego = document.createElement('x-ego');
         this.ego.init(this, 50, 150);
         this.ego.setPosition(250, 750);
+        this.ego.dataset.name = 'me';
+        this.addObjEventListeners(this.ego);
         this.screen.appendChild(this.ego);
 
         // Create "Pip", the visitor to the house.
         this.pip = document.createElement('x-actor');
         this.pip.init(this, 50, 150);
         this.pip.setPosition(450, 935);
+        this.pip.dataset.name = 'pip';
+        this.addObjEventListeners(this.pip);
         this.screen.appendChild(this.pip);
 
         // Enter the starting room.
@@ -321,7 +325,7 @@ class Game {
         let newCursor = this.cursors[this.inputEnabled? this.verbIcon : '⏳'];
         if (newCursor != this.currCursor) {
             this.wrap.style.cursor = newCursor;
-            if (this.verbIcon != '🚶') {
+            if (this.verbIcon != '👻') {
                 this.wrap.style.setProperty('--c', newCursor);
             } else {
                 this.wrap.style.removeProperty('--c');
@@ -339,8 +343,8 @@ class Game {
         if (this.inputEnabled) {
           this.command = this.logic.process(this.verb, this.command, this.thing, e);
           if (this.command == this.verb) {
-            this.command = this.verb = 'Walk to';
-            this.verbIcon = '🚶';
+            this.command = this.verb = 'Float to';
+            this.verbIcon = '👻';
           }
         }
         if (e) e.stopPropagation();
@@ -352,8 +356,8 @@ class Game {
     newRoom() {
         // Reset command for new room.
         this.thing = '';
-        this.command = this.verb = 'Walk to';
-        this.verbIcon = '🚶';
+        this.command = this.verb = 'Float to';
+        this.verbIcon = '👻';
 
         // Remove the previous room's Objs from the screen.
         this.objs.forEach(obj => this.screen.removeChild(obj));

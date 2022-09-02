@@ -32,7 +32,7 @@ class Logic {
     let speaker = game.actor? game.actor : ego;
 
     switch (verb) {
-      case 'Talk to':
+      case 'Whisper to':
         switch (thing) {
           default:
             if (obj && obj == game.actor) {
@@ -44,7 +44,7 @@ class Logic {
         }
         break;
 
-      case 'Walk to':
+      case 'Float to':
         switch (thing) {
           default:
             // Walk to screen object or screen click position.
@@ -63,7 +63,7 @@ class Logic {
         }
         break;
 
-      case 'Pick up':
+      case 'Touch':
         if (game.hasItem(thing)) {
           ego.say("I already have that.");
         } else {
@@ -75,7 +75,7 @@ class Logic {
                 ego.moveTo(ego.cx, 740, () => ego.moveTo(obj.x, 740, pickup));
               }
               else {
-                ego.say("I can't get that.");
+                ego.say("I'm not sure that would help.");
               }
               break;
           }

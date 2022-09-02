@@ -60,12 +60,14 @@ class Game {
         [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  , 501  ],
 
         // Room 2 - Parlor
-        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  , 501 ],
-        [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  , 501 ],
+        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ,  ],
+        [ 2, 20,  'fire',                 '🔥', 40,     50,  460, 590,  , 601 ],
+        [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ,  ],
         [ 2, 12,  'rug',                  null, 630,   120,  166, 900,  , 501 ],
         [ 2,  4,  'door',                 null, 80,    207,  700, 574,  , 501 ],
         [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340,  , 501 ],
-        [ 2, 20,  'radio',                '📻', 40,    40,  520, 340,  , 501 ],
+        [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340,  , 501 ],
+        [ 2, 20,  'radio',                '📻', 40,    40,  540, 340,  , 501 ],
 
         // Room 3 - Small landing and Bedroom
         [ 3,  4,  'middle_wall',         null, 260,   360,  503, 720,  , 1000 ],
@@ -133,6 +135,7 @@ class Game {
         this.msg = document.getElementById('msg');
 
         customElements.define('x-sprite', Sprite);
+        customElements.define('x-actor', Actor);
         customElements.define('x-ego', Ego);
         customElements.define('x-shadow', class Shadow extends HTMLElement {});
         
@@ -184,9 +187,6 @@ class Game {
                 }, 200);
             }
         //}
-
-        // TODO: Following is for debug only
-        window.game = this;
     }
 
     /**
@@ -198,13 +198,19 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 6;
+        this.room = 2;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
         this.ego.init(this, 50, 150);
-        this.ego.setPosition(450, 750);
+        this.ego.setPosition(250, 750);
         this.screen.appendChild(this.ego);
+
+        // Create "Pip", the visitor to the house.
+        this.pip = document.createElement('x-actor');
+        this.pip.init(this, 50, 150);
+        this.pip.setPosition(450, 935);
+        this.screen.appendChild(this.pip);
 
         // Enter the starting room.
         this.newRoom();
@@ -288,8 +294,9 @@ class Game {
             this.lastTime = now;
         }
 
-        // Update all objects on the screen.
-        this.updateObjects();
+        // Update ego.
+        this.ego.update();
+        this.ego.moved = false;
 
         // Update sentence.
         let newSentence = this.command + ' ' + this.thing;
@@ -321,26 +328,6 @@ class Game {
             }
         }
         this.currCursor = newCursor;
-    }
-
-    /**
-     * The main method invoked on every animation frame when the game is unpaused. It 
-     * interates through all of the Sprites and invokes their update method. The update
-     * method will invoke the move method if the calculated position has changed. This
-     * method then tests if the Sprite is touching another Sprite. If it is, it invokes
-     * the hit method on both Sprites. 
-     */
-    updateObjects() {
-        let a1 = this.ego;
-
-        // Attempt to update ego.
-        a1.update();
-
-        this.objs.forEach(o => {
-            if (a1.touching(o)) a1.hit(o);
-        });
-
-        a1.moved = false;
     }
       
     /**

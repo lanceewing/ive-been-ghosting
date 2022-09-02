@@ -27,7 +27,6 @@ class Sprite extends HTMLElement {
 
         this.width = width;
         this.height = height;
-        this.content = content;
         this.style.width = width + 'px';
         this.style.height = height + 'px';
         this.style.setProperty('--sprite-width', width + 'px');

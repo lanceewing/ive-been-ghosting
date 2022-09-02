@@ -16,7 +16,6 @@ class Ego extends Actor {
             // Stop moving.
             this.destX = this.destZ = -1;
             this.heading = null;
-            this.cell = 0;
 
             // Now check if there is a room on this edge.
             if (edge < 8) {

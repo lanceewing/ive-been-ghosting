@@ -34,7 +34,6 @@ class Actor extends Sprite {
     // Clear the current destination.
     this.destX = this.destZ = -1;
     this.heading = null;
-    this.cell = 0;
 
     if (this.destFn && !fully) {
       this.destFn();
@@ -72,9 +71,6 @@ class Actor extends Sprite {
 
         } else {
           this.heading = Math.atan2(this.destZ - this.z, this.destX - this.cx);
-
-          // Cycle cell
-          this.cell = ((this.cell + 1) % 30);
         }
       } else if (this.dests.length > 0) {
         // If there is a destination position waiting for ego to move to, pop it now.

@@ -61,7 +61,7 @@ class Game {
 
         // Room 2 - Parlor
         [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ,  ],
-        [ 2, 20,  'fire',                 '🔥', 40,     50,  460, 590,  , 601 ],
+        [ 2,  4,  'fire',                 '🔥', 40,     50,  460, 600,  , 601 ],
         [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ,  ],
         [ 2, 12,  'rug',                  null, 630,   120,  166, 900,  , 611 ],
         [ 2,  4,  'door',                 null, 80,    207,  700, 574,  , 501 ],
@@ -161,8 +161,8 @@ class Game {
         // Note: Firefox ignores custom cursors bigger than 32x32 when near the Window edge.
         let cursorSize = navigator.userAgent.match(/Firefox/)? 32 : 50;
         this.cursors = {};
-        (Util.MAC? ['👻','🤚🏼','⬆️','💭','⬇️','⏳','↖️','👁️','⬅️','➕','↗️','🤏🏼','➡️','❔','↙️','🔍','↘️'] :
-        ['👻','🤚🏼','\u{1F871}','💭','\u{1F873}','⏳','\u{1F874}','👁️','\u{1F870}','➕','\u{1F875}','🤏🏼','\u{1F872}','❔','\u{1F877}','🔍','\u{1F876}']).forEach((c,i) => {
+        (Util.MAC? ['👻','🤚🏼','⬆️','💭','⬇️','⏳','↖️','👀','⬅️','➕','↗️','🤏🏼','➡️','❔','↙️','🔍','↘️'] :
+        ['👻','🤚🏼','\u{1F871}','💭','\u{1F873}','⏳','\u{1F874}','👀','\u{1F870}','➕','\u{1F875}','🤏🏼','\u{1F872}','❔','\u{1F877}','🔍','\u{1F876}']).forEach((c,i) => {
             let hsy = [cursorSize-1, cursorSize/2][i%2];
             this.cursors[c] = `url(${Util.renderEmoji(c, cursorSize, cursorSize)[0].toDataURL()}) ${cursorSize/2} ${hsy}, auto`;
             document.body.style.setProperty(`--${c}`, this.cursors[c]);
@@ -203,7 +203,7 @@ class Game {
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
         this.ego.init(this, 50, 150);
-        this.ego.setPosition(250, 750);
+        this.ego.setPosition(450, 610);
         this.ego.dataset.name = 'me';
         this.addObjEventListeners(this.ego);
         this.screen.appendChild(this.ego);
@@ -219,28 +219,29 @@ class Game {
         // Enter the starting room.
         this.newRoom();
 
-        // TODO: Uncomment when releasing.
         // Intro text.
-        // this.inputEnabled = false;
-        // this.ego.say("Hello!!", 100, () => {
-        //     this.ego.say("I'm detective Pip.", 250, () => {
-        //         this.ego.say("The King has commissioned me to find his missing Page Boy.", 300, () => {
-        //             this.ego.say("He was on his way to deliver a message to The Goblin...", 300, () => {
-        //                 this.ego.moveTo(300, 740, () => {
-        //                     this.ego.say("...but went missing in the woods to the west.", 300, () => {
-        //                         this.ego.moveTo(300, 800, () => {
-        //                             this.ego.say("Please help me to find him.", 200, () => {
-        //                                 this.ego.say("Use the Walk, Look, Pick up, and Talk icons below.", 300, () => {
-                                            this.inputEnabled = true;
-        //                                 });
-        //                             });
-        //                         });
-        //                     });
-        //                 });
-        //             });
-        //         });
-        //     });
-        // });
+        this.inputEnabled = false;
+        this.pip.say("This is 'The Solitude' house in Philadelphia Zoo.", 350, () => {
+            this.pip.say("I'm a Javascript developer called Pip...", 310, () => {
+                this.pip.moveTo(600, 935, () => {
+                    this.pip.say("...and I have come here to research 'DEATH' for my js13kgames entry...", 300, () => {
+                        this.pip.moveTo(550, 935, () => {
+                            this.pip.say("...as I heard this house is haunted.", 200, () => {
+                                this.ego.say("And he heard right.", 170, () =>  {
+                                    this.ego.say("Please help me to help him with his research.", 250, () => {
+                                        this.pip.moveTo(530, 850, () => {
+                                            this.pip.say("Who said that?!", 200, () => {
+                                                this.inputEnabled = true
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
 
         // Fade in the whole screen at the start.
         this.fadeIn(this.wrap);
@@ -301,6 +302,8 @@ class Game {
         // Update ego.
         this.ego.update();
         this.ego.moved = false;
+        this.pip.update();
+        this.pip.moved = false;
 
         // Update sentence.
         let newSentence = this.command + ' ' + this.thing;

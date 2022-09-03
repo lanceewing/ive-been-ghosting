@@ -336,6 +336,9 @@ class Sprite extends HTMLElement {
         bubble.style.setProperty('--left', `${-left}px`);
         bubble.style.left = this.x + left + 'px';
         bubble.style.bottom = `${500-this.top}px`;
+        if (this == this.game.ego) {
+            bubble.style.opacity = 0.5;
+        }
 
         game.screen.appendChild(bubble);
         this.classList.add('speech');

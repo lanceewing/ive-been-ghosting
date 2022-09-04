@@ -134,6 +134,15 @@ x-ego {
   filter: contrast(0) opacity(0.2) brightness(1.5);
   transition: all 50ms linear;
 }
+.shake :not(.feet) {
+  animation: shake 0.2s infinite;
+  transform: translate(0, 0);
+}
+@keyframes shake {
+  50% {
+    transform: translate(-1px, 0);
+  }
+}
 x-shadow {
   --shadow-width: var(--sprite-width);
   --shadow-height: calc(var(--sprite-width)/2/3);

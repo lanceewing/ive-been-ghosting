@@ -106,29 +106,4 @@ class Actor extends Sprite {
       }
     }
   }
-
-  /**
-   * Invoked when the Actor has hit another Sprite.
-   * 
-   * @param obj The Sprite that the Actor has hit.
-   */
-  hit(obj) {
-    if (!this.game.inputEnabled) {
-      // Reset to last position where we weren't touching the other Sprite.
-      for (;this.reset() && this.touching(obj););
-
-      // Adjust the current X position to avoid the object.
-      if (!this.dests[0]) this.dests.unshift({x: this.destX, z: this.destZ});
-      this.destX = this.cx < obj.cx? obj.cx - obj.radius - 50 : obj.cx + obj.radius + 50;
-      this.dests.unshift({x: this.destX, z: this.destZ});
-      this.destZ = this.z;
-
-    } else {
-      // Reset the position to the last one that isn't touching another Sprite. Resetting
-      // the position prevents Ego from walking through obstacles. 
-      for (;this.reset() && this.touching(obj););
-      this.stop(true);
-      this.inputEnabled = true;
-    }
-  }
 }

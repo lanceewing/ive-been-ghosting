@@ -138,6 +138,7 @@ class Game {
         customElements.define('x-actor', Actor);
         customElements.define('x-ego', Ego);
         customElements.define('x-shadow', class Shadow extends HTMLElement {});
+        customElements.define('x-anchor', class Anchor extends Sprite {});
         
         this.logic = new Logic(this);
         this.sound = new Sound();
@@ -215,6 +216,13 @@ class Game {
         this.pip.dataset.name = 'pip';
         this.addObjEventListeners(this.pip);
         this.screen.appendChild(this.pip);
+
+        // Create the ghost's movement anchor.
+        this.anchor = document.createElement('x-anchor');
+        this.anchor.init(this, 50, 1, null, false);
+        this.anchor.setPosition(450, 620);
+        this.anchor.classList.add('anchor');
+        this.screen.appendChild(this.anchor);
 
         // Enter the starting room.
         this.newRoom();
@@ -299,9 +307,14 @@ class Game {
             this.lastTime = now;
         }
 
-        // Update ego.
+        // Update ego and pip.
         this.ego.update();
+        if (!this.ego.touching(this.anchor, 150)) {
+            while (this.ego.reset());
+            this.ego.stop(true);
+        }
         this.ego.moved = false;
+        
         this.pip.update();
         this.pip.moved = false;
 

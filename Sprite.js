@@ -299,11 +299,11 @@ class Sprite extends HTMLElement {
      * Tells the Actor to say the given text within a speech bubble of the given width. Will
      * execute the given optional next function if provided after the speech bubble is removed.
      * 
-     * @param {string} text The text to say.
      * @param {number} width The width of the speech bubble.
+     * @param {string} text The text to say.
      * @param {Function} next The function to execute after saying the text. Optional.
      */
-    say(text, width, next) {
+    say(text, next, width) {
         let game = this.game;
         let elem = this;
 

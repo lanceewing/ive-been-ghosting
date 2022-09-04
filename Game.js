@@ -52,70 +52,70 @@ class Game {
         // bit 7:    0 = normal, 1 = horizontal flip
 
         // Room 1 - Entry Hall
-        [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  , 1000 ],
-        [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  , 501  ],
-        [ 1,  4, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
-        [ 1,  4, 'door',                 null, 80,    207, 180,  574,  , 501  ],
-        [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, , 501  ],
-        [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  , 501  ],
+        [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  1000 ],
+        [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  501  ],
+        [ 1,  4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
+        [ 1,  4, 'door',                 null, 80,    207, 180,  574,  501  ],
+        [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, 501  ],
+        [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  501  ],
 
         // Room 2 - Parlor
-        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ,  ],
-        [ 2,  4,  'fire',                 '🔥', 40,     50,  460, 600,  , 601 ],
-        [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ,  ],
-        [ 2, 12,  'rug',                  null, 630,   120,  166, 900,  , 611 ],
-        [ 2,  4,  'door',                 null, 80,    207,  700, 574,  , 501 ],
-        [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340,  , 501 ],
-        [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340,  , 501 ],
-        [ 2, 20,  'radio',                '📻', 40,    40,  540, 340,  , 501 ],
+        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ],
+        [ 2,  4,  'fire',                 '🔥', 40,     50,  460, 600, 601, "It burns brightly." ],
+        [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ],
+        [ 2, 12,  'rug',                  null, 630,   120,  166, 900, 611 ],
+        [ 2,  4,  'door',                 null, 80,    207,  700, 574, 501, "It looks like a jib door." ],
+        [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501 ],
+        [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340, 501, "It contains my ashes." ],
+        [ 2, 20,  'radio',                '📻', 40,    40,  540, 340,  501 ],
 
         // Room 3 - Small landing and Bedroom
-        [ 3,  4,  'middle_wall',         null, 260,   360,  503, 720,  , 1000 ],
-        [ 3, 132, 'down_stairs',         null, 180,   70,   700, 956,  , 501  ],
-        [ 3, 20,  'bed',                 '🛏', 150,   110,   95, 850,  , 503  ],
-        [ 3, 20,  'alcove',              null, 108,   320,  101, 760,  , 502  ],
-        [ 3,  4,  'fireplace',           null, 200,   130,  330, 600,  , 501  ],
-        [ 3,  4,  'alcove_wall',         null, 260,   360,  95,  720,  , 1000 ],
-        [ 3,  4,  'door',                 null, 80,    207, 180,  574,  , 501  ],
+        [ 3,  4,  'middle_wall',         null, 260,   360,  503, 720, 1000 ],
+        [ 3, 132, 'down_stairs',         null, 180,   70,   700, 956, 501  ],
+        [ 3, 20,  'bed',                 '🛏', 150,   110,   95, 850, 503  ],
+        [ 3, 20,  'alcove',              null, 108,   320,  101, 760, 502  ],
+        [ 3,  4,  'fireplace',           null, 200,   130,  330, 600, 501  ],
+        [ 3,  4,  'alcove_wall',         null, 260,   360,  95,  720, 1000 ],
+        [ 3,  4,  'door',                 null, 80,    207, 180,  574, 501  ],
 
         // Room 4 - Library and Bedroom
-        [ 4,  12, 'middle_wall',          null, 260,   360, 250,  720,  , 1000 ],
-        [ 4,  12, 'side_wall',            null,  53,   300, 372,  596,  , 501 ],
-        [ 4,  12, 'window',               null, 121,   231, 542,  478,  , 501  ],
-        [ 4,  4,  'stairs',               null, 360,   75,    0,  414, , 501  ],
-        [ 4,  4,  'back_wall',            null, 260,   315,  136, 630,  , 502 ],
-        [ 4,  12, 'book_case',            null, 136,   265, 401,  600,  , 502  ],
-        [ 4,  12, 'book_case',            null, 136,   265, 667,  600,  , 502  ],
-        [ 4,  12, 'rug',                  null, 350,   120, 450,  884,  , 501 ],
-        [ 4,   0, 'chair',               '🪑',  50,   120, 720,  700,  ,   ],
-        [ 4,   0, 'desk',                 null, 222,   60, 668,  800,   ,  ],
+        [ 4,  12, 'middle_wall',          null, 260,   360, 250,  720, 1000 ],
+        [ 4,  12, 'side_wall',            null,  53,   300, 372,  596, 501 ],
+        [ 4,  12, 'window',               null, 121,   231, 542,  478, 501  ],
+        [ 4,  4,  'stairs',               null, 360,   75,    0,  414, 501  ],
+        [ 4,  4,  'back_wall',            null, 260,   315,  136, 630, 502 ],
+        [ 4,  12, 'book_case',            null, 136,   265, 401,  600, 502  ],
+        [ 4,  12, 'book_case',            null, 136,   265, 667,  600, 502  ],
+        [ 4,  12, 'rug',                  null, 350,   120, 450,  884, 501 ],
+        [ 4,   0, 'chair',               '🪑',  50,   120, 720,  700,   ],
+        [ 4,   0, 'desk',                 null, 222,   60, 668,  800,   ],
 
         // Room 5 - Attic
-        [ 5,  12, 'wall1',                null, 190,   341, 115,  683,  ,   ],
-        [ 5,  12, 'wall2',                null, 190,   341, 655,  683,  ,   ],
-        [ 5,  12, 'wall3',                null, 100,   311, 295,  623,  ,   ],
-        [ 5,  12, 'wall4',                null, 100,   311, 565,  623,  , 501 ],
-        [ 5,  12, 'wall5',                null,  25,   290, 357,  586,  , 502 ],
-        [ 5,   4, 'roof',                 null, 961,   30,   -1,   30,  , 1000 ],
-        [ 5,   0, 'ghost_bed',           '🛌', 225,   110, 370,  590,  ,   ],
-        [ 5,   4, 'stairs2',              null,  35,   207, 326,  590,  , 501  ],
+        [ 5,  12, 'wall1',                null, 190,   341, 115,  683,   ],
+        [ 5,  12, 'wall2',                null, 190,   341, 655,  683,   ],
+        [ 5,  12, 'wall3',                null, 100,   311, 295,  623,   ],
+        [ 5,  12, 'wall4',                null, 100,   311, 565,  623, 501 ],
+        [ 5,  12, 'wall5',                null,  25,   290, 357,  586, 502 ],
+        [ 5,   4, 'roof',                 null, 961,   30,   -1,   30, 1000 ],
+        [ 5,   0, 'ghost_bed',           '🛌', 225,   110, 370,  590,   ],
+        [ 5,   4, 'stairs2',              null,  35,   207, 326,  590, 501  ],
 
         // Room 6 - Cellar
-        [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720,  , 1000 ],
-        [ 6,  12, 'side_wall',            null,  53,   300, 305,  600,  , 501 ],
-        [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574,  , 501 ],
-        [ 6,   4, 'stairs',               null, 360,   75,  500,  414,  , 502  ],
-        [ 6,   4, 'up_stairs',            null, 410,   145, null, null, , 1000 ],
-        [ 6,  12, 'book_case',            null, 136,   400,  31,  845,  , 502  ],
+        [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720, 1000 ],
+        [ 6,  12, 'side_wall',            null,  53,   300, 305,  600, 501 ],
+        [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574, 501 ],
+        [ 6,   4, 'stairs',               null, 360,   75,  500,  414, 502  ],
+        [ 6,   4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
+        [ 6,  12, 'book_case',            null, 136,   400,  31,  845,  502  ],
 
         // Room 50 - Return into current room.
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.
 
         // Room 0 - All rooms
-        [ 0,  4, 'left_wall',            null, 260,   360, null, null, , 501 ],
-        [ 0,  4, 'right_wall',           null, 260,   360, null, null, , 501 ],
-        [ 0,  4, 'left_window',          null, 121,   231, null, null, , 501 ],
-        [ 0,  4, 'right_window',         null, 121,   231, null, null, , 501 ],
+        [ 0,  4, 'left_wall',            null, 260,   360, null, null, 501 ],
+        [ 0,  4, 'right_wall',           null, 260,   360, null, null, 501 ],
+        [ 0,  4, 'left_window',          null, 121,   231, null, null, 501 ],
+        [ 0,  4, 'right_window',         null, 121,   231, null, null, 501 ],
     ];
 
     // 1 = 
@@ -221,7 +221,9 @@ class Game {
         this.anchor = document.createElement('x-anchor');
         this.anchor.init(this, 50, 1, null, false);
         this.anchor.setPosition(450, 620);
+        this.anchor.dataset.name = 'circle';
         this.anchor.classList.add('anchor');
+        this.addObjEventListeners(this.anchor);
         this.screen.appendChild(this.anchor);
 
         // Enter the starting room.
@@ -229,16 +231,16 @@ class Game {
 
         // Intro text.
         this.inputEnabled = false;
-        this.pip.say("This is 'The Solitude' house in Philadelphia Zoo.", 350, () => {
-            this.pip.say("I'm a Javascript developer called Pip...", 310, () => {
+        this.pip.say("This is 'The Solitude' house in Philadelphia Zoo.", () => {
+            this.pip.say("I'm a Javascript developer called Pip...", () => {
                 this.pip.moveTo(600, 935, () => {
-                    this.pip.say("...and I have come here to research 'DEATH' for my js13kgames entry...", 300, () => {
+                    this.pip.say("...and I have come here to research 'DEATH' for my js13kgames entry...", () => {
                         this.pip.moveTo(550, 935, () => {
-                            this.pip.say("...as I heard this house is haunted.", 200, () => {
-                                this.ego.say("And he heard right.", 170, () =>  {
-                                    this.ego.say("Please help me to help him with his research.", 250, () => {
+                            this.pip.say("...as I heard this house is haunted.", () => {
+                                this.ego.say("And he heard right.", () =>  {
+                                    this.ego.say("Please help me to help him with his research.", () => {
                                         this.pip.moveTo(530, 850, () => {
-                                            this.pip.say("Who said that?!", 200, () => {
+                                            this.pip.say("Who said that?!", () => {
                                                 this.inputEnabled = true
                                             });
                                         });
@@ -442,10 +444,10 @@ class Game {
                 obj.ignore = true;
             }
             if (prop[8]) {
-                obj.radius = prop[8];
+                obj.style.zIndex = prop[8];
             }
             if (prop[9]) {
-                obj.style.zIndex = prop[9];
+                obj.desc = prop[9];
             }
 
             prop[11] = obj;

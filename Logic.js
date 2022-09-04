@@ -25,21 +25,24 @@ class Logic {
     let game = this.game;
     let flags = game.flags;
     let ego = game.ego;
+    let pip = game.pip;
 
     // If thing is in the current room, then obj will reference it.
     let obj = game.objs.find(i => i.dataset['name'] == thing);
     let pickup = () => game.getItem(thing);
-    let speaker = game.actor? game.actor : ego;
 
     switch (verb) {
       case 'Whisper to':
         switch (thing) {
+          case 'pip':
+            ego.say("Boo!!!", () => {
+              pip.say("Did somebody say something?", () => {
+                ego.say("I don't think he can hear me properly.");
+              });
+            });
+            break;
           default:
-            if (obj && obj == game.actor) {
-              game.actor.say("Hello!");
-            } else {
-              speaker.say("It doesn't speak.");
-            }
+            ego.say("It doesn't speak.");
             break;
         }
         break;
@@ -84,8 +87,17 @@ class Logic {
 
       case 'Look at':
         switch (thing) {
+          case 'circle':
+            ego.say("I can only move that far from my urn.");
+            break;
+          case 'pip':
+            ego.say("He looks scared.");
+            break;
           default:
-            if (thing != "") {
+            if (obj && obj.desc) {
+              ego.say(obj.desc);
+            }
+            else if (thing != "") {
               ego.say("It's just a " + thing + ".");
             }
             break;

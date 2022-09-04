@@ -92,19 +92,13 @@ class Sprite extends HTMLElement {
      * @returns {boolean} true if this Sprite is touching the given Sprite; otherwise false.
      */
     touching(obj, gap) {
-        if (this.ignore || obj.ignore || obj == this) {
-            return false;
-        }
-        if (obj) {
-            let dx = this.cx - obj.cx;
-            let dz = this.cz - obj.cz + 15;
-            let dist = (dx * dx) + (dz * dz);
-            let rsum = (this.radius + obj.radius + (gap | 0));
-            return (dist <= (rsum * rsum));
-        } else {
-            return false;
-        }
+        let dx = this.cx - obj.cx;
+        let dz = this.cz - obj.cz + 15;
+        let dist = (dx * dx) + (dz * dz);
+        let rsum = (this.radius + obj.radius + (gap | 0));
+        return (dist <= (rsum * rsum));
     }
+
     /**
      * Resets this Sprite's position to its previous position.
      * 

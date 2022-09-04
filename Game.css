@@ -131,7 +131,8 @@ span {
 x-ego {
   transform: rotateY(0deg) translate(var(--sprite-left), var(--sprite-top)) translateZ(0);
   will-change: transform;
-  filter: contrast(0) opacity(0.2) brightness(1.5)
+  filter: contrast(0) opacity(0.2) brightness(1.5);
+  transition: all 50ms linear;
 }
 x-shadow {
   --shadow-width: var(--sprite-width);
@@ -147,6 +148,20 @@ x-shadow {
   filter: blur(1.2px);
   z-index: 0;
   transform: rotateY(0deg);
+}
+x-anchor {
+  z-index: 500 !important;
+}
+.anchor:after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 50px;
+  left: -150px;
+  bottom: -25px;
+  background-color:transparent;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ea4c89, inset 0 0 8px #ea4c89;
 }
 x-sprite canvas {
   width: 100%;

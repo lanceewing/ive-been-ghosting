@@ -162,8 +162,8 @@ class Game {
         // Note: Firefox ignores custom cursors bigger than 32x32 when near the Window edge.
         let cursorSize = navigator.userAgent.match(/Firefox/)? 32 : 50;
         this.cursors = {};
-        (Util.MAC? ['👻','🤚🏼','⬆️','💭','⬇️','⏳','↖️','👀','⬅️','➕','↗️','🤏🏼','➡️','❔','↙️','🔍','↘️'] :
-        ['👻','🤚🏼','\u{1F871}','💭','\u{1F873}','⏳','\u{1F874}','👀','\u{1F870}','➕','\u{1F875}','🤏🏼','\u{1F872}','❔','\u{1F877}','🔍','\u{1F876}']).forEach((c,i) => {
+        (Util.MAC? ['👻','👆🏼','⬆️','💭','⬇️','⏳','↖️','👀','⬅️','➕','↗️','🤏🏼','➡️','❔','↙️','🔍','↘️'] :
+        ['👻','👆🏼','\u{1F871}','💭','\u{1F873}','⏳','\u{1F874}','👀','\u{1F870}','➕','\u{1F875}','🤏🏼','\u{1F872}','❔','\u{1F877}','🔍','\u{1F876}']).forEach((c,i) => {
             let hsy = [cursorSize-1, cursorSize/2][i%2];
             this.cursors[c] = `url(${Util.renderEmoji(c, cursorSize, cursorSize)[0].toDataURL()}) ${cursorSize/2} ${hsy}, auto`;
             document.body.style.setProperty(`--${c}`, this.cursors[c]);
@@ -241,6 +241,7 @@ class Game {
                                     this.ego.say("Please help me to help him with his research.", () => {
                                         this.pip.moveTo(530, 850, () => {
                                             this.pip.say("Who said that?!", () => {
+                                                this.pip.querySelector(".actor").classList.add("shake");
                                                 this.inputEnabled = true
                                             });
                                         });

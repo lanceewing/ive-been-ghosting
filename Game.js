@@ -118,6 +118,7 @@ class Game {
         [ 0,  4, 'right_window',         null, 121,   231, null, null, 501 ],
     ];
 
+    // 0 = Radio ON
     // 1 = 
     flags = [];
 

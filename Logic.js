@@ -34,8 +34,32 @@ class Logic {
     switch (verb) {
       case 'Whisper to':
         switch (thing) {
+          case 'radio':
+            if (flags[0]) {      // Radio ON
+              if (flags[2]) {    // Already spoken to Pip once
+
+              } else {           // Not yet spoken to Pip
+                ego.say("Boo!!!");
+                pip.jump(() => {
+                  pip.say("Who was that? I can't see you.", () => {
+                    ego.say("I am a helpful ghost, and your guide.", () => {
+                      pip.say("How do I know I can trust you?", () => {
+                        ego.say("I will show you things, and whisper helpful tips to you.", () => {
+                          pip.say("OK, but you will have to earn my trust.");
+                          flags[2] = 1;
+                        });
+                      });
+                    });
+                  });
+                });
+              }
+            } else {
+              ego.say("It is turned OFF.");
+            }
+            break;
           case 'pip':
-            ego.say("Boo!!!", () => {
+            ego.say("Boo!!!");
+            pip.jump(() => {
               pip.say("Did somebody say something?", () => {
                 ego.say("I don't think he can hear me properly.");
               });
@@ -73,6 +97,12 @@ class Logic {
               flags[0] = !flags[0];
               ego.say(`It is now turned ${flags[0]? "ON" : "OFF"}.`);
               break;
+            case 'urn':
+
+              break;
+            case 'clock':
+              ego.say("Too heavy for me to move.");
+              break;
             default:
               ego.say("Nothing happened.");
               break;
@@ -82,7 +112,7 @@ class Logic {
           if (obj.touching(game.anchor, 150)) {
             ego.moveTo(obj.cx, Math.min(obj.cz, 610), fn);
           } else {
-            ego.say("I can't walk to there.");
+            ego.say("It's too far from my urn.");
           }
         } else {
           ego.say("I don't think that would help.");
@@ -98,7 +128,7 @@ class Logic {
             ego.say("He looks scared.");
             break;
           case 'radio':
-            ego.say(`It is turned ${flags[0]? "ON" : "OFF"}.`);
+            ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);
             break;
           default:
             if (obj && obj.desc) {

@@ -56,6 +56,19 @@ class Actor extends Sprite {
   }
 
   /**
+   * Actor momentarily jumps.
+   * 
+   * @param {Function} fn The function to execute once the Actor finishes the jump.
+   */
+  jump(fn) {
+    this.querySelector(".actor").classList.add("jump");
+    setTimeout(() => {
+      this.querySelector(".actor").classList.remove("jump");
+      fn();
+    }, 200);
+  }
+
+  /**
    * Updates the Actor's position based on its current heading and destination point.
    */
   update() {

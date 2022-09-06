@@ -143,6 +143,14 @@ x-ego {
     transform: translate(-1px, 0);
   }
 }
+.jump {
+  animation: jump 0.2s;
+}
+@keyframes jump {
+  50% {
+    top: -10px;
+  }
+}
 x-shadow {
   --shadow-width: var(--sprite-width);
   --shadow-height: calc(var(--sprite-width)/2/3);

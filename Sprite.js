@@ -93,7 +93,7 @@ class Sprite extends HTMLElement {
      */
     touching(obj, gap) {
         let dx = this.cx - obj.cx;
-        let dz = this.cz - obj.cz + 15;
+        let dz = Math.max(1830, this.cz) - obj.cz + 15;
         let dist = (dx * dx) + (dz * dz);
         let rsum = (this.radius + obj.radius + (gap | 0));
         return (dist <= (rsum * rsum));

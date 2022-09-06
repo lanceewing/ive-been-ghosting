@@ -65,7 +65,7 @@ class Game {
         [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ],
         [ 2, 12,  'rug',                  null, 630,   120,  166, 900, 611 ],
         [ 2,  4,  'door',                 null, 80,    207,  700, 574, 501, "It looks like a jib door." ],
-        [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501 ],
+        [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501, "Looks to have been moved many times." ],
         [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340, 501, "It contains my ashes." ],
         [ 2, 20,  'radio',                '📻', 40,    40,  540, 340,  501 ],
 
@@ -119,7 +119,8 @@ class Game {
     ];
 
     // 0 = Radio ON
-    // 1 = 
+    // 1 = Fire is burning
+    // 2 = Spoken to Pip
     flags = [];
 
     /**
@@ -313,7 +314,7 @@ class Game {
 
         // Update ego and pip.
         this.ego.update();
-        if (!this.ego.touching(this.anchor, 150)) {
+        if (!this.ego.touching(this.anchor, 125)) {
             while (this.ego.reset());
             this.ego.stop(true);
         }

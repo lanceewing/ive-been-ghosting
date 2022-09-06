@@ -29,7 +29,7 @@ class Logic {
 
     // If thing is in the current room, then obj will reference it.
     let obj = game.objs.find(i => i.dataset['name'] == thing);
-    let pickup = () => game.getItem(thing);
+    let fn = null;
 
     switch (verb) {
       case 'Whisper to':
@@ -67,21 +67,25 @@ class Logic {
         break;
 
       case 'Touch':
-        if (game.hasItem(thing)) {
-          ego.say("I already have that.");
-        } else {
+        fn = () => { 
           switch (thing) {
+            case 'radio':
+              flags[0] = !flags[0];
+              ego.say(`It is now turned ${flags[0]? "ON" : "OFF"}.`);
+              break;
             default:
-              // Is item in the current room?
-              if (obj && obj.propData[1] & 1) {
-                // Normal room, so walk to item and pick it up.
-                ego.moveTo(ego.cx, 740, () => ego.moveTo(obj.x, 740, pickup));
-              }
-              else {
-                ego.say("I'm not sure that would help.");
-              }
+              ego.say("Nothing happened.");
               break;
           }
+        }
+        if (obj) {
+          if (obj.touching(game.anchor, 150)) {
+            ego.moveTo(obj.cx, Math.min(obj.cz, 610), fn);
+          } else {
+            ego.say("I can't walk to there.");
+          }
+        } else {
+          ego.say("I don't think that would help.");
         }
         break;
 
@@ -92,6 +96,9 @@ class Logic {
             break;
           case 'pip':
             ego.say("He looks scared.");
+            break;
+          case 'radio':
+            ego.say(`It is turned ${flags[0]? "ON" : "OFF"}.`);
             break;
           default:
             if (obj && obj.desc) {

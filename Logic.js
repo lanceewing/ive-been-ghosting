@@ -34,61 +34,67 @@ class Logic {
     switch (verb) {
       case 'Whisper to':
         let thing2 = (cmd.indexOf(' about ') < 0? '' : `,${cmd.substring(11, cmd.indexOf(' about '))}`)
-        if (thing2) ego.say(`Try the ${thing}.`);
-        switch (thing + thing2) {
-          case 'radio':
-            if (flags[0]) {      // Radio ON
-              if (flags[2]) {    // Already spoken to Pip once
-                if (flags[3]) {  // Radio batteries are now flat
-                  ego.say("The batteries have gone flat.");
-                } else {
-                  newCommand = 'Whisper to radio about ';
-                }
-              } else {           // Not yet spoken to Pip
-                ego.say("Boo!!!");
-                pip.jump(() => {
-                  pip.say("Who was that? I can't see you.", () => {
-                    ego.say("I am a helpful ghost, and your guide.", () => {
-                      pip.say("How do I know I can trust you?", () => {
-                        ego.say("I will show you things, and whisper helpful tips to you.", () => {
-                          pip.say("OK, but you will have to earn my trust.");
-                          flags[2] = 1;
+        fn = () => {
+          switch (thing + thing2) {
+            case 'radio':
+              if (flags[0]) {      // Radio ON
+                if (flags[2]) {    // Already spoken to Pip once
+                  if (flags[3]) {  // Radio batteries are now flat
+                    ego.say("The batteries have gone flat.");
+                  } else {
+                    newCommand = 'Whisper to radio about ';
+                  }
+                } else {           // Not yet spoken to Pip
+                  ego.say("Boo!!!", () => {
+                    pip.say("Who was that? I can't see you.", () => {
+                      ego.say("I am a helpful ghost, and your guide.", () => {
+                        pip.say("Ah... how do I know I can trust you?", () => {
+                          ego.say("I will show you things, and whisper helpful tips to you.", () => {
+                            pip.say("OK, but you will have to earn my trust.");
+                            flags[2] = 1;
+                          });
                         });
                       });
                     });
                   });
+                  pip.jump();
+                }
+              } else {
+                ego.say("It is turned OFF.");
+              }
+              break;
+            case 'me':
+              ego.say("I've been doing that for centuries.");
+              break;
+            case 'pip':
+              ego.say("Boo!!!");
+              pip.jump(() => {
+                pip.say("Did somebody say something?", () => {
+                  ego.say("I don't think he can hear me properly.");
+                });
+              });
+              break;
+            case 'door,radio':
+              if (flags[4]) {
+                pip.say("I don't see a door handle.");
+              } else {
+                pip.say("Is that a door? I didn't notice.", () => {
+                  pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
+                    pip.say("I don't see a door handle.");
+                    flags[4] = 1;
+                  });
                 });
               }
-            } else {
-              ego.say("It is turned OFF.");
-            }
-            break;
-          case 'me':
-            ego.say("I've been doing that for centuries.");
-            break;
-          case 'pip':
-            ego.say("Boo!!!");
-            pip.jump(() => {
-              pip.say("Did somebody say something?", () => {
-                ego.say("I don't think he can hear me properly.");
-              });
-            });
-            break;
-          case 'door,radio':
-            if (flags[4]) {
-              pip.say("I don't see a door handle.");
-            } else {
-              pip.say("Is that a door? I didn't notice.", () => {
-                pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
-                  pip.say("I don't see a door handle.");
-                  flags[4] = 1;
-                });
-              });
-            }
-            break;
-          default:
-            ego.say("It doesn't speak.");
-            break;
+              break;
+            default:
+              ego.say("It doesn't speak.");
+              break;
+          }
+        }
+        if (thing2) {
+          ego.say(`Try the ${thing}.`, fn);
+        } else {
+          fn();
         }
         break;
 
@@ -152,8 +158,13 @@ class Logic {
             ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);
             break;
           default:
-            if (obj && obj.desc) {
-              ego.say(obj.desc);
+            if (obj && obj.propData[9]) {
+              // Object description.
+              ego.say(obj.propData[9]);
+              if (obj.propData[10]) {
+                // Flag to set when object is looked at.
+                flags[obj.propData[10]] = 1;
+              }
             }
             else if (thing != "") {
               ego.say("It's just a " + thing + ".");

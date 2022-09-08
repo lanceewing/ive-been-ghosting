@@ -65,7 +65,7 @@ class Game {
         [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ],
         [ 2, 12,  'rug',                  null, 630,   120,  166, 900, 611 ],
         [ 2,  4,  'door',                 null, 80,    207,  700, 574, 501, "It looks like a jib door." ],
-        [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501, "Looks to have been moved many times." ],
+        [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501, "Looks to have been moved many times.", 5 ],
         [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340, 501, "It contains my ashes." ],
         [ 2, 20,  'radio',                '📻', 40,    40,  540, 340,  501 ],
 
@@ -123,6 +123,8 @@ class Game {
     // 2 = Spoken to Pip
     // 3 = Batteries flat
     // 4 = Tried parlor door once
+    // 5 = Noticed that the clock has been moved many times
+    // 6 = Parlor door open
     flags = [];
 
     /**
@@ -450,9 +452,6 @@ class Game {
             }
             if (prop[8]) {
                 obj.style.zIndex = prop[8];
-            }
-            if (prop[9]) {
-                obj.desc = prop[9];
             }
 
             prop[11] = obj;

@@ -119,8 +119,8 @@ class Game {
     ];
 
     // 0 = Radio ON
-    // 1 = Fire is burning
-    // 2 = Spoken to Pip
+    // 1 = Fire is still burning
+    // 2 = Ego spoken to Pip once
     // 3 = Batteries flat
     // 4 = Tried parlor door once
     // 5 = Noticed that the clock has been moved many times

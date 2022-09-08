@@ -64,7 +64,7 @@ class Actor extends Sprite {
     this.querySelector(".actor").classList.add("jump");
     setTimeout(() => {
       this.querySelector(".actor").classList.remove("jump");
-      fn();
+      if (fn) fn();
     }, 200);
   }
 

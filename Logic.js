@@ -86,6 +86,20 @@ class Logic {
                 });
               }
               break;
+            case 'clock,radio':
+              if (flags[5]) {   // Noticed that the clock has been moved many times.
+                pip.say("The clock has been moved many times? Let me check...", () => {
+                  pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
+                    obj.setPosition(obj.x + 10, obj.z);
+                    // TODO: Open the door.
+                    flags[6] = 1;
+                    game.inputEnabled = true;
+                  });
+                });
+              } else {
+                pip.say("Sorry, I'm not sure what you want me to do.");
+              }
+              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");
@@ -97,6 +111,7 @@ class Logic {
         }
         if (thing2) {
           ego.say(`Try the ${thing}.`, fn);
+          newCommand = verb;
         } else {
           fn();
         }
@@ -201,11 +216,6 @@ class Logic {
       default:
         ego.say("Nothing happened.");
         break;
-    }
-
-    if (newCommand.endsWith('with ')) {
-      game.verbIcon = game.inventory[thing].innerHTML;
-      game.cursors[game.verbIcon] = `url(${Util.renderEmoji(game.verbIcon, 50, 50)[0].toDataURL()}) 25 25, auto`;
     }
 
     return newCommand;

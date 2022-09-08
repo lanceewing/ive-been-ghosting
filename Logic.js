@@ -67,12 +67,12 @@ class Logic {
               ego.say("I've been doing that for centuries.");
               break;
             case 'pip':
-              ego.say("Boo!!!");
-              pip.jump(() => {
+              ego.say("Boo!!!", () => {
                 pip.say("Did somebody say something?", () => {
                   ego.say("I don't think he can hear me properly.");
                 });
               });
+              pip.jump();
               break;
             case 'door,radio':
               if (flags[4]) {
@@ -87,7 +87,11 @@ class Logic {
               }
               break;
             default:
-              ego.say("It doesn't speak.");
+              if (thing2) {
+                pip.say("Sorry, I'm not sure what you want me to do.");
+              } else {
+                ego.say("It doesn't speak.");
+              }
               break;
           }
         }

@@ -131,7 +131,7 @@ span {
 x-ego {
   transform: rotateY(0deg) translate(var(--sprite-left), var(--sprite-top)) translateZ(0);
   will-change: transform;
-  filter: contrast(0) opacity(0.2) brightness(1.5);
+  filter: contrast(0) opacity(0.3) brightness(1.5);
   transition: all 50ms linear;
 }
 .shake :not(.feet) {
@@ -494,7 +494,24 @@ x-ego .pack {
   clip-path: polygon(2px 0, 149px 100px, 470px 100px, 470px 0, 2px 0);
 }
 .door {
-  border: 1px grey solid;
+  background-image: linear-gradient(#D6CCC9 0% 55%, #D8CAAC 45% 75%, #6F4434 75% 100% );
+  perspective: 350px;
+  overflow: hidden;
+}
+.door:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#EEE3DF 0% 67%, #F0E0BF 67% 100%);
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  transform-origin: right center;
+  z-index: 16;
+  border: #80808080 1px solid;
+}
+.door.open:after {
+  transform: rotateY(-60deg);
 }
 .down_stairs:after {
   content: "";

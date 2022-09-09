@@ -50,7 +50,7 @@ class Logic {
                       ego.say("I am a helpful ghost, and your guide.", () => {
                         pip.say("Ah... how do I know I can trust you?", () => {
                           ego.say("I will show you things, and whisper helpful tips to you.", () => {
-                            pip.say("OK, but you will have to earn my trust.");
+                            pip.say("Hmmm, OK, but you will have to earn my trust.");
                             flags[2] = 1;
                           });
                         });
@@ -75,7 +75,9 @@ class Logic {
               pip.jump();
               break;
             case 'door,radio':
-              if (flags[4]) {
+              if (flags[6]) {
+                pip.say("The door is already open.");
+              } else if (flags[4]) {
                 pip.say("I don't see a door handle.");
               } else {
                 pip.say("Is that a door? I didn't notice.", () => {
@@ -87,8 +89,10 @@ class Logic {
               }
               break;
             case 'clock,radio':
-              if (flags[5]) {   // Noticed that the clock has been moved many times.
-                pip.say("The clock has been moved many times? Let me check...", () => {
+              if (flags[6]) {
+                pip.say("The door is already open.");
+              } else if (flags[5]) {   // Noticed that the clock has been moved many times.
+                pip.say("The clock has been moved many times you say? Let me check...", () => {
                   pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
                     obj.setPosition(obj.x + 10, obj.z);
                     obj = game.screen.querySelector(".door");
@@ -96,7 +100,6 @@ class Logic {
                     flags[6] = 1;
                     pip.setDirection(Sprite.RIGHT);
                     pip.say("The door opened!!", () => {
-
                       pip.moveTo(obj.cx, 610, () => {
                         pip.setDirection(Sprite.LEFT);
                         pip.say("Are you coming?");
@@ -111,11 +114,11 @@ class Logic {
               break;
             case 'urn,radio':
               if (flags[6]) {
-                pip.say("Oh, I need to take you with me?", () => {
+                pip.say("Oh! I need to take you with me?", () => {
                   pip.moveTo(obj.cx, 610, () => {
                     game.getItem(thing);
-                    // TODO: Move anchor to pip.
-                    
+                    pip.setDirection(Sprite.RIGHT);
+                    pip.say("Shall we go now?");
                   });
                 });
               } else {
@@ -212,27 +215,6 @@ class Logic {
             }
             break;
         }
-        break;
-      
-      case 'Use':
-        let useFn = () => {
-          let thing1 = cmd.substring(4, cmd.indexOf(' with '));
-          let things = [thing, thing1].sort().join();
-          switch (things) {
-            default:
-              ego.say("Hmmm, that didn't work.");
-              break;
-          }
-        }
-
-        // Execute Use command for two objects, with movement if obj set.
-        if (obj) {
-          ego.moveTo(ego.cx, 740, () => ego.moveTo(obj.cx, 740, useFn));
-        } else {
-          useFn();
-        }
-
-        newCommand = verb;
         break;
 
       default:

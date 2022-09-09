@@ -91,13 +91,35 @@ class Logic {
                 pip.say("The clock has been moved many times? Let me check...", () => {
                   pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
                     obj.setPosition(obj.x + 10, obj.z);
-                    // TODO: Open the door.
+                    obj = game.screen.querySelector(".door");
+                    obj.classList.add("open");
                     flags[6] = 1;
+                    pip.setDirection(Sprite.RIGHT);
+                    pip.say("The door opened!!", () => {
+
+                      pip.moveTo(obj.cx, 610, () => {
+                        pip.setDirection(Sprite.LEFT);
+                        pip.say("Are you coming?");
+                      }); 
+                    });
                     game.inputEnabled = true;
                   });
                 });
               } else {
                 pip.say("Sorry, I'm not sure what you want me to do.");
+              }
+              break;
+            case 'urn,radio':
+              if (flags[6]) {
+                pip.say("Oh, I need to take you with me?", () => {
+                  pip.moveTo(obj.cx, 610, () => {
+                    game.getItem(thing);
+                    // TODO: Move anchor to pip.
+                    
+                  });
+                });
+              } else {
+                pip.say("An urn? I'm too scared to touch that!");
               }
               break;
             default:
@@ -144,7 +166,7 @@ class Logic {
               ego.say(`It is now turned ${flags[0]? "ON" : "OFF"}.`);
               break;
             case 'urn':
-
+              ego.say("I'm unable to carry objects.");
               break;
             case 'clock':
               ego.say("Too heavy for me to move.");

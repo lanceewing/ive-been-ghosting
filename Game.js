@@ -316,7 +316,7 @@ class Game {
             this.lastTime = now;
         }
 
-        // Update ego and pip.
+        // Update ego.
         this.ego.update();
         if (!this.ego.touching(this.anchor, 125)) {
             while (this.ego.reset());
@@ -324,8 +324,12 @@ class Game {
         }
         this.ego.moved = false;
         
+        // Update pip.
         this.pip.update();
         this.pip.moved = false;
+        if (this.hasItem('urn')) {
+            this.anchor.setPosition(this.pip.x, this.pip.z);
+        }
 
         // Update sentence.
         let newSentence = this.command + ' ' + this.thing;

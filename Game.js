@@ -21,7 +21,7 @@ class Game {
         [0, [2, , , ], [3, , , ], [6, , , ]],
 
         // 2. Parlor
-        [1, [1, 9, 300, 620], , ],
+        [1, [1, 9, 315, 625], , ],
 
         // 3. Small Landing and Bedroom
         [0, [4, , , ], , [1, , , ]],
@@ -51,7 +51,7 @@ class Game {
         [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  1000 ],
         [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  501  ],
         [ 1,  4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
-        [ 1,164, 'door',                 null, 80,    207, 180,  574,  501  ],
+        [ 1,164, 'door',                 null, 80,    207, 180,  574,  501, "The jib door is open." ],
         [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, 501  ],
         [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  501  ],
 

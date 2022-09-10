@@ -131,7 +131,7 @@ span {
 x-ego {
   transform: rotateY(0deg) translate(var(--sprite-left), var(--sprite-top)) translateZ(0);
   will-change: transform;
-  filter: contrast(0) opacity(0.3) brightness(1.5);
+  filter: contrast(0) opacity(0.4) brightness(1.5);
   transition: all 50ms linear;
 }
 .shake :not(.feet) {

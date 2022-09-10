@@ -510,8 +510,15 @@ x-ego .pack {
   z-index: 16;
   border: #80808080 1px solid;
 }
-.door.open:after {
+.door.p5:after {
   transform: rotateY(-60deg);
+}
+.door.p5.p7 {
+  transform: scaleX(-1);
+  overflow: visible;
+}
+.door.p5.p7:after {
+  transform: rotateY(93deg);
 }
 .down_stairs:after {
   content: "";

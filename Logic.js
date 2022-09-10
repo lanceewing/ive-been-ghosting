@@ -37,7 +37,7 @@ class Logic {
         let thing2 = (cmd.indexOf(' about ') < 0? '' : `,${cmd.substring(11, cmd.indexOf(' about '))}`)
         fn = () => {
           switch (thing + thing2) {
-            case 'spirit_box':
+            case 'spirit box':
               if (flags[0]) {      // Spirit Box ON
                 if (flags[2]) {    // Already spoken to Pip once
                   if (flags[3]) {  // Spirit Box batteries are now flat
@@ -47,7 +47,7 @@ class Logic {
                   }
                 } else {           // Not yet spoken to Pip
                   ego.say("Boo!!!", () => {
-                    pip.say("Who was that? I can't see you.", () => {
+                    pip.say("Who said 'Boo'? I can't see you.", () => {
                       ego.say("I am a helpful ghost, and your guide.", () => {
                         pip.say("Ah... how do I know I can trust you?", () => {
                           ego.say("I will show you things, and whisper helpful tips to you.", () => {
@@ -75,12 +75,11 @@ class Logic {
               });
               pip.jump();
               break;
-            case 'door,spirit_box':
+            case 'door,spirit box':
               if (flags[6]) {
                 if (game.hasItem('urn')) {
                   pip.moveTo(obj.cx, 610, () => {
-                    // TODO: Implement move to next room.
-                    game.inputEnabled = true;
+                    ego.hitEdge(1);  // Edge 1 is always a door.
                   }); 
                 } else {
                   pip.say("The door is already open.");
@@ -96,15 +95,15 @@ class Logic {
                 });
               }
               break;
-            case 'clock,spirit_box':
+            case 'clock,spirit box':
               if (flags[6]) {
                 pip.say("The door is already open.");
               } else if (flags[5]) {   // Noticed that the clock has been moved many times.
-                pip.say("The clock has been moved many times you say? Let me check...", () => {
+                pip.say("The clock has 'been moved many times' you say? Let me check...", () => {
                   pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
                     obj.setPosition(obj.x + 10, obj.z);
                     obj = game.screen.querySelector(".door");
-                    obj.classList.add("open");
+                    obj.classList.add("p5");
                     flags[6] = 1;
                     pip.setDirection(Sprite.RIGHT);
                     pip.say("The door opened!!", () => {
@@ -114,14 +113,13 @@ class Logic {
                         pip.say("Are you coming?");
                       }); 
                     });
-                    game.inputEnabled = true;
                   });
                 });
               } else {
                 pip.say("Sorry, I'm not sure what you want me to do.");
               }
               break;
-            case 'urn,spirit_box':
+            case 'urn,spirit box':
               if (flags[6]) {
                 pip.say("Oh! I need to take you with me?", () => {
                   pip.moveTo(obj.cx, 610, () => {
@@ -173,7 +171,7 @@ class Logic {
       case 'Touch':
         fn = () => { 
           switch (thing) {
-            case 'spirit_box':
+            case 'spirit box':
               flags[0] = !flags[0];
               ego.say(`It is now turned ${flags[0]? "ON" : "OFF"}.`);
               break;
@@ -207,7 +205,7 @@ class Logic {
           case 'pip':
             ego.say(flags[6]? "He looks calm. I guess he trusts me now." : "He looks scared.");
             break;
-          case 'spirit_box':
+          case 'spirit box':
             ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);
             break;
           default:

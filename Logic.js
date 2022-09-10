@@ -69,9 +69,13 @@ class Logic {
               break;
             case 'pip':
               ego.say("Boo!!!", () => {
-                pip.say("Did somebody say something?", () => {
-                  ego.say("I don't think he can hear me properly.");
-                });
+                if ((game.room != 2) && !game.hasItem('spirit box')) {  
+                  pip.say("Is that you? I can't hear what you're saying.");
+                } else {
+                  pip.say("Did somebody say something?", () => {
+                    ego.say("I don't think he can hear me properly.");
+                  });
+                }
               });
               pip.jump();
               break;
@@ -132,6 +136,18 @@ class Logic {
                 pip.say("An urn? I'm too scared to touch that!");
               }
               break;
+            case 'spirit box,spirit box':
+              if (game.hasItem('spirit box')) {
+                // TODO: Handle batteries.
+                pip.say("Yes, it's an amazing device.");
+              } else {
+                pip.say("A spirit box? Is this how you talk to me?", () => {
+                  pip.say("Let's take it.", () => {
+                    pip.moveTo(obj.cx, 610, () => game.getItem(thing))
+                  });
+                });
+              }
+              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");
@@ -180,6 +196,17 @@ class Logic {
               break;
             case 'clock':
               ego.say("Too heavy for me to move.");
+              break;
+            case 'door':
+              if (game.room == 1) {
+                obj.classList.add("shake");
+                pip.say("You want to go through the door? OK.", () => {
+                  obj.classList.remove("shake");
+                  pip.moveTo(obj.cx, 610, () => {
+                    ego.hitEdge(1);  // Edge 1 is always a door.
+                  });
+                });
+              }
               break;
             default:
               ego.say("Nothing happened.");

@@ -22,56 +22,38 @@ class Ego extends Actor {
             if (edgeData) {
                 this.game.inputEnabled = false;
 
-                // Hide ego before we reposition him to the new entry point.
-                if (edgeData != this.room) this.hide();
+                // Hide ego (and pip) before we reposition him to the new entry point.
+                if (edgeData != this.room) {
+                    this.hide();
+                    this.pip.hide();
+                }
 
                 // Set the new room for ego.
-                this.room = Math.abs(edgeData);
+                this.room = edgeData;
 
-
-                // 1 = left crossing
-                // 2 = left path
-                // 3 = centre crossing
-                // 4 = right path
-                // 5 = right crossing
+                // 0 = no edge yet
+                // 1 = door
+                // 2 = up stairs
+                // 3 = down stairs
 
                 // Work out the new position for ego.
                 switch (edge) {
-                    case 1: // From the left edge of screen, i.e. left crossing
+                    case 1: // Exit out of a door.
                         this.setPosition(newRoomWidth, this.z);
                         this.setDirection(Sprite.LEFT);
                         this.moveTo(newRoomWidth - 70, 740, () => this.game.inputEnabled = true);
                         break;
 
-                    case 2: // Left foot path, i.e. hitting horizon up the left side.
+                    case 2: // Exit up stairs.
                         this.setPosition(newRoomWidth - pathStartAddX - this.radius, pathStartY);
                         this.setDirection(newRoomDown? Sprite.IN : Sprite.OUT);
                         this.moveTo(newRoomWidth - pathEndAddX, 740, () => this.game.inputEnabled = true);
                         break;
 
-                    case 6:
-                    case 3: // From the bottom edge of screen, i.e. across road.
+                    case 3: // Exit down stairs.
                         this.setPosition(reverseX, 950);
                         this.setDirection(Sprite.IN);
                         this.moveTo(reverseX, 740, () => this.game.inputEnabled = true);
-                        break;
-
-                    case 4: // Right foot path, i.e. hitting horizon up the right side.
-                        this.setPosition(pathStartAddX - this.radius, pathStartY);
-                        this.setDirection(Sprite.OUT);
-                        this.moveTo(pathEndAddX, 740, () => this.game.inputEnabled = true);
-                        break;
-
-                    case 5: // From the right edge of screen, i.e. right crossing.
-                        this.setPosition(-50, this.z);
-                        this.setDirection(Sprite.RIGHT);
-                        this.moveTo(70, 740, () => this.game.inputEnabled = true);
-                        break;
-
-                    case 7: // Back from the castle.
-                        this.setPosition(3300, 600);
-                        this.setDirection(Sprite.OUT);
-                        this.moveTo(3300, 740, () => this.game.inputEnabled = true);
                         break;
                 }
                 

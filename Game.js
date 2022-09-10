@@ -18,23 +18,41 @@ class Game {
         // Room types:
         //  bit 0: Reflective floor
 
+        // // 1. Entry Hall
+        // [0, 2, 3, 6],
+
+        // // 2. Parlor
+        // [1, 1, 0, 0],
+
+        // // 3. Small Landing and Bedroom
+        // [0, 4, 0, 1],
+
+        // // 4. Library and Bedroom
+        // [0, 3, 5, 0],
+
+        // // 5. Attic
+        // [0, 0, 4, 0],
+
+        // // 6. Cellar
+        // [0, 7, 1, 0],
+
         // 1. Entry Hall
-        [0, 2, 3, 6],
+        [0, [2, , , ], [3, , , ], [6, , , ]],
 
         // 2. Parlor
-        [1, 1, 0, 0],
+        [1, [1, , , ], , ],
 
         // 3. Small Landing and Bedroom
-        [0, 4, 0, 1],
+        [0, [4, , , ], , [1, , , ]],
 
         // 4. Library and Bedroom
-        [0, 3, 5, 0],
+        [0, [3, , , ], [5, , , ], ],
 
         // 5. Attic
-        [0, 0, 0, 4],
+        [0, , [4, , , ], ],
 
         // 6. Cellar
-        [0, 7, 1, 0]
+        [0, [7, , , ], [1, , , ], ]
     ];
 
     props = [

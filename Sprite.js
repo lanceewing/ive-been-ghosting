@@ -235,25 +235,9 @@ class Sprite extends HTMLElement {
                 // 6 = up
                 // 10 = simply block ego from moving further
 
-                if (this.game.inputEnabled) {
-                    // Check whether a room edge has been hit.
+                if (!this.game.inputEnabled) {
 
-                    // Left edge, which will be a left pedestrian crossing.
-                    if (x < 0 && this.game.room != 4) edge = 1;
-
-                    // Right edge, whidh will be a right pedestrian crossing.
-                    if ((x + this.width) > rightX) edge = 5;
-
-                    // This edge number is simply to stop ego. He won't leave the room. Only the pedestrian
-                    // crossings can be used to cross the street, so any other movement beyond the foot path
-                    // is blocked.
-                    if ((z < 585) || (z > 950)) edge = 10;
-
-                } else {
-                    // Walking out left side with under program control.
-                    if ((z < 710) && (x < 0)) {
-                        edge = 1;
-                    }
+                    // TODO: Just an examples. Need to change for new game.
 
                     // Horizon edge
                     if (z < 540) {
@@ -262,13 +246,8 @@ class Sprite extends HTMLElement {
 
                     // Bottom edge
                     if (z > 985) {
-                        if (this.room == 7) {
-                            // Coming back from the castle.
-                            edge = 7;
-                        } else {
-                            // If left path is negative, then check paths(2/4); otherwise its simply downwards(3).
-                            edge = this.game.roomData[3] >= 0 ? 3 : x < 250 ? 2 : x > (rightX - 250) ? 4 : 3;
-                        }
+                        // If left path is negative, then check paths(2/4); otherwise its simply downwards(3).
+                        edge = this.game.roomData[3] >= 0 ? 3 : x < 250 ? 2 : x > (rightX - 250) ? 4 : 3;
                     }
                 }
 

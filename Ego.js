@@ -8,10 +8,15 @@ class Ego extends Actor {
     }
 
     /**
+     * Process Ego hitting a room exit.
      * 
      * @param {number} edge 
      */
     hitEdge(edge) {
+        // 0 = no edge yet
+        // 1 = door
+        // 2 = up stairs
+        // 3 = down stairs
         if (edge) {
             // Stop moving.
             this.destX = this.destZ = -1;
@@ -23,41 +28,19 @@ class Ego extends Actor {
                 this.game.inputEnabled = false;
 
                 // Hide ego (and pip) before we reposition him to the new entry point.
-                if (edgeData != this.room) {
-                    this.hide();
-                    this.pip.hide();
-                }
+                this.hide();
+                this.pip.hide();
+
+                // Reposition both ego and pip.
+                this.setPosition(edgeData[2], edgeData[3]);
+                this.setDirection(edgeData[1]);
+                this.game.pip.setPosition(edgeData[2], edgeData[3]);
+                this.game.pip.setDirection(edgeData[1]);
 
                 // Set the new room for ego.
-                this.room = edgeData;
-
-                // 0 = no edge yet
-                // 1 = door
-                // 2 = up stairs
-                // 3 = down stairs
-
-                // Work out the new position for ego.
-                switch (edge) {
-                    case 1: // Exit out of a door.
-                        this.setPosition(newRoomWidth, this.z);
-                        this.setDirection(Sprite.LEFT);
-                        this.moveTo(newRoomWidth - 70, 740, () => this.game.inputEnabled = true);
-                        break;
-
-                    case 2: // Exit up stairs.
-                        this.setPosition(newRoomWidth - pathStartAddX - this.radius, pathStartY);
-                        this.setDirection(newRoomDown? Sprite.IN : Sprite.OUT);
-                        this.moveTo(newRoomWidth - pathEndAddX, 740, () => this.game.inputEnabled = true);
-                        break;
-
-                    case 3: // Exit down stairs.
-                        this.setPosition(reverseX, 950);
-                        this.setDirection(Sprite.IN);
-                        this.moveTo(reverseX, 740, () => this.game.inputEnabled = true);
-                        break;
-                }
+                this.room = edgeData[0];
                 
-                // Previously positions are not applicable when room changes.
+                // Previous positions are not applicable when room changes.
                 this.positions = [];
 
                 this.step = 1;

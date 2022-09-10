@@ -29,13 +29,15 @@ class Ego extends Actor {
 
                 // Hide ego (and pip) before we reposition him to the new entry point.
                 this.hide();
-                this.pip.hide();
+                this.game.pip.hide();
+                this.game.anchor.hide();
 
-                // Reposition both ego and pip.
-                this.setPosition(edgeData[2], edgeData[3]);
+                // Reposition both ego and pip. Ego offset a bit to the left.
+                this.setPosition(edgeData[2] - 140, edgeData[3]);
                 this.setDirection(edgeData[1]);
                 this.game.pip.setPosition(edgeData[2], edgeData[3]);
                 this.game.pip.setDirection(edgeData[1]);
+                this.game.anchor.setPosition(edgeData[2], edgeData[3]);
 
                 // Set the new room for ego.
                 this.room = edgeData[0];

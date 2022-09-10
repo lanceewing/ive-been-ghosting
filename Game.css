@@ -520,6 +520,14 @@ x-ego .pack {
 .door.p5.p7:after {
   transform: rotateY(93deg);
 }
+.door.p5.p7.shake:after {
+  animation: shakedoor 0.1s infinite;
+}
+@keyframes shakedoor {
+  50% {
+    transform: rotateY(88deg);
+  }
+}
 .down_stairs:after {
   content: "";
   position: absolute;

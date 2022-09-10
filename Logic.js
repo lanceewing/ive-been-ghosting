@@ -37,13 +37,13 @@ class Logic {
         let thing2 = (cmd.indexOf(' about ') < 0? '' : `,${cmd.substring(11, cmd.indexOf(' about '))}`)
         fn = () => {
           switch (thing + thing2) {
-            case 'radio':
-              if (flags[0]) {      // Radio ON
+            case 'spirit_box':
+              if (flags[0]) {      // Spirit Box ON
                 if (flags[2]) {    // Already spoken to Pip once
-                  if (flags[3]) {  // Radio batteries are now flat
+                  if (flags[3]) {  // Spirit Box batteries are now flat
                     ego.say("The batteries have gone flat.");
                   } else {
-                    newCommand = 'Whisper to radio about ';
+                    newCommand = 'Whisper to spirit box about ';
                   }
                 } else {           // Not yet spoken to Pip
                   ego.say("Boo!!!", () => {
@@ -75,7 +75,7 @@ class Logic {
               });
               pip.jump();
               break;
-            case 'door,radio':
+            case 'door,spirit_box':
               if (flags[6]) {
                 if (game.hasItem('urn')) {
                   pip.moveTo(obj.cx, 610, () => {
@@ -96,7 +96,7 @@ class Logic {
                 });
               }
               break;
-            case 'clock,radio':
+            case 'clock,spirit_box':
               if (flags[6]) {
                 pip.say("The door is already open.");
               } else if (flags[5]) {   // Noticed that the clock has been moved many times.
@@ -121,7 +121,7 @@ class Logic {
                 pip.say("Sorry, I'm not sure what you want me to do.");
               }
               break;
-            case 'urn,radio':
+            case 'urn,spirit_box':
               if (flags[6]) {
                 pip.say("Oh! I need to take you with me?", () => {
                   pip.moveTo(obj.cx, 610, () => {
@@ -159,7 +159,7 @@ class Logic {
             if (z <= 970) {
               ego.stop(true);
               let destX = e.pageX / game.scaleX;
-              destX = (destX > game.roomData[1] - 50? game.roomData[1] + 10 : destX < 50? -10 : destX);
+              destX = (destX > 960 - 50? 960 + 10 : destX < 50? -10 : destX);
               ego.moveTo(destX, z > 555? z : 585);
             } else {
               // Must be an item. Change command to Use
@@ -173,7 +173,7 @@ class Logic {
       case 'Touch':
         fn = () => { 
           switch (thing) {
-            case 'radio':
+            case 'spirit_box':
               flags[0] = !flags[0];
               ego.say(`It is now turned ${flags[0]? "ON" : "OFF"}.`);
               break;
@@ -207,7 +207,7 @@ class Logic {
           case 'pip':
             ego.say(flags[6]? "He looks calm. I guess he trusts me now." : "He looks scared.");
             break;
-          case 'radio':
+          case 'spirit_box':
             ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);
             break;
           default:

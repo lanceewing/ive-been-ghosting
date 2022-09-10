@@ -28,7 +28,8 @@ class Logic {
     let pip = game.pip;
 
     // If thing is in the current room, then obj will reference it.
-    let obj = game.objs.find(i => i.dataset['name'] == thing);
+    let item = game.inventory[thing];
+    let obj = item? item.obj : game.objs.find(i => i.dataset['name'] == thing);
     let fn = null;
 
     switch (verb) {
@@ -76,7 +77,14 @@ class Logic {
               break;
             case 'door,radio':
               if (flags[6]) {
-                pip.say("The door is already open.");
+                if (game.hasItem('urn')) {
+                  pip.moveTo(obj.cx, 610, () => {
+                    // TODO: Implement move to next room.
+                    game.inputEnabled = true;
+                  }); 
+                } else {
+                  pip.say("The door is already open.");
+                }
               } else if (flags[4]) {
                 pip.say("I don't see a door handle.");
               } else {
@@ -100,6 +108,7 @@ class Logic {
                     flags[6] = 1;
                     pip.setDirection(Sprite.RIGHT);
                     pip.say("The door opened!!", () => {
+                      pip.querySelector(".actor").classList.remove("shake");
                       pip.moveTo(obj.cx, 610, () => {
                         pip.setDirection(Sprite.LEFT);
                         pip.say("Are you coming?");
@@ -196,7 +205,7 @@ class Logic {
             ego.say("I can only move that far from my urn.");
             break;
           case 'pip':
-            ego.say("He looks scared.");
+            ego.say(flags[6]? "He looks calm. I guess he trusts me now." : "He looks scared.");
             break;
           case 'radio':
             ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);

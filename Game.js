@@ -64,7 +64,7 @@ class Game {
         [ 2,  4,  'fire',                 '🔥', 40,     50,  460, 600, 601, "It burns brightly." ],
         [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ],
         [ 2, 12,  'rug',                  null, 630,   120,  166, 900, 611 ],
-        [ 2,  4,  'door',                 null, 80,    207,  700, 574, 501, "It looks like a jib door." ],
+        [ 2, 20,  'door',                 null, 80,    207,  700, 574, 501, "It looks like a jib door." ],
         [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501, "Looks to have been moved many times.", 5 ],
         [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340, 501, "It contains my ashes." ],
         [ 2, 20,  'radio',                '📻', 40,    40,  540, 340,  501 ],
@@ -316,19 +316,25 @@ class Game {
             this.lastTime = now;
         }
 
-        // Update ego.
-        this.ego.update();
-        if (!this.ego.touching(this.anchor, 125)) {
-            while (this.ego.reset());
-            this.ego.stop(true);
-        }
-        this.ego.moved = false;
-        
-        // Update pip.
-        this.pip.update();
         this.pip.moved = false;
-        if (this.hasItem('urn')) {
+        this.ego.moved = false;
+        let dx = this.ego.x - this.pip.x;
+        let dz = this.ego.z - this.pip.z;
+
+        // Update pip, anchor and ego.
+        this.pip.update();
+        if (this.hasItem('urn') && this.pip.moved) {
             this.anchor.setPosition(this.pip.x, this.pip.z);
+            this.ego.stop(true);
+            this.ego.classList.add('walking');
+            this.ego.setDirection(this.pip.direction);
+            this.ego.setPosition(this.pip.x + dx, this.pip.z + dz);
+        } else {
+            this.ego.update();
+            if (!this.ego.touching(this.anchor, 125)) {
+                while (this.ego.reset());
+                this.ego.stop(true);
+            }
         }
 
         // Update sentence.
@@ -461,9 +467,6 @@ class Game {
             prop[11] = obj;
         }
 
-        // If it is an actor, store a reference to ease of use.
-        if (!prop[1]) this.actor = obj;
-
         this.add(obj);
 
         this.addObjEventListeners(obj);
@@ -527,6 +530,7 @@ class Game {
             obj.propData[0] = -1;
             this.remove(obj);
             item.innerHTML = obj.propData[3];
+            item.obj = obj;
         } else {
             item.innerHTML = icon;
         }
@@ -551,6 +555,8 @@ class Game {
         this.items.removeChild(item);
         delete this.inventory[name];
         this.scrollInv(1);
+        item.obj.propData[0] = this.room;
+        this.add(item.obj);
     }
 
     /**

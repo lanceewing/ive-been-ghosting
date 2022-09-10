@@ -14,31 +14,27 @@ class Game {
      * The rooms map is essentially the game map.
      */
     rooms = [
-        // Room type, room width, left crossing, left path, centre crossing, right path, right crossing
-        // room 50  = special room for country side, but used in multiple places.
+        // Room type, door exit, up stairs exit, down stairs exit
         // Room types:
         //  bit 0: Reflective floor
-        //  bit 1: 
-        //  bit 2: 
-        //  bit 3: 
 
         // 1. Entry Hall
-        [0, 960,  0, 0, 0, 0, 0],
+        [0, 2, 3, 6],
 
         // 2. Parlor
-        [1, 960,  0, 0, 0, 0, 0],
+        [1, 1, 0, 0],
 
         // 3. Small Landing and Bedroom
-        [0, 960,  0, 0, 0, 0, 0],
+        [0, 4, 0, 1],
 
         // 4. Library and Bedroom
-        [0, 960,  0, 0, 0, 0, 0],
+        [0, 3, 5, 0],
 
         // 5. Attic
-        [0, 960,  0, 0, 0, 0, 0],
+        [0, 0, 0, 4],
 
         // 6. Cellar
-        [0, 960,  0, 0, 0, 0, 0],
+        [0, 7, 1, 0]
     ];
 
     props = [
@@ -67,7 +63,7 @@ class Game {
         [ 2, 20,  'door',                 null, 80,    207,  700, 574, 501, "It looks like a jib door." ],
         [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501, "Looks to have been moved many times.", 5 ],
         [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340, 501, "It contains my ashes." ],
-        [ 2, 20,  'radio',                '📻', 40,    40,  540, 340,  501 ],
+        [ 2, 20,  'spirit_box',           '📻', 40,    40,  540, 340,  501 ],
 
         // Room 3 - Small landing and Bedroom
         [ 3,  4,  'middle_wall',         null, 260,   360,  503, 720, 1000 ],
@@ -118,7 +114,7 @@ class Game {
         [ 0,  4, 'right_window',         null, 121,   231, null, null, 501 ],
     ];
 
-    // 0 = Radio ON
+    // 0 = Spirit Box ON
     // 1 = Fire is still burning
     // 2 = Ego spoken to Pip once
     // 3 = Batteries flat
@@ -343,8 +339,8 @@ class Game {
             this.sentence.innerHTML = this.lastSentence = newSentence;
         }
 
-        // If after updating all objects, the room that Ego says it is in is different
-        // than what it was previously in, then we trigger entry in to the new room.
+        // If the room that Ego says it is in is different than what it was previously 
+        // in, then we trigger entry in to the new room.
         if (this.ego.edge) {
             this.edge = this.ego.edge;
             this.room = this.ego.room;
@@ -413,9 +409,11 @@ class Game {
         });
 
         this.ego.show();
+        this.pip.show();
 
         this.fadeIn(this.wrap);
         this.fadeIn(this.ego);
+        this.fadeIn(this.pip);
     }
 
     /**

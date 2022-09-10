@@ -12,35 +12,16 @@ class Game {
 
     /**
      * The rooms map is essentially the game map.
+     * 
+     * room type:
+     * bit 0: Floor reflects
      */
     rooms = [
-        // Room type, door exit, up stairs exit, down stairs exit
-        // Room types:
-        //  bit 0: Reflective floor
-
-        // // 1. Entry Hall
-        // [0, 2, 3, 6],
-
-        // // 2. Parlor
-        // [1, 1, 0, 0],
-
-        // // 3. Small Landing and Bedroom
-        // [0, 4, 0, 1],
-
-        // // 4. Library and Bedroom
-        // [0, 3, 5, 0],
-
-        // // 5. Attic
-        // [0, 0, 4, 0],
-
-        // // 6. Cellar
-        // [0, 7, 1, 0],
-
         // 1. Entry Hall
         [0, [2, , , ], [3, , , ], [6, , , ]],
 
         // 2. Parlor
-        [1, [1, , , ], , ],
+        [1, [1, 9, 300, 620], , ],
 
         // 3. Small Landing and Bedroom
         [0, [4, , , ], , [1, , , ]],
@@ -57,11 +38,12 @@ class Game {
 
     props = [
         // Room#, type, name, content, width, height, x, y, radius override, z-index override, element reference
-        // bit 0-1:  00 = actor, 01 = item, 10 = prop, 11 = not used.
+        // bit 0:
+        // bit 1:
         // bit 2:    0  = shadow, 1 = no shadow
         // bit 3:    0  = observe objs, 1 = ignore objs
         // bit 4:    0  = observe reflection, 1 = ignore reflection
-        // bit 5:
+        // bit 5:    0  = closed, 1 = open
         // bit 6:  
         // bit 7:    0 = normal, 1 = horizontal flip
 
@@ -69,7 +51,7 @@ class Game {
         [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  1000 ],
         [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  501  ],
         [ 1,  4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
-        [ 1,  4, 'door',                 null, 80,    207, 180,  574,  501  ],
+        [ 1,164, 'door',                 null, 80,    207, 180,  574,  501  ],
         [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, 501  ],
         [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  501  ],
 
@@ -365,6 +347,7 @@ class Game {
             this.fadeOut(this.wrap);
             setTimeout(() => this.newRoom(), 200);
             this.ego.edge = 0;
+            this.inputEnabled = true;
         }
 
         // Update based on user input state.
@@ -428,10 +411,12 @@ class Game {
 
         this.ego.show();
         this.pip.show();
+        this.anchor.show();
 
         this.fadeIn(this.wrap);
         this.fadeIn(this.ego);
         this.fadeIn(this.pip);
+        this.fadeIn(this.anchor);
     }
 
     /**
@@ -446,13 +431,14 @@ class Game {
         let obj = prop[11];
 
         // Room#, type, name, content, width, height, x, y, radius override, z-index override, element reference
-        // bit 0-1:  00 = actor, 01 = item, 10 = prop, 11 = not used.
-        // bit 2:    0  = shadow, 1 = no shadow
-        // bit 3:    0  = observe objs, 1 = ignore objs
-        // bit 4:    0  = not reflected, 1 = reflected
-        // bit 5:
+        // bit 0
+        // bit 1:
+        // bit 2:    0 = shadow, 1 = no shadow
+        // bit 3:    0 = observe objs, 1 = ignore objs
+        // bit 4:    0 = not reflected, 1 = reflected
+        // bit 5:    0 = closed, 1 = open
         // bit 6:  
-        // bit 7:    0  = normal, 1 = horizontal flip
+        // bit 7:    0 = normal, 1 = horizontal flip
 
         if (!obj) {
             obj = new Sprite();

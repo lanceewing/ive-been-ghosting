@@ -218,54 +218,20 @@ class Sprite extends HTMLElement {
         if (this.direction || this.heading != null) {
             let x = this.x;
             let z = this.z;
-            let edge = 0;
-            let rightX = this.game.roomData[1];
 
             // Move the position based on the current heading, step size and time delta.
             if (this.heading != null) {
                 x += Math.cos(this.heading) * Math.round(this.step * this.game.stepFactor);
                 z += Math.sin(this.heading) * Math.round(this.step * this.game.stepFactor);
 
-                // 0 = no edge yet
-                // 1 = left crossing
-                // 2 = left path
-                // 3 = centre crossing
-                // 4 = right path
-                // 5 = right crossing
-                // 6 = up
-                // 10 = simply block ego from moving further
-
-                if (!this.game.inputEnabled) {
-
-                    // TODO: Just an examples. Need to change for new game.
-
-                    // Horizon edge
-                    if (z < 540) {
-                        edge = (x < 250 ? 2 : x > (rightX - 250) ? 4 : 6);
-                    }
-
-                    // Bottom edge
-                    if (z > 985) {
-                        // If left path is negative, then check paths(2/4); otherwise its simply downwards(3).
-                        edge = this.game.roomData[3] >= 0 ? 3 : x < 250 ? 2 : x > (rightX - 250) ? 4 : 3;
-                    }
-                }
-
                 // Increment the step size the step increment, capping at the max step.
                 if ((this.step += this.stepInc) > this.maxStep) this.step = this.maxStep;
             }
 
-            if (edge) {
-                //this.game.status.innerHTML = `${this.x.toFixed(1)}, ${this.z.toFixed(1)}  [${x.toFixed(1)}, ${z.toFixed(1)}]   HIT EDGE`;
-                this.hitEdge(edge);
-            } else {
-                //this.game.status.innerHTML = `${this.x.toFixed(1)}, ${this.z.toFixed(1)}  [${x.toFixed(1)}, ${z.toFixed(1)}]`;
-
-                // If x or z has changed, update the position.
-                if ((x != this.x) || (z != this.z)) {
-                    this.setPosition(x, z);
-                    this.moved = true;
-                }
+            // If x or z has changed, update the position.
+            if ((x != this.x) || (z != this.z)) {
+                this.setPosition(x, z);
+                this.moved = true;
             }
         } else {
             // If stationary then set step size back to 1, which allows closer movement

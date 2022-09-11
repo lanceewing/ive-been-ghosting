@@ -48,16 +48,16 @@ class Game {
         // bit 7:    0 = normal, 1 = horizontal flip
 
         // Room 1 - Entry Hall
-        [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  1000 ],
+        [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  852 ],
         [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  501  ],
         [ 1,  4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
         [ 1,164, 'door',                 null, 80,    207, 180,  574,  501, "The jib door is open." ],
-        [ 1,  5, 'down_stairs',          null, 180,   70,  null, null, 501  ],
+        [ 1,  5, 'down_stairs',          null, 180,   70,  null, null, 498  ],
         [ 1,  4, 'picture',              null, 84,    84,  380,  300,  501  ],
-        [ 1, 12, 'rug',                  null, 410,   120, 380,  950,  501 ],
+        [ 1, 12, 'rug',                  null, 386,   120, 392,  950,  499 ],
         [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 850, "That's a rather ominous design." ],
-        [ 1,  0, 'left_vase',            '🏺', 80,   90,   275,  950,   ],
-        [ 1,  0, 'right_vase',           '🏺', 80,   90,   848,  950,   ],
+        [ 1,  0, 'left_vase',            '🏺', 80,   90,   300,  950,   ],
+        [ 1,  0, 'vase',                 '🏺', 80,   90,   815,  950,   ],
 
         // Room 2 - Parlor
         [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ],

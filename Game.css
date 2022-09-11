@@ -510,6 +510,9 @@ x-ego .pack {
     transform: rotateY(88deg);
   }
 }
+.room1 .stairs {
+  filter: drop-shadow(6px 18px 25px black) hue-rotate(45deg) brightness(2.5) blur(1px) opacity(0.4);
+}
 .down_stairs:after {
   content: "";
   position: absolute;

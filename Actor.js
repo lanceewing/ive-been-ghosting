@@ -55,9 +55,10 @@ class Actor extends Sprite {
    * @param {number} x The X position to move to.
    * @param {number} y The Y position to move to.
    * @param {Function} fn The function to execute once the Actor reaches the X/Y position.
+   * @param {boolean} cond Doesn't movement part only if true. If false, still executes function if set.
    */
-  moveTo(x, z, fn) {
-    this.dests.push({ z: z, x: x, fn: fn });
+  moveTo(x, z, fn, cond=true) {
+    if (cond) this.dests.push({ z: z, x: x, fn: fn }); else if (fn) fn()
   }
 
   /**

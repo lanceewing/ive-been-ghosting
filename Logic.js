@@ -152,7 +152,7 @@ class Logic {
               break;
             case 'urn,spirit box':
               if (flags[6]) {
-                pip.say("Oh! I need to take you with me?", () => {
+                pip.say("Oh! I need to take 'YOU' with me?", () => {
                   pip.moveTo(obj.cx, 610, () => {
                     game.getItem(thing);
                     pip.setDirection(Sprite.RIGHT);
@@ -193,11 +193,45 @@ class Logic {
                   ego.hitEdge(2);  // Edge 2 is always up stairs.
                 });
               } else {
+                // TODO: Other rooms.
 
               }
               break;
+            case 'trapdoor,spirit box':
+              if (flags[10]) {
+                pip.say("Sorry, I'm not sure what you want me to do.");
+              } else {
+                pip.moveTo(325, 625, () => {
+                  pip.moveTo(150, 625, () => {
+                    pip.moveTo(97, 800, () => {
+                      pip.say("It appears to be locked.");
+                    });
+                  });
+                }, pip.x > 315);
+              }
+              break;
             case 'left vase,spirit box':
-
+              pip.moveTo(150, 625, () => {
+                pip.moveTo(325, 625, () => {
+                  pip.moveTo(430, obj.z - 10, () => {
+                    pip.setDirection(Sprite.LEFT);
+                    pip.say("This vase it too heavy to lift.");
+                  });
+                }, pip.z < 650);
+              }, pip.x < 300);
+              break;
+            case 'vase,spirit box':
+              pip.moveTo(150, 625, () => {
+                pip.moveTo(325, 625, () => {
+                  pip.moveTo(770, obj.z - 10, () => {
+                    pip.setDirection(Sprite.RIGHT);
+                    pip.say("This vase it empty. I'll take it.", () => {
+                      game.getItem(thing);
+                      game.inputEnabled = true;
+                    });
+                  });
+                }, pip.z < 650);
+              }, pip.x < 300);
               break;
             default:
               if (thing2) {

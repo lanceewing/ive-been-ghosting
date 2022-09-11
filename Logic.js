@@ -227,6 +227,25 @@ class Logic {
         }
         break;
 
+      case 'Listen to':
+        switch (thing) {
+          case 'picture':
+            if (flags[9]) {
+              ego.say("Hmmm, I wonder...", () => {
+                obj.classList.add("m3");
+                flags[9] = 1;
+                ego.say("Hey!! It changed again!");
+              });
+            } else {
+              ego.say("I don't hear anything.");
+            }
+            break;
+          default:
+            ego.say("I don't hear anything.");
+            break;
+        }
+        break;
+
       case 'Look at':
         switch (thing) {
           case 'circle':

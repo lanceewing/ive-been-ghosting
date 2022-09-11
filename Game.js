@@ -18,7 +18,7 @@ class Game {
      */
     rooms = [
         // 1. Entry Hall
-        [0, [2, 8, 715, 625], [3, , , ], [6, , , ]],
+        [0, [2, 8, 715, 625], [3, , , ], [6, 1, 415, 625]],
 
         // 2. Parlor
         [1, [1, 8, 315, 625], , ],
@@ -33,17 +33,17 @@ class Game {
         [0, , [4, , , ], ],
 
         // 6. Cellar
-        [0, [7, , , ], [1, , , ], ]
+        [0, [7, , , ], [1, 4, 80, 750], ]
     ];
 
     props = [
         // Room#, type, name, content, width, height, x, y, z-index override, description
-        // bit 0:
+        // bit 0:    0 = visible, 1 = hidden
         // bit 1:
-        // bit 2:    0  = shadow, 1 = no shadow
-        // bit 3:    0  = observe objs, 1 = ignore objs
-        // bit 4:    0  = observe reflection, 1 = ignore reflection
-        // bit 5:    0  = closed, 1 = open
+        // bit 2:    0 = shadow, 1 = no shadow
+        // bit 3:    0 = observe objs, 1 = ignore objs
+        // bit 4:    0 = observe reflection, 1 = ignore reflection
+        // bit 5:    0 = closed, 1 = open
         // bit 6:  
         // bit 7:    0 = normal, 1 = horizontal flip
 
@@ -52,10 +52,10 @@ class Game {
         [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  501  ],
         [ 1,  4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
         [ 1,164, 'door',                 null, 80,    207, 180,  574,  501, "The jib door is open." ],
-        [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, 501  ],
+        [ 1,  5, 'down_stairs',          null, 180,   70,  null, null, 501  ],
         [ 1,  4, 'picture',              null, 84,    84,  380,  300,  501  ],
         [ 1, 12, 'rug',                  null, 410,   120, 380,  950,  501 ],
-        [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 502, "That's a rather ominous design." ],
+        [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 850, "That's a rather ominous design." ],
         [ 1,  0, 'left_vase',            '🏺', 80,   90,   275,  950,   ],
         [ 1,  0, 'right_vase',           '🏺', 80,   90,   848,  950,   ],
 
@@ -331,7 +331,7 @@ class Game {
             this.anchor.setPosition(this.pip.x, this.pip.z);
             this.ego.stop(true);
             this.ego.hide();
-            this.ego.fadeOut(this.ego);
+            this.fadeOut(this.ego);
             this.ego.setDirection(this.pip.direction);
             this.ego.setPosition(this.pip.x + dx, this.pip.z + dz);
         } else {
@@ -473,6 +473,9 @@ class Game {
             }
             if (prop[8]) {
                 obj.style.zIndex = prop[8];
+            }
+            if (prop[1] & 1) {
+                obj.hide();
             }
 
             prop[11] = obj;

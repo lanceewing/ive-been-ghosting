@@ -40,6 +40,11 @@ class Actor extends Sprite {
       this.destFn = null;
     }
 
+    if ((this == this.game.pip) && (this.game.hasItem('urn')) && (!this.game.ego.edge)) {
+      this.game.ego.show();
+      this.game.fadeIn(this.ego);
+    }
+
     // To fully stop, we need to also clear the pending destinations.
     if (fully) this.dests = [];
   }

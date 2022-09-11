@@ -125,7 +125,7 @@ class Game {
     // 4 = Tried parlor door once
     // 5 = Noticed that the clock has been moved many times
     // 6 = Parlor door open
-    // 7 = Trapdoor is open
+    // 7 = 
     // 8 = Looked at monkey
     // 9 = Listened to monkey
     // 10 = Spoke to monkey
@@ -209,7 +209,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 1; //2;
+        this.room = 2;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
@@ -330,7 +330,8 @@ class Game {
         if (this.hasItem('urn') && this.pip.moved) {
             this.anchor.setPosition(this.pip.x, this.pip.z);
             this.ego.stop(true);
-            this.ego.classList.add('walking');
+            this.ego.hide();
+            this.ego.fadeOut(this.ego);
             this.ego.setDirection(this.pip.direction);
             this.ego.setPosition(this.pip.x + dx, this.pip.z + dz);
         } else {

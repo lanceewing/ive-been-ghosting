@@ -19,7 +19,7 @@ echo '`);' >> roadroller_input.js
 cat min.js >> roadroller_input.js
 
 # Use roadroller to compress the JS, CSS and most of the HTML.
-npx roadroller roadroller_input.js -o roadroller_min.js -D -O2
+npx roadroller roadroller_input.js -o roadroller_min.js -D -Zab16 -Zlr1459 -Zmc4 -Zmd36 -Zpr15 -S0,1,2,3,7,10,13,14,25,51,228,387
 
 # Put it all together.
 cat min_head.html roadroller_min.js min_foot.html  | tr -d '\n' > min.html

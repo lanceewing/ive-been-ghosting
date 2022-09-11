@@ -55,7 +55,7 @@ class Game {
         [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, 501  ],
         [ 1,  4, 'picture',              null, 84,    84,  380,  300,  501  ],
         [ 1, 12, 'rug',                  null, 410,   120, 380,  950,  501 ],
-        [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 502  ],
+        [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 502, "That's a rather ominous design." ],
         [ 1,  0, 'left_vase',            '🏺', 80,   90,   275,  950,   ],
         [ 1,  0, 'right_vase',           '🏺', 80,   90,   848,  950,   ],
 

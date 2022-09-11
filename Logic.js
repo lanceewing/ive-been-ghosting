@@ -71,7 +71,11 @@ class Logic {
               ego.say("Boo!!!", () => {
                 if ((game.room != 2) && !game.hasItem('spirit box')) {  
                   pip.say("Is that you? I can't hear what you're saying.");
-                } else {
+                }
+                else if (game.hasItem('spirit box')) {
+                  pip.say("Try using the spirit box.");
+                }
+                else {
                   pip.say("Did somebody say something?", () => {
                     ego.say("I don't think he can hear me properly.");
                   });
@@ -148,6 +152,9 @@ class Logic {
                 });
               }
               break;
+            case 'left vase,spirit box':
+
+              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");
@@ -175,10 +182,6 @@ class Logic {
               let destX = e.pageX / game.scaleX;
               destX = (destX > 960 - 50? 960 + 10 : destX < 50? -10 : destX);
               ego.moveTo(destX, z > 555? z : 585);
-            } else {
-              // Must be an item. Change command to Use
-              game.verb = 'Use';
-              newCommand = 'Use ' + thing + ' with ';
             }
             break;
         }
@@ -234,6 +237,25 @@ class Logic {
             break;
           case 'spirit box':
             ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);
+            break;
+          case 'picture':
+            if (flags[8]) {
+              if (flags[9]) {
+                if (flags[10]) {
+                  ego.say("It's just a happy monkey now.");
+                } else {
+                  ego.say("The monkey is now covering its mouth.");
+                }
+              } else {
+                ego.say("The monkey is now covering its ears.");
+              }
+            } else {
+              ego.say("The monkey is covering its eyes..", () => {
+                obj.classList.add("m2");
+                flags[8] = 1;
+                ego.say("Hey!! It just changed!");
+              });
+            }
             break;
           default:
             if (obj && obj.propData[9]) {

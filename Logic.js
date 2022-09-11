@@ -111,7 +111,7 @@ class Logic {
                     ego.hitEdge(1);  // Edge 1 is always a door.
                   }); 
                 } else {
-                  pip.say("The door is already open.");
+                  ego.say("I can't leave without my urn.");
                 }
               } else if (flags[4]) {
                 pip.say("I don't see a door handle.");
@@ -168,7 +168,10 @@ class Logic {
               } else {
                 pip.say("A spirit box? Is this how you talk to me?", () => {
                   pip.say("Let's take it.", () => {
-                    pip.moveTo(obj.cx, 610, () => game.getItem(thing))
+                    pip.moveTo(obj.cx, 610, () => {
+                      game.getItem(thing);
+                      game.inputEnabled = true;
+                    });
                   });
                 });
               }
@@ -186,7 +189,7 @@ class Logic {
           }
         }
         if (thing2) {
-          ego.say(`Try the ${thing}.`, fn);
+          ego.say(`...${thing}...`, fn);
           newCommand = verb;
         } else {
           fn();
@@ -258,12 +261,21 @@ class Logic {
                 ego.say("Hmmm, I wonder...", () => {
                   obj.classList.add("m3");
                   flags[9] = 1;
-                  setTimeout(() => ego.say("Hey!! It changed again!"), 1000);
+                  setTimeout(() => ego.say("Hey!! The picture changed again!"), 1000);
                 });
               }
             } else {
               ego.say("I don't hear anything.");
             }
+            break;
+          case 'spirit box':
+            ego.say("Only the living listen to it.");
+            break;
+          case 'clock':
+            ego.say("Tick, tock.");
+            break;
+          case 'fire':
+            ego.say("The fire crackles.");
             break;
           default:
             ego.say("I don't hear anything.");
@@ -294,7 +306,7 @@ class Logic {
                 ego.say("Now the monkey is covering its ears.");
               }
             } else {
-              ego.say("The monkey is covering its eyes..", () => {
+              ego.say("The monkey is covering its eyes.", () => {
                 obj.classList.add("m2");
                 flags[8] = 1;
                 setTimeout(() => ego.say("Hey!! It just changed!"), 1000);

@@ -67,6 +67,27 @@ class Logic {
             case 'me':
               ego.say("I've been doing that for centuries.");
               break;
+            case 'picture':
+              if (flags[8]) {
+                if (flags[9]) {
+                  if (flags[10]) {
+                    ego.say("Hmmm, nothing happened.");
+                  } else {
+                    ego.say("Yeah, this might work. Boo!!", () => {
+                      obj.classList.add("m4");
+                      flags[10] = 1;
+                      obj = game.screen.querySelector(".trapdoor");
+                      obj.classList.add("open");
+                      ego.say("The trapdoor opened!");
+                    });
+                  }
+                } else {
+                  ego.say("Hmmm, nothing happened.");
+                }
+              } else {
+                ego.say("Hmmm, nothing happened.");
+              }
+              break;
             case 'pip':
               ego.say("Boo!!!", () => {
                 if ((game.room != 2) && !game.hasItem('spirit box')) {  
@@ -212,7 +233,7 @@ class Logic {
               }
               break;
             default:
-              ego.say("Nothing happened.");
+              ego.say("Hmmm, nothing happened.");
               break;
           }
         }
@@ -230,12 +251,16 @@ class Logic {
       case 'Listen to':
         switch (thing) {
           case 'picture':
-            if (flags[9]) {
-              ego.say("Hmmm, I wonder...", () => {
-                obj.classList.add("m3");
-                flags[9] = 1;
-                ego.say("Hey!! It changed again!");
-              });
+            if (flags[8]) {
+              if (flags[9]) {
+                ego.say("I don't hear anything.");
+              } else {
+                ego.say("Hmmm, I wonder...", () => {
+                  obj.classList.add("m3");
+                  flags[9] = 1;
+                  setTimeout(() => ego.say("Hey!! It changed again!"), 1000);
+                });
+              }
             } else {
               ego.say("I don't hear anything.");
             }
@@ -263,16 +288,16 @@ class Logic {
                 if (flags[10]) {
                   ego.say("It's just a happy monkey now.");
                 } else {
-                  ego.say("The monkey is now covering its mouth.");
+                  ego.say("Now the monkey is covering its mouth.");
                 }
               } else {
-                ego.say("The monkey is now covering its ears.");
+                ego.say("Now the monkey is covering its ears.");
               }
             } else {
               ego.say("The monkey is covering its eyes..", () => {
                 obj.classList.add("m2");
                 flags[8] = 1;
-                ego.say("Hey!! It just changed!");
+                setTimeout(() => ego.say("Hey!! It just changed!"), 1000);
               });
             }
             break;

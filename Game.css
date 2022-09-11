@@ -344,24 +344,6 @@ x-ego .pack {
   box-shadow: 5px 1px black;
   z-index: 1011;
 }
-#screen.left:before {
-  content: "";
-  position: absolute;
-  width: 60px;
-  top: 225px;
-  height: 200px;
-  left: -20px;
-  cursor: var(--c, var(--🡰, var(--⬅️)));
-}
-#screen.right:after {
-  content: "";
-  position: absolute;
-  width: 60px;
-  top: 225px;
-  height: 200px;
-  right: -20px;
-  cursor: var(--c, var(--🡲, var(--➡️)));
-}
 .left_wall, .right_wall, .middle_wall, .alcove_wall, .back_wall, .side_wall, .wall1, .wall2, .wall3, .wall4, .wall5 {
   top: 0px;
   background: linear-gradient(

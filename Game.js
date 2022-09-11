@@ -54,6 +54,8 @@ class Game {
         [ 1,164, 'door',                 null, 80,    207, 180,  574,  501, "The jib door is open." ],
         [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, 501  ],
         [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  501  ],
+        [ 1,  12, 'rug',                 null, 410,   120, 380,  950,  501 ],
+        [ 1,  4, 'trapdoor',             null, 152,   80,  null, null, 502  ],
 
         // Room 2 - Parlor
         [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ],
@@ -201,7 +203,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 2;
+        this.room = 1; //2;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');

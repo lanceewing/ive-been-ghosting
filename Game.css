@@ -556,6 +556,18 @@ x-ego .pack {
 .down_stairs.p7 {
   transform: scaleY(1.2) scaleX(-1);
 }
+.trapdoor {
+  background: #3e2305;
+  left: 84px;
+  bottom: 0px;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transform: rotateX(84deg);
+  transition: transform 0.5s;
+}
+.trapdoor.open {
+  transform: rotateX(84deg) rotateY(-120deg);
+}
 .stairs2 {
   background: #00000030;
 }

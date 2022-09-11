@@ -37,7 +37,7 @@ class Game {
     ];
 
     props = [
-        // Room#, type, name, content, width, height, x, y, radius override, z-index override, element reference
+        // Room#, type, name, content, width, height, x, y, z-index override, description
         // bit 0:
         // bit 1:
         // bit 2:    0  = shadow, 1 = no shadow
@@ -53,9 +53,11 @@ class Game {
         [ 1,  4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
         [ 1,164, 'door',                 null, 80,    207, 180,  574,  501, "The jib door is open." ],
         [ 1,  4, 'down_stairs',          null, 180,   70,  null, null, 501  ],
-        [ 1,  4, 'picture',              '🖼', 100,   100,  380, 300,  501  ],
-        [ 1,  12, 'rug',                 null, 410,   120, 380,  950,  501 ],
-        [ 1,  4, 'trapdoor',             null, 152,   80,  null, null, 502  ],
+        [ 1,  4, 'picture',              null, 84,    84,  380,  300,  501  ],
+        [ 1, 12, 'rug',                  null, 410,   120, 380,  950,  501 ],
+        [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 502  ],
+        [ 1,  0, 'left_vase',            '🏺', 80,   90,   275,  950,   ],
+        [ 1,  0, 'right_vase',           '🏺', 80,   90,   848,  950,   ],
 
         // Room 2 - Parlor
         [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ],
@@ -123,6 +125,10 @@ class Game {
     // 4 = Tried parlor door once
     // 5 = Noticed that the clock has been moved many times
     // 6 = Parlor door open
+    // 7 = Trapdoor is open
+    // 8 = Looked at monkey
+    // 9 = Listened to monkey
+    // 10 = Spoke to monkey
     flags = [];
 
     /**

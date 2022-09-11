@@ -172,9 +172,9 @@ class Game {
         // Note: Firefox ignores custom cursors bigger than 32x32 when near the Window edge.
         let cursorSize = navigator.userAgent.match(/Firefox/)? 32 : 50;
         this.cursors = {};
-        (Util.MAC? ['👻','👆🏼','⬆️','💭','⬇️','⏳','↖️','👀','⬅️','➕','↗️','🤏🏼','➡️','❔','↙️','🔍','↘️'] :
-        ['👻','👆🏼','\u{1F871}','💭','\u{1F873}','⏳','\u{1F874}','👀','\u{1F870}','➕','\u{1F875}','🤏🏼','\u{1F872}','❔','\u{1F877}','🔍','\u{1F876}']).forEach((c,i) => {
-            let hsy = [cursorSize-1, cursorSize/2][i%2];
+        [['👻', 2],['👆🏼', 0],['💭', 2],['⏳', 1],['👀', 1],['➕', 1],['👂🏼', 1]].forEach(d => {
+            let [c, i] = d;
+            let hsy = [0, cursorSize/2, cursorSize-1][i];
             this.cursors[c] = `url(${Util.renderEmoji(c, cursorSize, cursorSize)[0].toDataURL()}) ${cursorSize/2} ${hsy}, auto`;
             document.body.style.setProperty(`--${c}`, this.cursors[c]);
         });

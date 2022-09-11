@@ -67,7 +67,7 @@ span {
   cursor: var(--➕);
 }
 #items {
-  width: 545px;
+  width: 463px;
   height: 82px;
   background-color: #2d2022;;
   margin: 1px;
@@ -89,7 +89,7 @@ span {
   font-size: 40px;
 }
 #commands {
-  width: 328px;
+  width: 410px;
   font-size: 0px;
   cursor: var(--➕);
 }
@@ -564,9 +564,33 @@ x-ego .pack {
   transform-origin: left center;
   transform: rotateX(84deg);
   transition: transform 0.5s;
+  outline: #3e2305 4px solid;
 }
 .trapdoor.open {
   transform: rotateX(84deg) rotateY(-120deg);
+}
+.picture {
+  background: linear-gradient(#AEDDFF 0% 50%, #96C34A 50% 100%);
+  outline: outset #F3AD61 8px;
+  filter: drop-shadow(0px 0px 1px black);
+}
+.picture:after {
+  content: "🙈";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 91px;
+  font-size: 55px;
+}
+.picture.m2:after {
+  content: "🙉";
+}
+.picture.m3:after {
+  content: "🙊";
+}
+.picture.m4:after {
+  content: "🐵";
 }
 .stairs2 {
   background: #00000030;

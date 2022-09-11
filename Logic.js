@@ -76,6 +76,8 @@ class Logic {
                     ego.say("Yeah, this might work. Boo!!", () => {
                       obj.classList.add("m4");
                       flags[10] = 1;
+                      obj = game.screen.querySelector(".down_stairs");
+                      obj.show();
                       obj = game.screen.querySelector(".trapdoor");
                       obj.classList.add("open");
                       setTimeout(() => ego.say("The trapdoor opened!"), 1000);
@@ -111,7 +113,7 @@ class Logic {
                     ego.hitEdge(1);  // Edge 1 is always a door.
                   }); 
                 } else {
-                  ego.say("I can't leave without my urn.");
+                  pip.say("Yes, it's open. After you.");
                 }
               } else if (flags[4]) {
                 pip.say("I don't see a door handle.");
@@ -163,7 +165,6 @@ class Logic {
               break;
             case 'spirit box,spirit box':
               if (game.hasItem('spirit box')) {
-                // TODO: Handle batteries.
                 pip.say("Yes, it's an amazing device.");
               } else {
                 pip.say("A spirit box? Is this how you talk to me?", () => {
@@ -174,6 +175,25 @@ class Logic {
                     });
                   });
                 });
+              }
+              break;
+            case 'down stairs,spirit box':
+              pip.moveTo(pip.x, 625, () => {
+                pip.moveTo(145, 625, () => {
+                  pip.moveTo(140, 850, () => {
+                    ego.hitEdge(3);  // Edge 3 is always down stairs.
+                  });
+                });
+              }); 
+              break;
+            case 'stairs,spirit box':
+            case 'up stairs,spirit box':
+              if (game.room == 6) {  // Cellar.
+                pip.moveTo(500, 610, () => {
+                  ego.hitEdge(2);  // Edge 2 is always up stairs.
+                });
+              } else {
+
               }
               break;
             case 'left vase,spirit box':

@@ -78,7 +78,7 @@ class Logic {
                       flags[10] = 1;
                       obj = game.screen.querySelector(".trapdoor");
                       obj.classList.add("open");
-                      ego.say("The trapdoor opened!");
+                      setTimeout(() => ego.say("The trapdoor opened!"));
                     });
                   }
                 } else {

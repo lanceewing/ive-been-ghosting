@@ -739,3 +739,10 @@ x-ego .pack {
 .fire {
   filter: opacity(0.8) blur(1px) brightness(1.6) drop-shadow(0px -5px 6px orange);
 }
+.ladder {
+  background: linear-gradient(transparent 0% 80%, #333 80% 100%);
+  background-size: 40px 25px;
+  background-repeat: repeat-y;
+  border-left: #333 4px solid;
+  border-right: #333 4px solid;
+}

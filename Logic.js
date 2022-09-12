@@ -178,13 +178,20 @@ class Logic {
               }
               break;
             case 'down stairs,spirit box':
-              pip.moveTo(pip.x, 625, () => {
-                pip.moveTo(145, 625, () => {
-                  pip.moveTo(140, 850, () => {
-                    ego.hitEdge(3);  // Edge 3 is always down stairs.
+              if (game.room == 1) {
+                pip.moveTo(pip.x, 625, () => {
+                  pip.moveTo(145, 625, () => {
+                    pip.moveTo(140, 850, () => {
+                      ego.hitEdge(3);  // Edge 3 is always down stairs.
+                    });
                   });
                 });
-              }); 
+              } else if (game.room == 3) {
+                pip.moveTo(800, 850, () => {
+                  flags[7] = false;
+                  ego.hitEdge(3);
+                });
+              }
               break;
             case 'stairs,spirit box':
             case 'up stairs,spirit box':
@@ -192,14 +199,12 @@ class Logic {
                 pip.moveTo(500, 610, () => {
                   ego.hitEdge(2);  // Edge 2 is always up stairs.
                 });
-              } else {
-                // TODO: May need more code for attic.
+              } else if (game.room == 1) {
                 pip.moveTo(150, 625, () => {
-                  pip.moveTo(325, 625, () => {
-                    pip.moveTo(450, 625, () => {
-                      ego.hitEdge(2);
-                    });
-                  }, pip.z < 650);
+                  pip.moveTo(450, 625, () => {
+                    flags[7] = true;
+                    ego.hitEdge(2);
+                  });
                 }, pip.x < 300);
               }
               break;
@@ -223,7 +228,7 @@ class Logic {
                     pip.setDirection(Sprite.LEFT);
                     pip.say("This vase it too heavy to lift.");
                   });
-                }, pip.z < 650);
+                }, pip.x < 300);
               }, pip.x < 300);
               break;
             case 'vase,spirit box':
@@ -236,7 +241,7 @@ class Logic {
                       game.inputEnabled = true;
                     });
                   });
-                }, pip.z < 650);
+                }, pip.x < 300);
               }, pip.x < 300);
               break;
             default:

@@ -252,6 +252,37 @@ class Logic {
                 }, pip.x < 300);
               }, pip.x < 300);
               break;
+            case 'beer keg,spirit box':
+              pip.moveTo(700, 745, () => {
+                if (game.hasItem('vase')) {
+                  pip.say("I have filled the vase with beer.");
+                  flags[11] = 1;
+                } else {
+                  pip.say("It is too heavy for me to lift.")
+                }
+              });
+              break;
+            case 'sled,spirit box':
+              if (game.hasItem('sled')) { 
+                ego.say("Someone died using this sled.");
+              } else {
+                pip.moveTo(350, 920, () => {
+                  pip.say("Looks useful. Let's take it.");
+                  game.getItem('sled');
+                });
+              }
+              break;
+            case 'cryptoporticus,spirit box':
+              if (game.hasItem('candle')) {
+                pip.say("With the candle light, it should be fine.", () => {
+                  pip.moveTo(442, 600, () => {
+                    ego.hitEdge(1);
+                  });
+                });
+              } else {
+                pip.say("It's too dark in there.");
+              }
+              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");

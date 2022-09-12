@@ -240,17 +240,21 @@ class Logic {
               }, pip.x < 300);
               break;
             case 'vase,spirit box':
-              pip.moveTo(150, 625, () => {
-                pip.moveTo(325, 625, () => {
-                  pip.moveTo(770, obj.z - 10, () => {
-                    pip.setDirection(Sprite.RIGHT);
-                    pip.say("This vase it empty. I'll take it.", () => {
-                      game.getItem(thing);
-                      game.inputEnabled = true;
+              if (!game.hasItem('vase')) {
+                pip.moveTo(150, 625, () => {
+                  pip.moveTo(325, 625, () => {
+                    pip.moveTo(770, obj.z - 10, () => {
+                      pip.setDirection(Sprite.RIGHT);
+                      pip.say("This vase it empty. I'll take it.", () => {
+                        game.getItem(thing);
+                        game.inputEnabled = true;
+                      });
                     });
-                  });
+                  }, pip.x < 300);
                 }, pip.x < 300);
-              }, pip.x < 300);
+              } else {
+                pip.say("Sorry, I'm not sure what you want me to do.");
+              }
               break;
             case 'beer keg,spirit box':
               pip.moveTo(700, 745, () => {
@@ -282,6 +286,24 @@ class Logic {
               } else {
                 pip.say("It's too dark in there.");
               }
+              break;
+            case 'fire,spirit box':
+              pip.moveTo(obj.cx, 610, () => {
+                if (flags[11]) {
+                  obj.propData[0] = -1;
+                  game.remove(obj);
+                  flags[1] = 1;
+                  pip.say("I extinguished it with the beer.", () => {
+                    pip.moveTo(obj.cx + 100, 630, () => {
+                      game.inputEnabled = true;
+                    });
+                  });
+                } else {
+                  pip.say("There's something behind the flame.", () => {
+                    pip.say("If only I had liquid to extinguish it.");
+                  });
+                }
+              });
               break;
             default:
               if (thing2) {
@@ -379,7 +401,12 @@ class Logic {
             ego.say("Tick, tock.");
             break;
           case 'fire':
-            ego.say("The fire crackles.");
+          case 'fireplace':
+            if (flags[1]) {
+              ego.say("I hear sounds from upstairs.");
+            } else {
+              ego.say("The fire crackles.");
+            }
             break;
           default:
             ego.say("I don't hear anything.");
@@ -397,6 +424,12 @@ class Logic {
             break;
           case 'spirit box':
             ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);
+            break;
+          case 'fireplace':
+            ego.say(flags[1]? "Is that a ladder at the back?" : "The fire burns brightly.");
+            break;
+          case 'vase':
+            ego.say(flags[11]? "It is filled with beer." : "It is empty.");
             break;
           case 'picture':
             if (flags[8]) {

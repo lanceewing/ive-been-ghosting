@@ -18,13 +18,13 @@ class Game {
      */
     rooms = [
         // 1. Entry Hall
-        [0, [2, 8, 715, 625], [3, 1, 800, 840], [6, 1, 415, 625]],
+        [0, [2, 8, 715, 625], [3, 4, 815, 840], [6, 1, 415, 625]],
 
         // 2. Parlor
         [1, [1, 8, 315, 625], , ],
 
         // 3. Small Landing and Bedroom
-        [0, [4, , , ], , [1, , , ]],
+        [0, [4, , , ], , [1, 1, 450, 625]],
 
         // 4. Library and Bedroom
         [0, [3, , , ], [5, , , ], ],
@@ -126,7 +126,7 @@ class Game {
     // 4 = Tried parlor door once
     // 5 = Noticed that the clock has been moved many times
     // 6 = Parlor door open
-    // 7 = 
+    // 7 = Up stairs from parlor (meets ghost)
     // 8 = Looked at monkey
     // 9 = Listened to monkey
     // 10 = Spoke to monkey

@@ -107,23 +107,31 @@ class Logic {
               pip.jump();
               break;
             case 'door,spirit box':
-              if (flags[6]) {
-                if (game.hasItem('urn')) {
-                  pip.moveTo(obj.cx, 610, () => {
-                    ego.hitEdge(1);  // Edge 1 is always a door.
-                  }); 
+              if (game.room == 2) {
+                if (flags[6]) {
+                  if (game.hasItem('urn')) {
+                    pip.moveTo(obj.cx, 610, () => {
+                      ego.hitEdge(1);  // Edge 1 is always a door.
+                    }); 
+                  } else {
+                    pip.say("Yes, it's open. After you.");
+                  }
+                } else if (flags[4]) {
+                  pip.say("I don't see a door handle.");
                 } else {
-                  pip.say("Yes, it's open. After you.");
-                }
-              } else if (flags[4]) {
-                pip.say("I don't see a door handle.");
-              } else {
-                pip.say("Is that a door? I didn't notice.", () => {
-                  pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
-                    pip.say("I don't see a door handle.");
-                    flags[4] = 1;
+                  pip.say("Is that a door? I didn't notice.", () => {
+                    pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
+                      pip.say("I don't see a door handle.");
+                      flags[4] = 1;
+                    });
                   });
-                });
+                }
+              } else if (game.room == 1) {
+                pip.moveTo(325, 625, () => {
+                  pip.moveTo(150, 625, () => {
+                    ego.hitEdge(1);
+                  });
+                }, pip.x > 315);
               }
               break;
             case 'clock,spirit box':

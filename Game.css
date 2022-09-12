@@ -516,6 +516,9 @@ x-ego .pack {
 .ghost {
   filter: sepia(1) opacity(0.5);
 }
+.beer_keg {
+  filter: grayscale(1);
+}
 .down_stairs:after {
   content: "";
   position: absolute;
@@ -656,7 +659,7 @@ x-ego .pack {
   );
   filter: sepia(1);
 }
-.book_case {
+.book_case, .wine_rack {
   background: linear-gradient( 0deg, #3c200b 0% 12%, #281507 20% 100% );
   background-size: 121px 43px;
   border: 6px solid #3c200b;
@@ -665,7 +668,7 @@ x-ego .pack {
 .book_case ~ .book_case {
   filter: drop-shadow(-3px -4px 1px black);
 }
-.room6 .book_case {
+.wine_rack {
   transform: rotateY(100deg);
   filter: drop-shadow(-62px 0px 0px black);
   background-size: 121px 56px;

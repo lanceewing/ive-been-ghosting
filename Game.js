@@ -18,7 +18,7 @@ class Game {
      */
     rooms = [
         // 1. Entry Hall
-        [0, [2, 8, 715, 625], [3, , , ], [6, 1, 415, 625]],
+        [0, [2, 8, 715, 625], [3, 1, 800, 840], [6, 1, 415, 625]],
 
         // 2. Parlor
         [1, [1, 8, 315, 625], , ],
@@ -49,7 +49,7 @@ class Game {
 
         // Room 1 - Entry Hall
         [ 1,  4, 'middle_wall',          null, 260,   360, 165,  720,  852 ],
-        [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  501  ],
+        [ 1,  4, 'stairs',               null, 360,   75,  450,  414,  501, "Looks very ghostly." ],
         [ 1,  4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
         [ 1,164, 'door',                 null, 80,    207, 180,  574,  501, "The jib door is open." ],
         [ 1,  5, 'down_stairs',          null, 180,   70,  null, null, 498  ],
@@ -76,7 +76,8 @@ class Game {
         [ 3, 20,  'alcove',              null, 108,   320,  101, 760, 502  ],
         [ 3,  4,  'fireplace',           null, 200,   130,  330, 600, 501  ],
         [ 3,  4,  'alcove_wall',         null, 260,   360,  95,  720, 1000 ],
-        [ 3,  4,  'door',                 null, 80,    207, 180,  574, 501  ],
+        [ 3,  4,  'door',                null, 80,    207, 180,  574, 501  ],
+        [ 3,  0,  'ghost',               '🕴️', 80,    170,  735, 720,  , "He's guarding the stairs."],
 
         // Room 4 - Library and Bedroom
         [ 4,  12, 'middle_wall',          null, 260,   360, 250,  720, 1000 ],

@@ -104,10 +104,14 @@ class Game {
         // Room 6 - Cellar
         [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720, 1000 ],
         [ 6,  12, 'side_wall',            null,  53,   300, 305,  600, 501 ],
-        [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574, 501 ],
+        [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574, 501, "A long, dark tunnel. Very spooky." ],
         [ 6,   4, 'stairs',               null, 360,   75,  500,  414, 502  ],
         [ 6,   4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
-        [ 6,  12, 'book_case',            null, 136,   400,  31,  845,  502  ],
+        [ 6,  12, 'wine_rack',            null, 136,   400,  31,  845,  502, "The wine rack is empty." ],
+        [ 6,   0, 'beer_keg',             '🛢', 80,   100,  740,  645,  , "Each is filled with beer." ],
+        [ 6,   0, 'beer_keg',             '🛢', 80,   100,  770,  745,  , "Each is filled with beer." ],
+        [ 6,   0, 'beer_keg',             '🛢', 80,   100,  815,  845,  , "Each is filled with beer." ],
+        [ 6,   0, 'sled',                 '🛷', 150,   40,  280,  920,  , "I vaguely recall some tragic event in my past..." ],
 
         // Room 50 - Return into current room.
         // No items. Ego just walks back into the previous room, as there is nothing in that direction.
@@ -130,6 +134,7 @@ class Game {
     // 8 = Looked at monkey
     // 9 = Listened to monkey
     // 10 = Spoke to monkey
+    // 11 = Vase filled with beer
     flags = [];
 
     /**
@@ -210,7 +215,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 2;
+        this.room = 6;
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');

@@ -193,8 +193,14 @@ class Logic {
                   ego.hitEdge(2);  // Edge 2 is always up stairs.
                 });
               } else {
-                // TODO: Other rooms.
-
+                // TODO: May need more code for attic.
+                pip.moveTo(150, 625, () => {
+                  pip.moveTo(325, 625, () => {
+                    pip.moveTo(450, 625, () => {
+                      ego.hitEdge(2);
+                    });
+                  }, pip.z < 650);
+                }, pip.x < 300);
               }
               break;
             case 'trapdoor,spirit box':

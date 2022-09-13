@@ -293,6 +293,8 @@ class Logic {
                   obj.propData[0] = -1;
                   game.remove(obj);
                   flags[1] = 1;
+                  obj = game.screen.querySelector(".ladder");
+                  obj.show();
                   pip.say("I extinguished it with the beer.", () => {
                     pip.moveTo(obj.cx + 100, 630, () => {
                       game.inputEnabled = true;
@@ -303,6 +305,11 @@ class Logic {
                     pip.say("If only I had liquid to extinguish it.");
                   });
                 }
+              });
+              break;
+            case 'ladder,spirit box':
+              pip.moveTo(obj.cx, 610, () => {
+                ego.hitEdge(2);
               });
               break;
             default:
@@ -426,10 +433,13 @@ class Logic {
             ego.say(`It is turned ${flags[0]? "ON, to Ghost FM" : "OFF"}.`);
             break;
           case 'fireplace':
-            ego.say(flags[1]? "Is that a ladder at the back?" : "The fire burns brightly.");
+            ego.say(flags[1] || (game.room == 3)? "Is that a ladder at the back?" : "The fire burns brightly.");
             break;
           case 'vase':
             ego.say(flags[11]? "It is filled with beer." : "It is empty.");
+            break;
+          case 'me':
+            ego.say("I forget who I am. Maybe pip can help me remember.");
             break;
           case 'picture':
             if (flags[8]) {

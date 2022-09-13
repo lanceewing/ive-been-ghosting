@@ -201,8 +201,7 @@ class Game {
         this.started = false;
         this.fadeOut(this.wrap);
 
-        // TODO: Uncomment the commented bits when releasing.
-        //onclick = e => {
+        onclick = e => {
             if (!this.started) {
                 this.started = true;
                 onclick = null;
@@ -210,13 +209,13 @@ class Game {
                 this.fadeOut(this.msg);
                 setTimeout(() => {
                     this.msg.style.display = 'none'
-                    //this.sound.playSong();
+                    this.sound.playSong();
                     speechSynthesis.getVoices();  // Trigger fetch of voices up front.
                     this.init();
                     this.loop();
                 }, 200);
             }
-        //}
+        }
     }
 
     /**

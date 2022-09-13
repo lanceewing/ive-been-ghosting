@@ -251,7 +251,7 @@ class Sprite extends HTMLElement {
         audio.voice = voices.filter(function(voice) { return voice.name.includes('Hazel'); })[0];  // David, Hazel (most common), Zira, Susan, George
         audio.pitch = 0.1;
         audio.rate = 0.4;
-        audio.volume = 0.5;
+        //audio.volume = 0.5;
         window.speechSynthesis.speak(audio);
     }
 

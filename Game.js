@@ -27,10 +27,10 @@ class Game {
         [0, [4, 4, 150, 900], [2, 8, 513, 625], [1, 1, 450, 625]],
 
         // 4. Library and Bedroom
-        [0, [3, 1, 280, 625], [5, , , ], ],
+        [0, [3, 1, 280, 625], [5, 8, 380, 625], ],
 
         // 5. Attic
-        [0, , [4, , , ], ],
+        [0, , [4, 8, 245, 700], ],
 
         // 6. Cellar
         [0, [7, , , ], [1, 4, 80, 750], ]
@@ -103,7 +103,7 @@ class Game {
         // Room 5 - Attic
         [ 5,  12, 'wall1',                null, 190,   341, 115,  683,   ],
         [ 5,  12, 'wall2',                null, 190,   341, 655,  683,   ],
-        [ 5,  12, 'wall3',                null, 100,   311, 295,  623,   ],
+        [ 5,  12, 'wall3',                null, 100,   311, 295,  623, 627 ],
         [ 5,  12, 'wall4',                null, 100,   311, 565,  623, 501 ],
         [ 5,  12, 'wall5',                null,  25,   290, 357,  586, 502 ],
         [ 5,   4, 'roof',                 null, 961,   30,   -1,   30, 1000 ],
@@ -229,8 +229,11 @@ class Game {
         this.room = 4;
 
         // TODO: Remove. Quick hack to test later parts of game.
+        this.flags[0] = 1;
+        this.flags[2] = 1;
         this.flags[11] = 1;
         this.getItem('vase');
+        this.getItem('spirit box');
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');

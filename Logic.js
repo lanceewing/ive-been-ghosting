@@ -242,6 +242,20 @@ class Logic {
                     ego.hitEdge(2);
                   });
                 }, pip.x < 300);
+              } else if (game.room == 4) {
+                pip.moveTo(420, 700, () => {
+                  pip.moveTo(290, 700, () => {
+                    pip.moveTo(290, 660, () => {
+                      ego.hitEdge(2);
+                    });
+                  }, pip.x > 330);
+                }, pip.x > 330);
+              } else if (game.room == 5) {
+                pip.moveTo(360, 625, () => {
+                  pip.moveTo(340, 625, () => {
+                    ego.hitEdge(2);
+                  });
+                });
               }
               break;
             case 'trapdoor,spirit box':

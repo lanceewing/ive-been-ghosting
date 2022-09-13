@@ -61,6 +61,7 @@ class Game {
         [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 850, "That's a rather ominous design." ],
         [ 1,  0, 'left_vase',            '🏺', 80,   90,   300,  950,   ],
         [ 1,  0, 'vase',                 '🏺', 80,   90,   815,  950,   ],
+        [ 1, 12, 'front_door',           null, 200,   15,  380,  972, 1002, "They mysteriously locked as Pip entered. Spooky." ],
 
         // Room 2 - Parlor
         [ 2,  4,  'fireplace',            null, 200,   130,  380, 600, 599 ],
@@ -72,6 +73,7 @@ class Game {
         [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340, 501, "It contains my ashes." ],
         [ 2, 20,  'spirit_box',           '📻', 40,    40,  540, 340,  501 ],
         [ 2, 21,  'ladder',               null, 40,     63,  460, 570, 600, "It appears to go up the chimney." ],
+        [ 2,  12, 'outside_doors',        null, 350,   15,   305, 972, 1002, "They mysteriously locked as Pip entered. Spooky." ],
 
         // Room 3 - Small landing and Bedroom
         [ 3,  4,  'middle_wall',         null, 260,   360,  503, 720, 1000 ],
@@ -226,7 +228,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 4;
+        this.room = 1;
 
         // TODO: Remove. Quick hack to test later parts of game.
         this.flags[0] = 1;

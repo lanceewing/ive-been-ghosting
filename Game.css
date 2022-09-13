@@ -752,8 +752,11 @@ x-ego .pack {
   bottom: 0;
 }
 .bedroom_door {
+  background: #7B4C3A;
+}
+.outside_doors, .front_door {
   background: #333;
 }
-.diary, .paper {
+.diary, .paper, .bedroom_door, .outside_doors, .front_door {
   transform: rotateX(77deg);
 }

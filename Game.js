@@ -33,10 +33,10 @@ class Game {
         [0, , [4, 8, 245, 700], ],
 
         // 6. Cellar
-        [0, [7, , , ], [1, 4, 80, 750], ]
+        [0, [7, 8, 450, 625], [1, 4, 80, 750], ],
 
         // 7. Outside.
-
+        [0, [6, 8, 415, 625]]
     ];
 
     props = [
@@ -125,8 +125,10 @@ class Game {
         [ 6,   0, 'beer_keg',             '🛢', 80,   100,  815,  845,  , "Each is filled with beer." ],
         [ 6,   0, 'sled',                 '🛷', 150,   40,  280,  920,  , "I vaguely recall some tragic event in my past..." ],
 
-        // Room 50 - Return into current room.
-        // No items. Ego just walks back into the previous room, as there is nothing in that direction.
+        // Room 7 - Outside
+        [ 7,   4, 'cryptoporticus',       null, 180,   200, 390,  574, 501 ],
+        [ 7,   4, 'river',                null, 960,   150,  0,    985, 100 ],
+        [ 7,   4, 'sand',                 null, 960,   150,  0,    890, 99 ],
 
         // Room 0 - All rooms
         [ 0,  4, 'left_wall',            null, 260,   360, null, null, 501 ],
@@ -150,6 +152,7 @@ class Game {
     // 10 = Spoke to monkey
     // 11 = Vase filled with beer
     // 12 = Glass cover smashed
+    // 13 = Said message about frozen river
     flags = [];
 
     /**
@@ -362,6 +365,7 @@ class Game {
             this.ego.stop(true);
             this.ego.hide();
             this.fadeOut(this.ego);
+            this.anchor.hide();
             this.ego.setDirection(this.pip.direction);
             this.ego.setPosition(this.pip.x, this.pip.z);
         } else {
@@ -448,14 +452,27 @@ class Game {
             if ((prop[0] == this.room) || (prop[0] == 0)) this.addPropToRoom(prop);
         });
 
-        this.ego.show();
+        if (this.hasItem('urn')) {
+            this.ego.setDirection(this.pip.direction);
+            this.ego.setPosition(this.pip.x, this.pip.z);
+        }
         this.pip.show();
-        this.anchor.show();
 
         this.fadeIn(this.wrap);
-        this.fadeIn(this.ego);
         this.fadeIn(this.pip);
-        this.fadeIn(this.anchor);
+
+        // End game. Outside.
+        if ((this.room == 7) && (this.hasItem('sled')) && !this.flags[13]) {
+            this.pip.say("A river? Perhaps if it were frozen, we could use the sled.", () => {
+                this.ego.show();
+                this.fadeIn(this.ego);
+                this.anchor.show();
+                this.ego.moveTo(this.pip.x + 70, this.pip.z, () => {
+                    this.ego.say("A frozen river? A sled? I think I remember what happened to me.");
+                    this.flags[13] = 1;
+                });
+            });
+        }
     }
 
     /**

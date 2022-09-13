@@ -324,7 +324,7 @@ class Logic {
               if (flags[12]) {  // Glass cover smashed.
                 if (game.hasItem('candle')) {
                   pip.say("With the candle light, it should be fine.", () => {
-                    pip.moveTo(442, 610, () => {
+                    pip.moveTo(obj.cx, 610, () => {
                       ego.hitEdge(1);
                     });
                   });
@@ -420,6 +420,31 @@ class Logic {
                 pip.say("Sorry, I'm not sure what you want me to do with it.");
               }
               break;
+            case 'urn,river':
+              if (flags[13]) {
+                // End game.
+                pip.say("Empty your urn into the river? OK.", () => {
+                  pip.walkTo(700, 380, () => {
+                    pip.say("There, I've tipped the ash into the river.", () => {
+                      ego.say("Thank you Pip! I am finally free.", () => {
+                        ego.say("I drowned in this river. Now my soul can finally rest.", () => {
+                          ego.setDirection(Sprite.OUT);
+                          pip.setDirection(Sprite.OUT);
+                          ego.say("THE END!");
+                          pip.say("THE END!", () => {
+                            game.fadeOut(game.wrap);
+                            game.msg.innerHTML = "The End";
+                            game.msg.style.display = 'flex';
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              } else {
+                pip.say("Sorry, I'm not sure what you want me to do with it.");
+              }
+              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");
@@ -441,6 +466,11 @@ class Logic {
         switch (thing) {
           default:
             // Walk to screen object or screen click position.
+            if (game.hasItem('urn') && (!ego.visible)) {
+              ego.show();
+              game.fadeIn(this.game.ego);
+              game.anchor.show();
+            }
             let z = ((e.pageY / game.scaleY) - 27) * 2;
             if (z <= 970) {
               ego.stop(true);
@@ -536,6 +566,13 @@ class Logic {
         switch (thing) {
           case 'circle':
             ego.say("I can only move that far from my urn.");
+            break;
+          case 'river':
+            if (flags[13]) {
+              ego.say("I remember now. This is where I died.");
+            } else {
+              ego.say("Very pretty.");
+            }
             break;
           case 'pip':
             ego.say(flags[6]? "He looks calm. I guess he trusts me now." : "He looks scared.");

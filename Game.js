@@ -216,7 +216,6 @@ class Game {
                 setTimeout(() => {
                     this.msg.style.display = 'none'
                     this.sound.playSong();
-                    speechSynthesis.getVoices();  // Trigger fetch of voices up front.
                     this.init();
                     this.loop();
                 }, 200);
@@ -233,18 +232,18 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 6;
+        this.room = 2;
 
-        // TODO: Remove. Quick hack to test later parts of game.
-        this.flags[0] = 1;
-        this.flags[2] = 1;
-        this.flags[11] = 1;
-        this.getItem('vase','🏺');
-        this.getItem('spirit box','📻');
-        this.getItem('candle','🕯️');
-        this.getItem('hammer','🔨');
-        this.getItem('urn','⚱');
-        this.getItem('tool box','🧰');
+        // // // TODO: Remove. Quick hack to test later parts of game.
+        // this.flags[0] = 1;
+        // this.flags[2] = 1;
+        // this.flags[11] = 1;
+        // this.getItem('vase','🏺');
+        // this.getItem('spirit box','📻');
+        // this.getItem('candle','🕯️');
+        // this.getItem('hammer','🔨');
+        // this.getItem('urn','⚱');
+        // this.getItem('tool box','🧰');
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
@@ -276,28 +275,28 @@ class Game {
 
         // Intro text.
         this.inputEnabled = false;
-        // this.pip.say("This is 'The Solitude' house in Philadelphia Zoo.", () => {
-        //     this.pip.say("I'm a Javascript developer called Pip...", () => {
-        //         this.pip.moveTo(600, 935, () => {
-        //             this.pip.say("...and I have come here to research 'DEATH' for my js13kgames entry...", () => {
-        //                 this.pip.moveTo(550, 935, () => {
-        //                     this.pip.say("...as I heard this house is haunted.", () => {
-        //                         this.ego.say("And he heard right.", () =>  {
-        //                             this.ego.say("Please help me to help him with his research.", () => {
-        //                                 this.pip.moveTo(530, 850, () => {
-        //                                     this.pip.say("Who said that?!", () => {
-        //                                         this.pip.querySelector(".actor").classList.add("shake");
+        this.pip.say("This is 'The Solitude' house in Philadelphia Zoo.", () => {
+            this.pip.say("I'm a Javascript developer called Pip...", () => {
+                this.pip.moveTo(600, 935, () => {
+                    this.pip.say("...and I have come here to research 'DEATH' for my js13kgames entry...", () => {
+                        this.pip.moveTo(550, 935, () => {
+                            this.pip.say("...as I heard this house is haunted.", () => {
+                                this.ego.say("And he heard right.", () =>  {
+                                    this.ego.say("Please help me to help him with his research.", () => {
+                                        this.pip.moveTo(530, 850, () => {
+                                            this.pip.say("Who said that?!", () => {
+                                                this.pip.querySelector(".actor").classList.add("shake");
                                                  this.inputEnabled = true
-        //                                     });
-        //                                 });
-        //                             });
-        //                         });
-        //                     });
-        //                 });
-        //             });
-        //         });
-        //     });
-        // });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
 
         // Fade in the whole screen at the start.
         this.fadeIn(this.wrap);
@@ -367,7 +366,7 @@ class Game {
             this.fadeOut(this.ego);
             this.anchor.hide();
             this.ego.setDirection(this.pip.direction);
-            this.ego.setPosition(this.pip.x, this.pip.z);
+            this.ego.setPosition(this.pip.x - 40, this.pip.z);
         } else {
             this.ego.update();
             if (!this.ego.touching(this.anchor, 125) || (this.ego.z < 590)) {
@@ -454,7 +453,7 @@ class Game {
 
         if (this.hasItem('urn')) {
             this.ego.setDirection(this.pip.direction);
-            this.ego.setPosition(this.pip.x, this.pip.z);
+            this.ego.setPosition(this.pip.x + 40, this.pip.z);
         }
         this.pip.show();
 

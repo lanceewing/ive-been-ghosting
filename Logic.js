@@ -32,6 +32,13 @@ class Logic {
     let obj = item? item.obj : game.objs.find(i => i.dataset['name'] == thing);
     let fn = null;
 
+    // Show ego on first action in new room.
+    if (game.hasItem('urn') && (!ego.visible)) {
+      ego.show();
+      game.fadeIn(this.game.ego);
+      game.anchor.show();
+    }
+
     switch (verb) {
       case 'Whisper to':
         let thing2 = (cmd.indexOf(' about ') < 0? '' : `,${cmd.substring(11, cmd.indexOf(' about '))}`)
@@ -185,7 +192,35 @@ class Logic {
               }
               break;
             case 'urn,spirit box':
-              if (flags[6]) {
+              if (game.hasItem('urn')) {
+                if (flags[13]) {
+                  // End game.
+                  pip.say("Empty your urn into the river? OK.", () => {
+                    pip.moveTo(380, 700, () => {
+                      pip.say("There, I've tipped the ash into the river.", () => {
+                        ego.setPosition(pip.x - 100, pip.z);
+                        ego.show();
+                        game.fadeIn(ego);
+                        ego.say("Thank you Pip! I am finally free.", () => {
+                          ego.say("I drowned in this river. Now my soul can finally rest.", () => {
+                            ego.setDirection(Sprite.OUT);
+                            pip.setDirection(Sprite.OUT);
+                            ego.say("THE END!");
+                            pip.say("THE END!", () => {
+                              game.fadeOut(game.wrap);
+                              game.msg.innerHTML = "The End";
+                              game.msg.style.display = 'flex';
+                              game.fadeIn(game.msg);
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                } else {
+                  pip.say("Sorry, I'm not sure what you want me to do with it.");
+                }
+              } else if (flags[6] && game.room == 2) {
                 pip.say("Oh! I need to take 'YOU' with me?", () => {
                   pip.moveTo(obj.cx, 610, () => {
                     game.getItem(thing);
@@ -420,31 +455,6 @@ class Logic {
                 pip.say("Sorry, I'm not sure what you want me to do with it.");
               }
               break;
-            case 'urn,river':
-              if (flags[13]) {
-                // End game.
-                pip.say("Empty your urn into the river? OK.", () => {
-                  pip.walkTo(700, 380, () => {
-                    pip.say("There, I've tipped the ash into the river.", () => {
-                      ego.say("Thank you Pip! I am finally free.", () => {
-                        ego.say("I drowned in this river. Now my soul can finally rest.", () => {
-                          ego.setDirection(Sprite.OUT);
-                          pip.setDirection(Sprite.OUT);
-                          ego.say("THE END!");
-                          pip.say("THE END!", () => {
-                            game.fadeOut(game.wrap);
-                            game.msg.innerHTML = "The End";
-                            game.msg.style.display = 'flex';
-                          });
-                        });
-                      });
-                    });
-                  });
-                });
-              } else {
-                pip.say("Sorry, I'm not sure what you want me to do with it.");
-              }
-              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");
@@ -466,11 +476,6 @@ class Logic {
         switch (thing) {
           default:
             // Walk to screen object or screen click position.
-            if (game.hasItem('urn') && (!ego.visible)) {
-              ego.show();
-              game.fadeIn(this.game.ego);
-              game.anchor.show();
-            }
             let z = ((e.pageY / game.scaleY) - 27) * 2;
             if (z <= 970) {
               ego.stop(true);
@@ -569,7 +574,7 @@ class Logic {
             break;
           case 'river':
             if (flags[13]) {
-              ego.say("I remember now. This is where I died.");
+              ego.say("I remember now. This river is where I died.");
             } else {
               ego.say("Very pretty.");
             }

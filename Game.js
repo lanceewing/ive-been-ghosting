@@ -42,7 +42,7 @@ class Game {
     props = [
         // Room#, type, name, content, width, height, x, y, z-index override, description
         // bit 0:    0 = visible, 1 = hidden
-        // bit 1:
+        // bit 1:    0 = no glass, 1 = glass
         // bit 2:    0 = shadow, 1 = no shadow
         // bit 3:    0 = observe objs, 1 = ignore objs
         // bit 4:    0 = observe reflection, 1 = ignore reflection
@@ -116,7 +116,7 @@ class Game {
         // Room 6 - Cellar
         [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720, 850 ],
         [ 6,  12, 'side_wall',            null,  53,   300, 305,  600, 501 ],
-        [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574, 501, "A long, dark tunnel. Very spooky." ],
+        [ 6,   6, 'cryptoporticus',       null, 180,   200, 352,  574, 501 ],
         [ 6,   4, 'stairs',               null, 360,   75,  500,  414, 502  ],
         [ 6,   4, 'up_stairs',            null, 410,   145, null, null, 1000 ],
         [ 6,  12, 'wine_rack',            null, 136,   400,  31,  845,  502, "The wine rack is empty." ],
@@ -149,6 +149,7 @@ class Game {
     // 9 = Listened to monkey
     // 10 = Spoke to monkey
     // 11 = Vase filled with beer
+    // 12 = Glass cover smashed
     flags = [];
 
     /**
@@ -353,8 +354,6 @@ class Game {
 
         this.pip.moved = false;
         this.ego.moved = false;
-        let dx = this.ego.x - this.pip.x;
-        let dz = this.ego.z - this.pip.z;
 
         // Update pip, anchor and ego.
         this.pip.update();
@@ -364,10 +363,10 @@ class Game {
             this.ego.hide();
             this.fadeOut(this.ego);
             this.ego.setDirection(this.pip.direction);
-            this.ego.setPosition(this.pip.x + dx, this.pip.z + dz);
+            this.ego.setPosition(this.pip.x, this.pip.z);
         } else {
             this.ego.update();
-            if (!this.ego.touching(this.anchor, 125)) {
+            if (!this.ego.touching(this.anchor, 125) || (this.ego.z < 590)) {
                 while (this.ego.reset());
                 this.ego.stop(true);
             }

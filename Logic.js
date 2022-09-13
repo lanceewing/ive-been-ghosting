@@ -321,14 +321,18 @@ class Logic {
               }
               break;
             case 'cryptoporticus,spirit box':
-              if (game.hasItem('candle')) {
-                pip.say("With the candle light, it should be fine.", () => {
-                  pip.moveTo(442, 600, () => {
-                    ego.hitEdge(1);
+              if (flags[12]) {  // Glass cover smashed.
+                if (game.hasItem('candle')) {
+                  pip.say("With the candle light, it should be fine.", () => {
+                    pip.moveTo(442, 610, () => {
+                      ego.hitEdge(1);
+                    });
                   });
-                });
+                } else {
+                  pip.say("It's too dark in there.");
+                }
               } else {
-                pip.say("It's too dark in there.");
+                pip.say("It's covered with a glass panel.");
               }
               break;
             case 'fire,spirit box':
@@ -393,6 +397,27 @@ class Logic {
                     game.inputEnabled = true;
                   });
                 });
+              }
+              break;
+            case 'hammer,spirit box':
+              if (game.room == 6) {
+                if (flags[12]) {
+                  pip.say("I've already smashed the glass panel.");
+                } else {
+                  pip.say("Smash the glass panel with the hammer?", () => {
+                    pip.moveTo(415, 625, () => {
+                      pip.say("Great idea!", () => {
+                        obj = game.screen.querySelector(".cryptoporticus");
+                        obj.classList.remove("p1");
+                        obj.propData[1] |= 2;
+                        game.inputEnabled = true;
+                        flags[12] = 1;
+                      });
+                    });
+                  });
+                }
+              } else {
+                pip.say("Sorry, I'm not sure what you want me to do with it.");
               }
               break;
             default:
@@ -523,6 +548,9 @@ class Logic {
             break;
           case 'vase':
             ego.say(flags[11]? "It is filled with beer." : "It is empty.");
+            break;
+          case 'cryptoporticus':
+            ego.say(flags[12]? "A long, dark tunnel. Very spooky." : "It is covered with a glass panel.");
             break;
           case 'me':
             ego.say("I forget who I am. Maybe pip can help me remember.");

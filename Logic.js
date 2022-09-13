@@ -44,6 +44,9 @@ class Logic {
                 });
               });
               break;
+            case 'ghost bed':
+              ego.say("I'd rather let her sleep.");
+              break;
             case 'spirit box':
               if (flags[0]) {      // Spirit Box ON
                 if (flags[2]) {    // Already spoken to Pip once
@@ -374,6 +377,24 @@ class Logic {
                 pip.say("I feel safer with this.");
               }
               break;
+            case 'tool box,spirit box':
+              if (game.hasItem('tool box')) {
+                if (game.hasItem('hammer')) {
+                  pip.say("There's nothing else inside.");
+                } else {
+                  pip.say("There's a hammer inside.");
+                  game.getItem('hammer','🔨');
+                }
+              } else {
+                pip.moveTo(620, 700, () => {
+                  pip.setDirection(Sprite.RIGHT);
+                  pip.say("I wonder what's inside here.", () => {
+                    game.getItem(thing);
+                    game.inputEnabled = true;
+                  });
+                });
+              }
+              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");
@@ -469,6 +490,9 @@ class Logic {
           case 'clock':
             ego.say("Tick, tock.");
             break;
+          case 'ghost bed':
+            ego.say("Yep, she's snoring.");
+            break;
           case 'fire':
           case 'fireplace':
             if (flags[1]) {
@@ -502,6 +526,12 @@ class Logic {
             break;
           case 'me':
             ego.say("I forget who I am. Maybe pip can help me remember.");
+            break;
+          case 'ghost bed':
+            ego.say("Don't worry, it's just Letitia, sleeping.");
+            break;
+          case 'ghost':
+            ego.say("I don't think I know this guy. He's new.");
             break;
           case 'picture':
             if (flags[8]) {

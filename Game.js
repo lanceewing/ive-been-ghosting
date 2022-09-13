@@ -111,6 +111,7 @@ class Game {
         [ 5,   4, 'roof',                 null, 961,   30,   -1,   30, 1000 ],
         [ 5,   0, 'ghost_bed',           '🛌', 225,   110, 370,  590,   ],
         [ 5,   4, 'stairs2',              null,  35,   207, 326,  590, 501  ],
+        [ 5,   0, 'tool_box',            '🧰', 40,   40,    660,  700,   ],
 
         // Room 6 - Cellar
         [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720, 850 ],
@@ -133,6 +134,7 @@ class Game {
         [ 0,  4, 'left_window',          null, 121,   231, null, null, 501, "It is pitch black outside." ],
         [ 0,  4, 'right_window',         null, 121,   231, null, null, 501, "It is pitch black outside." ],
         [ 0,  4, 'front_wall',           null, 960,   15,  null, null, 1001 ],
+
     ];
 
     // 0 = Spirit Box ON
@@ -227,14 +229,18 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 1;
+        this.room = 6;
 
         // TODO: Remove. Quick hack to test later parts of game.
         this.flags[0] = 1;
         this.flags[2] = 1;
         this.flags[11] = 1;
-        this.getItem('vase');
-        this.getItem('spirit box');
+        this.getItem('vase','🏺');
+        this.getItem('spirit box','📻');
+        this.getItem('candle','🕯️');
+        this.getItem('hammer','🔨');
+        this.getItem('urn','⚱');
+        this.getItem('tool box','🧰');
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
@@ -606,7 +612,7 @@ class Game {
     scrollInv(dir) {
         let newLeft = this.itemsLeft + (77 * dir);
         let invCount = this.items.children.length;
-        if ((newLeft <= 0) && (newLeft >= -((invCount - 7) * 77))) {
+        if ((newLeft <= 0) && (newLeft >= -((invCount - 6) * 77))) {
             this.itemsLeft = newLeft;
             this.items.style.left = this.itemsLeft + 'px';
         }

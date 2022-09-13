@@ -59,8 +59,8 @@ class Game {
         [ 1,  4, 'picture',              null, 84,    84,  380,  300,  501  ],
         [ 1, 12, 'rug',                  null, 386,   120, 392,  950,  499 ],
         [ 1,  4, 'trapdoor',             '☠', 152,   80,  null, null, 850, "That's a rather ominous design." ],
-        [ 1,  0, 'left_vase',            '🏺', 80,   90,   300,  950,   ],
-        [ 1,  0, 'vase',                 '🏺', 80,   90,   815,  950,   ],
+        [ 1,  0, 'left_vase',            '🏺', 80,   90,   300,  925,   ],
+        [ 1,  0, 'vase',                 '🏺', 80,   90,   815,  925,   ],
         [ 1, 12, 'front_door',           null, 200,   15,  380,  972, 1002, "They mysteriously locked as Pip entered. Spooky." ],
 
         // Room 2 - Parlor
@@ -130,8 +130,8 @@ class Game {
         // Room 0 - All rooms
         [ 0,  4, 'left_wall',            null, 260,   360, null, null, 501 ],
         [ 0,  4, 'right_wall',           null, 260,   360, null, null, 501 ],
-        [ 0,  4, 'left_window',          null, 121,   231, null, null, 501 ],
-        [ 0,  4, 'right_window',         null, 121,   231, null, null, 501 ],
+        [ 0,  4, 'left_window',          null, 121,   231, null, null, 501, "It is pitch black outside." ],
+        [ 0,  4, 'right_window',         null, 121,   231, null, null, 501, "It is pitch black outside." ],
         [ 0,  4, 'front_wall',           null, 960,   15,  null, null, 1001 ],
     ];
 

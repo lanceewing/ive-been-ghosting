@@ -122,6 +122,9 @@ span {
   perspective: 500px;
   perspective-origin: top;
   background: linear-gradient( #EEE3DF 0% 45%, #F0E0BF 45% 59%, #7B4C3A 59% 100% );
+/*
+  filter: saturate(0.7) blur(0.5px)  url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><filter id="waves" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB"><feTurbulence type="turbulence" baseFrequency="0.01 0.01" numOctaves="1" seed="1" stitchTiles="noStitch" result="turbulence" /><feDisplacementMap in="SourceGraphic" in2="turbulence" scale="20" xChannelSelector="G" yChannelSelector="A" result="displacementMap" /></filter></svg>#waves');
+  */
 }
 #screen * {
   position: absolute;
@@ -357,12 +360,10 @@ x-ego .pack {
 .left_wall {
   left: -30px;
   transform: rotateY(100deg);
-  box-shadow: 10px -20px 300px grey
 }
 .right_wall {
   right: -30px;
   transform: rotateY(-100deg);
-  box-shadow: -10px -20px 300px grey
 }
 .wall1, .wall2 {
   filter: brightness(0.9);
@@ -424,11 +425,11 @@ x-ego .pack {
 }
 .left_window, .right_window, .window {
   top: 43px;
-  background: white;
+  background: black;
   background-size: 40px 46px;
   background-image:
-    linear-gradient(to right, grey 1px, transparent 1px),
-    linear-gradient(to bottom, grey 1px, transparent 1px);
+    linear-gradient(to right, white 2px, transparent 1px),
+    linear-gradient(to bottom, white 2px, transparent 1px);
 }
 .left_window {
   left: 35px;

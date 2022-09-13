@@ -96,6 +96,9 @@ class Game {
         [ 4,   0, 'chair',               '🪑',  50,   120, 720,  700,   ],
         [ 4,   4, 'desk',                 null, 222,   60, 668,  800,   ],
         [ 4,  12, 'bedroom_door',         null, 100,   15,  120, 970, 1002 ],
+        [ 4,   0, 'candle',               '🕯️', 20,   40,  690,  730,  801, "The candle burns brightly." ],
+        [ 4,   0, 'diary',                '📖', 60,   40,  740,  770,  801 ],
+        [ 4,   0, 'paper',                '📜', 60,   40,  800,  770,  801 ],
 
         // Room 5 - Attic
         [ 5,  12, 'wall1',                null, 190,   341, 115,  683,   ],
@@ -223,7 +226,7 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 2;
+        this.room = 4;
 
         // TODO: Remove. Quick hack to test later parts of game.
         this.flags[11] = 1;

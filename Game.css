@@ -754,3 +754,6 @@ x-ego .pack {
 .bedroom_door {
   background: #333;
 }
+.diary, .paper {
+  transform: rotateX(77deg);
+}

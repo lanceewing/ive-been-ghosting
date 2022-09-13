@@ -344,6 +344,23 @@ class Logic {
                 });
               }
               break;
+            case 'candle,spirit box':
+              if (!game.hasItem('candle')) {
+                pip.moveTo(260, 700, () => {
+                  pip.moveTo(420, 700, () => {
+                    pip.moveTo(650, obj.z - 10, () => {
+                      pip.setDirection(Sprite.OUT);
+                      pip.say("I'll feel safer with this.", () => {
+                        game.getItem(thing);
+                        game.inputEnabled = true;
+                      });
+                    });
+                  }, pip.x < 330);
+                }, pip.x < 330);
+              } else {
+                pip.say("I feel safer with this.");
+              }
+              break;
             default:
               if (thing2) {
                 pip.say("Sorry, I'm not sure what you want me to do.");

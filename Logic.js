@@ -53,7 +53,6 @@ class Logic {
                     newCommand = 'Whisper to spirit box about ';
                   }
                 } else {           // Not yet spoken to Pip
-                  ego.speak("Boo");
                   ego.say("Boo!!!", () => {
                     pip.say("Who said 'Boo'? I can't see you.", () => {
                       ego.say("I am a helpful ghost, and your guide.", () => {
@@ -385,7 +384,6 @@ class Logic {
           }
         }
         if (thing2) {
-          ego.speak(thing);
           ego.say(`...${thing}...`, fn);
           newCommand = verb;
         } else {

@@ -241,21 +241,6 @@ class Sprite extends HTMLElement {
     }
 
     /**
-     * Speaks out the text with the JS speech utterance.
-     * 
-     * @param {*} text 
-     */
-    speak(text) {
-        let audio = new SpeechSynthesisUtterance(text);
-        var voices = window.speechSynthesis.getVoices();
-        audio.voice = voices.filter(function(voice) { return voice.name.includes('Hazel'); })[0];  // David, Hazel (most common), Zira, Susan, George
-        audio.pitch = 0.1;
-        audio.rate = 0.4;
-        //audio.volume = 0.5;
-        window.speechSynthesis.speak(audio);
-    }
-
-    /**
      * Tells the Actor to say the given text within a speech bubble of the given width. Will
      * execute the given optional next function if provided after the speech bubble is removed.
      * 

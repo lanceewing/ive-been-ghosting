@@ -81,7 +81,7 @@ class Game {
         [ 3,  4,  'fireplace',           null, 200,   130,  330, 600, 501  ],
         [ 3, 20,  'ladder',              null, 40,    50,  407, 590, 600, "It appears to go down the chimney." ],
         [ 3,  4,  'alcove_wall',         null, 260,   360,  95,  720, 1000 ],
-        [ 3,  4,  'door',                null, 80,    207, 180,  574, 501  ],
+        [ 3, 36,  'door',                null, 80,    207, 180,  574, 501  ],
         [ 3,  0,  'ghost',               '🕴️', 80,    170,  735, 720,  , "He's guarding the stairs."],
 
         // Room 4 - Library and Bedroom

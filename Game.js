@@ -21,10 +21,10 @@ class Game {
         [0, [2, 8, 715, 625], [3, 4, 815, 840], [6, 1, 415, 625]],
 
         // 2. Parlor
-        [1, [1, 8, 315, 625], , ],
+        [1, [1, 8, 315, 625], [3, 8, 445, 625], ],
 
         // 3. Small Landing and Bedroom
-        [0, [4, , , ], , [1, 1, 450, 625]],
+        [0, [4, , , ], [2, 8, 513, 625], [1, 1, 450, 625]],
 
         // 4. Library and Bedroom
         [0, [3, , , ], [5, , , ], ],
@@ -34,6 +34,9 @@ class Game {
 
         // 6. Cellar
         [0, [7, , , ], [1, 4, 80, 750], ]
+
+        // 7. Outside.
+
     ];
 
     props = [
@@ -60,7 +63,7 @@ class Game {
         [ 1,  0, 'vase',                 '🏺', 80,   90,   815,  950,   ],
 
         // Room 2 - Parlor
-        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600,  ],
+        [ 2,  4,  'fireplace',            null, 200,   130,  380, 600, 599 ],
         [ 2,  4,  'fire',                 '🔥', 40,     50,  460, 600, 601, "It burns brightly." ],
         [ 2, 128, 'couch',                '🛋', 160,   200,  180, 610,  ],
         [ 2, 12,  'rug',                  null, 630,   120,  166, 900, 611 ],
@@ -68,6 +71,7 @@ class Game {
         [ 2, 20,  'clock',                '🕰', 40,     40,  380, 340, 501, "Looks to have been moved many times.", 5 ],
         [ 2, 20,  'urn',                  '⚱',  40,     40,  460, 340, 501, "It contains my ashes." ],
         [ 2, 20,  'spirit_box',           '📻', 40,    40,  540, 340,  501 ],
+        [ 2, 21,  'ladder',               null, 40,     63,  460, 570, 600, "It appears to go up the chimney." ],
 
         // Room 3 - Small landing and Bedroom
         [ 3,  4,  'middle_wall',         null, 260,   360,  503, 720, 1000 ],
@@ -75,6 +79,7 @@ class Game {
         [ 3, 20,  'bed',                 '🛏', 150,   110,   95, 850, 503  ],
         [ 3, 20,  'alcove',              null, 108,   320,  101, 760, 502  ],
         [ 3,  4,  'fireplace',           null, 200,   130,  330, 600, 501  ],
+        [ 3, 20,  'ladder',              null, 40,    50,  407, 590, 600, "It appears to go down the chimney." ],
         [ 3,  4,  'alcove_wall',         null, 260,   360,  95,  720, 1000 ],
         [ 3,  4,  'door',                null, 80,    207, 180,  574, 501  ],
         [ 3,  0,  'ghost',               '🕴️', 80,    170,  735, 720,  , "He's guarding the stairs."],
@@ -124,7 +129,7 @@ class Game {
     ];
 
     // 0 = Spirit Box ON
-    // 1 = Fire is still burning
+    // 1 = Fire is no longer burning
     // 2 = Ego spoken to Pip once
     // 3 = Batteries flat
     // 4 = Tried parlor door once
@@ -215,7 +220,11 @@ class Game {
         
         // Set the room back to the start, and clear the object map.
         this.objs = [];
-        this.room = 6;
+        this.room = 2;
+
+        // TODO: Remove. Quick hack to test later parts of game.
+        this.flags[11] = 1;
+        this.getItem('vase');
 
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');

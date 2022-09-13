@@ -53,6 +53,7 @@ class Logic {
                     newCommand = 'Whisper to spirit box about ';
                   }
                 } else {           // Not yet spoken to Pip
+                  ego.speak("Boo");
                   ego.say("Boo!!!", () => {
                     pip.say("Who said 'Boo'? I can't see you.", () => {
                       ego.say("I am a helpful ghost, and your guide.", () => {
@@ -111,7 +112,6 @@ class Logic {
                   });
                 }
               });
-              pip.jump();
               break;
             case 'door,spirit box':
               if (game.room == 2) {
@@ -148,6 +148,15 @@ class Logic {
                   }); 
                 }
               }
+              break;
+            case 'bedroom door,spirit box':
+              pip.moveTo(420, 700, () => {
+                pip.moveTo(260, 700, () => {
+                  pip.moveTo(175, 970, () => {
+                    ego.hitEdge(1);
+                  });
+                }, pip.x > 330);
+              }, pip.x > 330);
               break;
             case 'clock,spirit box':
               if (flags[6]) {
@@ -207,8 +216,8 @@ class Logic {
                     pip.moveTo(140, 850, () => {
                       ego.hitEdge(3);  // Edge 3 is always down stairs.
                     });
-                  });
-                });
+                  }, pip.x > 300);
+                }, pip.x > 300);
               } else if (game.room == 3) {
                 if (flags[7]) {
                   pip.moveTo(800, 850, () => {
@@ -289,7 +298,7 @@ class Logic {
               if (game.hasItem('sled')) { 
                 ego.say("Someone died using this sled.");
               } else {
-                pip.moveTo(350, 920, () => {
+                pip.moveTo(400, 920, () => {
                   pip.say("Looks useful. Let's take it.");
                   game.getItem('sled');
                 });
@@ -345,6 +354,7 @@ class Logic {
           }
         }
         if (thing2) {
+          ego.speak(thing);
           ego.say(`...${thing}...`, fn);
           newCommand = verb;
         } else {

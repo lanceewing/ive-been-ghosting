@@ -27,7 +27,7 @@ class Game {
         [0, [4, 4, 150, 900], [2, 8, 513, 625], [1, 1, 450, 625]],
 
         // 4. Library and Bedroom
-        [0, [3, , , ], [5, , , ], ],
+        [0, [3, 1, 280, 625], [5, , , ], ],
 
         // 5. Attic
         [0, , [4, , , ], ],
@@ -76,9 +76,9 @@ class Game {
         // Room 3 - Small landing and Bedroom
         [ 3,  4,  'middle_wall',         null, 260,   360,  503, 720, 1000 ],
         [ 3, 132, 'down_stairs',         null, 180,   70,   700, 956, 501  ],
-        [ 3, 20,  'bed',                 '🛏', 150,   110,   95, 850, 503  ],
-        [ 3, 20,  'alcove',              null, 108,   320,  101, 760, 502  ],
-        [ 3,  4,  'fireplace',           null, 200,   130,  330, 600, 501  ],
+        [ 3, 20,  'bed',                 '🛏', 150,   110,   95, 850, 701  ],
+        [ 3, 20,  'alcove',              null, 108,   320,  101, 760, 700  ],
+        [ 3,  4,  'fireplace',           null, 200,   130,  330, 600, 599  ],
         [ 3, 20,  'ladder',              null, 40,    50,  407, 590, 600, "It appears to go down the chimney." ],
         [ 3,  4,  'alcove_wall',         null, 260,   360,  95,  720, 1000 ],
         [ 3, 36,  'door',                null, 80,    207, 180,  574, 501  ],
@@ -95,6 +95,7 @@ class Game {
         [ 4,  12, 'rug',                  null, 350,   120, 450,  884, 501 ],
         [ 4,   0, 'chair',               '🪑',  50,   120, 720,  700,   ],
         [ 4,   4, 'desk',                 null, 222,   60, 668,  800,   ],
+        [ 4,  12, 'bedroom_door',         null, 100,   15,  120, 970, 1002 ],
 
         // Room 5 - Attic
         [ 5,  12, 'wall1',                null, 190,   341, 115,  683,   ],
@@ -107,7 +108,7 @@ class Game {
         [ 5,   4, 'stairs2',              null,  35,   207, 326,  590, 501  ],
 
         // Room 6 - Cellar
-        [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720, 1000 ],
+        [ 6,  12, 'middle_wall',          null, 260,   388, 165,  720, 850 ],
         [ 6,  12, 'side_wall',            null,  53,   300, 305,  600, 501 ],
         [ 6,   4, 'cryptoporticus',       null, 180,   200, 352,  574, 501, "A long, dark tunnel. Very spooky." ],
         [ 6,   4, 'stairs',               null, 360,   75,  500,  414, 502  ],
@@ -126,6 +127,7 @@ class Game {
         [ 0,  4, 'right_wall',           null, 260,   360, null, null, 501 ],
         [ 0,  4, 'left_window',          null, 121,   231, null, null, 501 ],
         [ 0,  4, 'right_window',         null, 121,   231, null, null, 501 ],
+        [ 0,  4, 'front_wall',           null, 960,   15,  null, null, 1001 ],
     ];
 
     // 0 = Spirit Box ON
@@ -204,6 +206,7 @@ class Game {
                 setTimeout(() => {
                     this.msg.style.display = 'none'
                     //this.sound.playSong();
+                    speechSynthesis.getVoices();  // Trigger fetch of voices up front.
                     this.init();
                     this.loop();
                 }, 200);
@@ -256,28 +259,28 @@ class Game {
 
         // Intro text.
         this.inputEnabled = false;
-        this.pip.say("This is 'The Solitude' house in Philadelphia Zoo.", () => {
-            this.pip.say("I'm a Javascript developer called Pip...", () => {
-                this.pip.moveTo(600, 935, () => {
-                    this.pip.say("...and I have come here to research 'DEATH' for my js13kgames entry...", () => {
-                        this.pip.moveTo(550, 935, () => {
-                            this.pip.say("...as I heard this house is haunted.", () => {
-                                this.ego.say("And he heard right.", () =>  {
-                                    this.ego.say("Please help me to help him with his research.", () => {
-                                        this.pip.moveTo(530, 850, () => {
-                                            this.pip.say("Who said that?!", () => {
-                                                this.pip.querySelector(".actor").classList.add("shake");
-                                                this.inputEnabled = true
-                                            });
-                                        });
-                                    });
-                                });
-                            });
-                        });
-                    });
-                });
-            });
-        });
+        // this.pip.say("This is 'The Solitude' house in Philadelphia Zoo.", () => {
+        //     this.pip.say("I'm a Javascript developer called Pip...", () => {
+        //         this.pip.moveTo(600, 935, () => {
+        //             this.pip.say("...and I have come here to research 'DEATH' for my js13kgames entry...", () => {
+        //                 this.pip.moveTo(550, 935, () => {
+        //                     this.pip.say("...as I heard this house is haunted.", () => {
+        //                         this.ego.say("And he heard right.", () =>  {
+        //                             this.ego.say("Please help me to help him with his research.", () => {
+        //                                 this.pip.moveTo(530, 850, () => {
+        //                                     this.pip.say("Who said that?!", () => {
+        //                                         this.pip.querySelector(".actor").classList.add("shake");
+                                                 this.inputEnabled = true
+        //                                     });
+        //                                 });
+        //                             });
+        //                         });
+        //                     });
+        //                 });
+        //             });
+        //         });
+        //     });
+        // });
 
         // Fade in the whole screen at the start.
         this.fadeIn(this.wrap);

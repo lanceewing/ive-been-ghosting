@@ -14,11 +14,12 @@ body {
   position: relative;
 }
 #msg {
-  font-size: 50px;
+  font-size: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  color: #019F35;
 }
 span {
   display: inline-block;
@@ -745,4 +746,11 @@ x-ego .pack {
   background-repeat: repeat-y;
   border-left: #333 4px solid;
   border-right: #333 4px solid;
+}
+.front_wall {
+  background: black;
+  bottom: 0;
+}
+.bedroom_door {
+  background: #333;
 }

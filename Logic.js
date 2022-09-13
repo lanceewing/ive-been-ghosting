@@ -37,6 +37,13 @@ class Logic {
         let thing2 = (cmd.indexOf(' about ') < 0? '' : `,${cmd.substring(11, cmd.indexOf(' about '))}`)
         fn = () => {
           switch (thing + thing2) {
+            case 'ghost':
+              ego.say("Boo???", () => {
+                obj.say("BOO!!!", () => {
+                  ego.say("Whoa! He seems angry about something.");
+                });
+              });
+              break;
             case 'spirit box':
               if (flags[0]) {      // Spirit Box ON
                 if (flags[2]) {    // Already spoken to Pip once
@@ -132,6 +139,14 @@ class Logic {
                     ego.hitEdge(1);
                   });
                 }, pip.x > 315);
+              } else if (game.room == 3) {
+                if (flags[7]) {
+                  pip.say("The ghost is blocking my way to the door.");
+                } else {
+                  pip.moveTo(obj.cx, 610, () => {
+                    ego.hitEdge(1);  // Edge 1 is always a door.
+                  }); 
+                }
               }
               break;
             case 'clock,spirit box':
@@ -195,10 +210,14 @@ class Logic {
                   });
                 });
               } else if (game.room == 3) {
-                pip.moveTo(800, 850, () => {
-                  flags[7] = false;
-                  ego.hitEdge(3);
-                });
+                if (flags[7]) {
+                  pip.moveTo(800, 850, () => {
+                    flags[7] = false;
+                    ego.hitEdge(3);
+                  });
+                } else {
+                  pip.say("The ghost is blocking my way to the stairs.");
+                }
               }
               break;
             case 'stairs,spirit box':
@@ -308,9 +327,13 @@ class Logic {
               });
               break;
             case 'ladder,spirit box':
-              pip.moveTo(obj.cx, 610, () => {
-                ego.hitEdge(2);
-              });
+              if ((game.room == 3) && flags[7]) {
+                pip.say("The ghost is blocking my way to the ladder.");
+              } else {
+                pip.moveTo(obj.cx, 610, () => {
+                  ego.hitEdge(2);
+                });
+              }
               break;
             default:
               if (thing2) {

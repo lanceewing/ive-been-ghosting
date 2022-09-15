@@ -234,17 +234,6 @@ class Game {
         this.objs = [];
         this.room = 2;
 
-        // // // TODO: Remove. Quick hack to test later parts of game.
-        // this.flags[0] = 1;
-        // this.flags[2] = 1;
-        // this.flags[11] = 1;
-        // this.getItem('vase','🏺');
-        // this.getItem('spirit box','📻');
-        // this.getItem('candle','🕯️');
-        // this.getItem('hammer','🔨');
-        // this.getItem('urn','⚱');
-        // this.getItem('tool box','🧰');
-
         // Create Ego (the main character) and add it to the screen.
         this.ego = document.createElement('x-ego');
         this.ego.init(this, 50, 150);

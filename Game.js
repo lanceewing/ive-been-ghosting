@@ -474,12 +474,12 @@ class Game {
         // We cache the obj when it isn't in the dom rather than recreate. It might remember it's state.
         let obj = prop[11];
 
-        // Room#, type, name, content, width, height, x, y, radius override, z-index override, element reference
-        // bit 0
-        // bit 1:
+        // Room#, type, name, content, width, height, x, y, z-index override, description
+        // bit 0:    0 = visible, 1 = hidden
+        // bit 1:    0 = no glass, 1 = glass
         // bit 2:    0 = shadow, 1 = no shadow
         // bit 3:    0 = observe objs, 1 = ignore objs
-        // bit 4:    0 = not reflected, 1 = reflected
+        // bit 4:    0 = observe reflection, 1 = ignore reflection
         // bit 5:    0 = closed, 1 = open
         // bit 6:  
         // bit 7:    0 = normal, 1 = horizontal flip

@@ -18,6 +18,13 @@ Control the ghost by using the Float to, Look at, Listen to, Touch, and Whisper 
 
 **Whisper to:** Used for talking to other characters in the game, although your voice may need a little electronic help.
 
+# Screenshots
+
+![](img/library_1.png)     |  ![](img/entry_hall_2.png)
+:-------------------------:|:-------------------------:
+![](img/cellar_1.png)      |  ![](img/attic_2.png)
+![](img/bedroom_1.png)     |  ![](img/riverside_1.png)
+
 # Credits
 **Created By:** Lance Ewing  
 

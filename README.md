@@ -2,6 +2,8 @@
 
 "I've Been Ghosting" is a point and click animated adventure game, written for the 2022 js13kGames contest.
 
+![Screenshot](img/parlor_1.png)
+
 You control a ghost who doesn't know her name, or how she died, but who offers to help a visitor called Pip to learn more about DEATH as part of his research for building a js13kgames entry. Soon the ghost realises it is Pip that is helping her to remember something.
 
 # Controls

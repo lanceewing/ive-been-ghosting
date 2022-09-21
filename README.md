@@ -1,6 +1,6 @@
 # I've Been Ghosting
 
-"I've Been Ghosting" is a point and click animated adventure game, written for the 2022 js13kGames contest.
+"I've Been Ghosting" is a point and click animated adventure game, written for the [2022 js13kGames](https://js13kgames.com/entries/2022) contest.
 
 ![Screenshot](img/parlor_1.png)
 

@@ -405,10 +405,6 @@ class Game {
     processCommand(e) {
         if (this.inputEnabled) {
           this.command = this.logic.process(this.verb, this.command, this.thing, e);
-          if (this.command == this.verb) {
-            this.command = this.verb = 'Float to';
-            this.verbIcon = '👻';
-          }
         }
         if (e) e.stopPropagation();
     }

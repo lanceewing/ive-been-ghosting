@@ -170,8 +170,8 @@ class Logic {
             case 'clock,spirit box':
               if (flags[6]) {
                 pip.say("The door is already open.");
-              } else if (flags[5]) {   // Noticed that the clock has been moved many times.
-                pip.say("The clock has 'been moved many times' you say? Let me check...", () => {
+              } else {
+                pip.say("Try moving the clock? Okay, let me check...", () => {
                   pip.moveTo(obj.cx, Math.min(obj.cz, 610), () => {
                     obj.setPosition(obj.x + 10, obj.z);
                     obj = game.screen.querySelector(".door");
@@ -187,8 +187,6 @@ class Logic {
                     });
                   });
                 });
-              } else {
-                pip.say("Sorry, I'm not sure what you want me to do.");
               }
               break;
             case 'urn,spirit box':
